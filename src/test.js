@@ -44,17 +44,9 @@ A.GUIDE.sections.forEach(s => {
 });
 const items = A.GUIDE.sections.flatMap(s => s.items);
 ok(items.length === 16 && new Set(items.map(i => i.id)).size === 16, 'sixteen items, unique ids');
-ok(/Beyond Meat/.test(A.GUIDE.sections[0].beyond) && /Institutional/.test(A.GUIDE.sections[1].beyond) && A.GUIDE.sections[2].beyond === '' && /sponsorship/.test(A.GUIDE.sections[3].beyond), 'what each chapter leaves out is stated');
-
-// ---------- 2. in class ----------
-head('in class');
-ok(A.THEMES.length === 4 && A.THEMES.every(t => t.h && t.body), 'four chapter themes');
-ok(A.THEMES[0].quotes.some(q => /Reid Hoffman/.test(q[1])) && A.THEMES[1].quotes.some(q => /Maxwell/.test(q[1])), 'the openers’ quotes');
-['Ecclesiastes 4:9–12', 'Philippians 4:12–13', 'Joshua 1:9', 'James 1:2–4'].forEach(r => ok(A.VERSES.some(v => v.ref === r), 'verse on the slides: ' + r));
-ok(A.EVENTS.length === 2 && /Scott Walker/.test(A.EVENTS[1][1]) && /September 23/.test(A.EVENTS[1][1]), 'the two announcements');
-ok(A.VIDEOS.length >= 20 && A.VIDEOS.every(v => /^https:\/\/www\.youtube\.com\/watch\?v=/.test(v.u) && v.t && tps.includes(v.tp)), 'video list complete with links', A.VIDEOS.length);
-ok(new Set(A.VIDEOS.map(v => v.u)).size === A.VIDEOS.length, 'no duplicate video links');
-['OvkgSJuGPfY', 'Alp49p_4rc8', 'UfpBPk8HiaY', 'OapP_OK7IrI', 'JFXmIh4P2dM', '46_EC6teOqg'].forEach(id => ok(A.VIDEOS.some(v => v.u.includes(id)), 'video id from the deck: ' + id));
+ok(A.GUIDE.sections.every(s => !('beyond' in s)) && !('THEMES' in A) && !('VIDEOS' in A) && !('VERSES' in A) && !('EVENTS' in A), 'nothing outside the handout: no beyond notes, no class extras');
+ok(!/youtube\.com|Ecclesiastes|Philippians|Joshua 1|Scott Walker|Impact 2026/.test(html), 'the openers, Scripture, videos and announcements are gone from the page');
+ok(!/institutional and government|how brands are built|Beyond the guide|beyond the guide/i.test(html), 'no wording left over from the wider version');
 
 // ---------- 3. chapters ----------
 head('chapters');
@@ -62,20 +54,16 @@ const noteIds = [];
 tps.forEach((tp, k) => {
   const c = A.CH[tp];
   ok(c.n === k + 5 && c.title && c.short, 'chapter header: ' + tp);
-  ok(c.notes.length >= 4 && c.notes.every(n => n.id && n.h && n.body && n.body.length > 300), 'notes complete: ' + tp, c.notes.length);
-  ok(c.notes.slice(0, 4).map(n => n.h.replace(/: Brand Equity and Brand Value$/, ' (Brand Equity and Brand Value only)')).join('|') === HANDOUT[tp].join('|'), 'the first four note sections carry the handout’s headings: ' + tp, c.notes.slice(0, 4).map(n => n.h).join(' | '));
-  ok(c.notes.slice(4).every(n => n.beyond && /^Beyond the guide/.test(n.h)), 'anything after the four is marked beyond the guide: ' + tp);
+  ok(c.notes.length === 4 && c.notes.every(n => n.id && n.h && n.body && n.body.length > 300 && !n.beyond), 'exactly the handout’s four sections, nothing more: ' + tp, c.notes.length);
+  ok(c.notes.map(n => n.h.replace(/: Brand Equity and Brand Value$/, ' (Brand Equity and Brand Value only)')).join('|') === HANDOUT[tp].join('|'), 'the note sections carry the handout’s headings: ' + tp, c.notes.map(n => n.h).join(' | '));
   c.notes.forEach(n => { ok(n.id.indexOf(tp + '-') === 0, 'note id prefixed: ' + n.id); noteIds.push(n.id); });
-  const main = c.decks.filter(d => d.match !== false), beyond = c.decks.filter(d => d.match === false);
-  ok(main.length === 2 && main.every(d => d.id && d.label && d.cards.length >= 15), 'two main decks with 15+ cards: ' + tp, main.map(d => d.cards.length).join(','));
-  ok(beyond.every(d => d.cards.length >= 5 && d.cards.every(x => x[2])), 'beyond-the-guide decks are labeled card by card: ' + tp);
+  ok(c.decks.length === 2 && c.decks.every(d => d.id && d.label && d.match !== false && d.cards.length >= 15), 'two decks with 15+ cards, all in play: ' + tp, c.decks.map(d => d.cards.length).join(','));
   c.decks.forEach(d => {
     ok(d.cards.every(x => x.length >= 2 && x[0] && x[1]), 'cards have front and back: ' + tp + '/' + d.id);
     ok(new Set(d.cards.map(x => x[0])).size === d.cards.length, 'card fronts unique: ' + tp + '/' + d.id);
   });
   ok(A.PAIRSETS[tp].pairs.length >= 30, 'enough pairs to match: ' + tp, A.PAIRSETS[tp].pairs.length);
   ok(new Set(A.PAIRSETS[tp].pairs.map(p => p[1])).size === A.PAIRSETS[tp].pairs.length, 'pair meanings unique: ' + tp);
-  beyond.forEach(d => d.cards.forEach(x => ok(!A.PAIRSETS[tp].pairs.some(p => p[0] === x[0]), 'beyond-the-guide card stays out of match and quizzes: ' + x[0])));
 });
 ok(new Set(noteIds).size === noteIds.length, 'note ids unique across chapters');
 const subIds = [...new Set((allBodies.match(/ id="([a-z0-9-]+)"/g) || []).map(s => s.slice(5, -1)))];
@@ -94,7 +82,8 @@ ok(/these two are from the book/.test(body('c5')), 'perception and attitudes are
 ['Users', 'Influencers', 'Buyers', 'Deciders', 'Gatekeepers'].forEach(v => ok(body('c6').includes('<td class="head">' + v + '</td>'), 'ch. 6 buying-center role: ' + v));
 ['Problem recognition', 'General need description', 'Product specification', 'Supplier search', 'Proposal solicitation', 'Supplier selection', 'Order-routine specification', 'Performance review'].forEach((v, i) => ok(body('c6').includes((i + 1) + ' · ' + v), 'ch. 6 step ' + (i + 1) + ': ' + v));
 ['$30 trillion', '34.8 million', '99.9%', '9" × 12"'].forEach(v => ok(body('c6').includes(v), 'ch. 6 class figure: ' + v));
-ok(/not on the study guide/.test(A.CH.c6.notes[3].body), 'digital/social marketing is labeled as not on the guide inside the process section');
+ok(!/Maersk|c6-digital|Wright-Patterson|Grainger|Institutional markets/.test(body('c6')), 'ch. 6 has no digital/social, institutional or government material');
+ok(!/Beyond Meat/.test(body('c5')) && !/Line extensions|Kroger|Apple’s comeback|Sculley/.test(body('c8')), 'ch. 5 and 8 carry nothing outside the handout');
 // chapter 7
 ['Geographic', 'Demographic', 'Psychographic', 'Behavioral'].forEach(v => ok(body('c7').includes('<h3>' + v + '</h3>'), 'ch. 7 segmentation base: ' + v));
 ['Measurable', 'Accessible', 'Substantial', 'Differentiable', 'Actionable'].forEach(v => ok(body('c7').includes('<b>' + v + '</b>'), 'ch. 7 requirement: ' + v));
@@ -107,9 +96,7 @@ ok(/Evernote/.test(body('c7')) && /Aveeno/.test(body('c7')), 'positioning statem
 ['Convenience', 'Shopping', 'Specialty', 'Unsought'].forEach(v => ok(body('c8').includes('<th>' + v + '</th>'), 'ch. 8 consumer product column: ' + v));
 ['Intangibility', 'Inseparability', 'Variability', 'Perishability'].forEach(v => ok(body('c8').includes('<h4>' + v + '</h4>'), 'ch. 8 service characteristic: ' + v));
 ['Width', 'Length', 'Depth', 'Consistency'].forEach(v => ok(body('c8').includes('<td class="head">' + v + '</td>'), 'ch. 8 mix dimension: ' + v));
-ok(/differentiation, relevance, knowledge, esteem/.test(A.CH.c8.notes[3].body) && /\$470\.9B/.test(A.CH.c8.notes[3].body), 'brand equity and value are in the guide section');
-ok(!/Line extensions/.test(A.CH.c8.notes[3].body) && /Line extensions/.test(A.CH.c8.notes[4].body) && A.CH.c8.notes[4].beyond, 'sponsorship and development are only in the beyond-the-guide section');
-ok(/as dated on the slide/.test(body('c8')), 'the Macintosh 1983 date is attributed to the slide');
+ok(/differentiation, relevance, knowledge, esteem/.test(A.CH.c8.notes[3].body) && /\$470\.9B/.test(A.CH.c8.notes[3].body), 'brand equity and value are in the branding section');
 
 // ---------- 4. question bank ----------
 head('question bank');
@@ -120,9 +107,9 @@ tps.forEach(tp => {
   ok(mine.filter(q => q.ap).length >= 6, 'on-guide application questions on ' + tp, mine.filter(q => q.ap).length);
 });
 const off = A.QB.filter(q => q.off);
-ok(off.length >= 20 && off.every(q => ['c5', 'c6', 'c8'].includes(q.tp)), 'beyond-the-guide questions exist only for chapters 5, 6 and 8', off.length);
-ok(off.some(q => /Kroger/.test(q.q)) && off.some(q => /lowest bidder|Government markets/.test(q.q)) && off.some(q => /Beyond Meat/.test(q.q)) && off.some(q => /Apple became/.test(q.q)), 'the excluded topics are the ones the handout leaves out');
-ok(!A.QB.some(q => !q.off && /co-brand|licens|brand extension|multibrand|store-brand quality|Kroger|Great Value|institutional market|lowest bidder|Grainger|Wright-Patterson|Beyond Meat|Apple became|Apple’s timeline|Maersk/i.test(q.q)), 'no on-guide question touches an excluded topic', A.QB.filter(q => !q.off && /co-brand|licens|brand extension|multibrand|store-brand quality|Kroger|Great Value|institutional market|lowest bidder|Grainger|Wright-Patterson|Beyond Meat|Apple became|Maersk/i.test(q.q)).map(q => q.q).join(' || '));
+ok(off.length === 0, 'no question is marked outside the guide — there is nothing outside it', off.length);
+const OUT = /co-brand|licens|brand extension|multibrand|store-brand quality|Kroger|Great Value|institutional market|lowest bidder|Grainger|Wright-Patterson|Beyond Meat|Apple became|Apple’s timeline|Maersk/i;
+ok(!A.QB.some(q => OUT.test(q.q)), 'no question touches a topic the handout leaves out', A.QB.filter(q => OUT.test(q.q)).map(q => q.q).join(' || '));
 A.QB.forEach((q, i) => {
   ok(tps.includes(q.tp), 'known chapter #' + i);
   ok(q.q && q.e, 'question and explanation #' + i);
@@ -197,9 +184,10 @@ panels.forEach(pn => {
   ok(html.includes('data-modes="' + t + '"'), 'panel ' + pn + ' has a mode switch');
   ok(new RegExp('data-modes="' + t + '"[\\s\\S]*?data-mode="' + mo + '"').test(html), 'panel ' + pn + ' has its mode button');
 });
-['guide', 'c5', 'c6', 'c7', 'c8', 'extra', 'exam'].forEach(t => {
+['guide', 'c5', 'c6', 'c7', 'c8', 'exam'].forEach(t => {
   ok(html.includes('data-topic="' + t + '"') && html.includes('id="topic-' + t + '"'), 'topic ' + t + ' has a tab and a section');
 });
+ok(!html.includes('data-topic="extra"') && (html.match(/class="topic-btn"/g) || []).length === 6, 'six tabs, no In Class tab');
 ok(/data-topic="guide"\s+aria-selected="true"/.test(html), 'Guide is the first, default tab');
 ok((html.match(/<script>/g) || []).length === 1, 'a single script block');
 ['div', 'section', 'button', 'nav', 'main', 'header', 'footer', 'svg', 'symbol', 'table', 'g', 'ol', 'ul', 'h3'].forEach(t => {

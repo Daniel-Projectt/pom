@@ -34,12 +34,10 @@ function renderGuide(){
           '<div class="gsub">'+it.subs.map(function(sb){ return '<button class="btn" type="button" data-go="'+s.tp+'/notes" data-a="'+sb[1]+'">'+sb[0]+'</button>'; }).join("")+'</div></div>'+
         '<button class="btn" type="button" data-go="'+s.tp+'/notes" data-a="'+it.a+'">Study it</button></div>';
     });
-    if(s.beyond) html += '<p class="gbeyond">'+s.beyond+'</p>';
     html += '</div>';
   });
   html += '<div class="gsec"><div class="toolbar">'+
       '<button class="btn primary" type="button" data-go="exam/mock">Practice exam</button>'+
-      '<button class="btn" type="button" data-go="extra/videos">Videos from class</button>'+
       '<button class="btn" type="button" id="gPrint">Print this list</button>'+
     '</div></div>';
   $("#guideRoot").innerHTML = html;
@@ -77,29 +75,10 @@ function goTo(path, anchor){
 function renderNotes(tp){
   var c = CH[tp];
   $("#"+tp+"Notes").innerHTML = '<div class="secnav">'+c.notes.map(function(s){ return '<a href="#'+s.id+'" data-a="'+s.id+'">'+strip(s.h).replace(/“|”/g,"").replace(/^Figure [\d.]+ · /, "")+'</a>'; }).join("")+'</div>'+
-    c.notes.map(function(s){ return '<div class="note-sec'+(s.beyond ? " beyond" : "")+'" id="'+s.id+'"><h2>'+s.h+'</h2>'+divider()+s.body+'</div>'; }).join("");
+    c.notes.map(function(s){ return '<div class="note-sec" id="'+s.id+'"><h2>'+s.h+'</h2>'+divider()+s.body+'</div>'; }).join("");
   $$("#"+tp+"Notes .secnav a").forEach(function(a){
     a.addEventListener("click", function(e){ e.preventDefault(); var el = document.getElementById(a.getAttribute("data-a")); if(el) el.scrollIntoView({behavior:"smooth", block:"start"}); });
   });
-}
-
-/* ================================================================ in class */
-function renderThemes(){
-  var html = '<div class="themes">'+THEMES.map(function(t){
-    return '<div class="theme"><div class="ch">'+TOPIC_NAMES[t.tp]+'</div><h3>'+t.h+'</h3>'+t.body+
-      t.quotes.map(function(q){ return '<div class="q">“'+q[0]+'”'+(q[1] ? '<small>'+q[1]+'</small>' : '')+'</div>'; }).join("")+
-      (t.verse ? '<p class="src">'+t.verse+'</p>' : '')+'</div>';
-  }).join("")+'</div>'+
-  '<div class="note-sec" style="margin-top:34px"><h2>Scripture on the slides</h2>'+divider()+'<div class="verses">'+
-    VERSES.map(function(v){ return '<div class="verse"><div class="ref">'+v.ref+'</div><p>'+v.text+'</p><small>'+v.why+'</small></div>'; }).join("")+'</div></div>'+
-  '<div class="note-sec"><h2>Announcements on the slides</h2>'+divider()+'<div class="rules">'+
-    EVENTS.map(function(e){ return '<div class="rule"><p><b>'+e[0]+'</b></p><p class="ex">'+e[1]+'</p></div>'; }).join("")+'</div></div>';
-  $("#themesRoot").innerHTML = html;
-}
-function renderVideos(){
-  $("#videosRoot").innerHTML = '<div class="vids">'+VIDEOS.map(function(v){
-    return '<div class="vid"><span class="ch">'+TOPIC_NAMES[v.tp].replace(/ · .*/, "")+'</span><span><a href="'+v.u+'" target="_blank" rel="noopener">'+v.t+'</a>'+(v.why ? '<span class="why">'+v.why+'</span>' : '')+'</span><span class="m">'+v.m+'</span></div>';
-  }).join("")+'</div>';
 }
 
 /* ================================================================ practice exam */
@@ -141,7 +120,7 @@ CHAPTERS.forEach(function(tp){
   engines[tp+"Quiz"]  = makeQuiz($("#"+tp+"Quiz"), function(){ return topicQuestions(tp, null, 10); });
   renderNotes(tp);
 });
-renderGuide(); renderThemes(); renderVideos();
+renderGuide();
 
 var ON_SHOW = {"exam/mock":function(){ if(!engines.mock) renderMockSetup(); }};
 var KEYS = {"exam/mock":function(e){ return engines.mock ? engines.mock.keys(e) : false; }};
@@ -151,8 +130,8 @@ CHAPTERS.forEach(function(tp){
   KEYS[tp+"/cards"] = function(e){ return engines[tp+"Cards"].keys(e); };
   KEYS[tp+"/quiz"]  = function(e){ return engines[tp+"Quiz"].keys(e); };
 });
-var TOPICS = ["guide","c5","c6","c7","c8","extra","exam"];
-var currentTopic = "guide", currentMode = {guide:"overview", c5:"notes", c6:"notes", c7:"notes", c8:"notes", extra:"themes", exam:"mock"};
+var TOPICS = ["guide","c5","c6","c7","c8","exam"];
+var currentTopic = "guide", currentMode = {guide:"overview", c5:"notes", c6:"notes", c7:"notes", c8:"notes", exam:"mock"};
 function showMode(topic, mode){
   currentMode[topic] = mode;
   $$('.seg[data-modes="'+topic+'"] button').forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-mode") === mode)); });

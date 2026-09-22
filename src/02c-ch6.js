@@ -1,8 +1,8 @@
 /* ================================================================ chapter 6
-   Business Markets and Business Buyer Behavior. Sections follow the Exam 2 study
-   guide; content is from the Pearson slides and notes plus the professor's
-   additions (small business, the Cedarville envelope, the classroom-furniture
-   buying center, WPAFB, Grainger).                                               */
+   Business Markets and Business Buyer Behavior. Sections are the Exam 2 study
+   guide's; content is from the Pearson slides and notes plus the professor's
+   additions inside those sections (small business, the Cedarville envelope, the
+   classroom-furniture buying center).                                            */
 CH.c6 = {n:6, title:"Business Markets and Business Buyer Behavior", short:"Business",
  notes:[
   {id:"c6-intro", h:"Introduction", body:
@@ -86,17 +86,7 @@ CH.c6 = {n:6, title:"Business Markets and Business Buyer Behavior", short:"Busin
    '<h3 class="sub" id="c6-eproc">E-procurement and online purchasing</h3>'+
    '<p>Online procurement is standard procedure today. Companies do it through <b>reverse auctions</b> (post purchasing requests and invite bids), <b>trading exchanges</b>, their own <b>company buying sites</b>, and <b>extranet</b> links with key suppliers. Staples Business Advantage serves business customers of any size.</p>'+
    '<div class="boxrow"><div class="box"><h4>Advantages</h4><ul><li>Access to new suppliers</li><li>Lowers costs</li><li>Speeds order processing and delivery</li><li>Enhances information sharing</li><li>Improves sales</li><li>Facilitates service and support</li><li>Frees buyers to focus on strategic issues</li></ul></div>'+
-   '<div class="box"><h4>Disadvantages</h4><ul><li>Can erode relationships as buyers search for new suppliers</li><li>Buyers use the internet to pit suppliers against one another, purchase by purchase</li></ul></div></div>'+
-   '<h3 class="sub" id="c6-digital">B-to-B digital and social media marketing — objective 6.4, not on the study guide</h3>'+
-   '<p><b>B-to-B digital and social media marketing</b> uses digital and social approaches to engage business customers and manage relationships anywhere, any time — websites, blogs, apps, LinkedIn, YouTube, Facebook, Twitter. Container-shipping giant <b>Maersk Line</b> engages business customers through “a boatload” of digital and social media: “The goal is… to get closer to our customers.” “Social media is about communication, not marketing. It’s about engaging, not pushing.”</p>'},
-  {id:"c6-inst", h:"Beyond the guide: Institutional and Government Markets", beyond:true, body:
-   '<p class="ask">Objective 6.5 in the deck, but not a section on the Exam 2 study guide. Kept for reference; not in the quizzes.</p>'+
-   '<h3>Institutional markets</h3>'+
-   '<p>Schools, hospitals, nursing homes and prisons that provide goods and services to people in their care. Characteristics: <b>low budgets</b> and <b>captive patrons</b>. A hospital purchasing agent must find food vendors whose quality meets a minimum standard at low prices. Many marketers set up separate divisions — General Mills Foodservice, P&G Professional.</p>'+
-   '<h3>Government markets</h3>'+
-   '<ul><li>Tend to <b>favor domestic suppliers</b>, <b>require bids</b>, and normally <b>award the contract to the lowest bidder</b>.</li><li>Affected by environmental, organizational, interpersonal and individual factors — and watched by outside publics, from Congress to private groups, because it is taxpayers’ money.</li><li><b>Noneconomic factors</b> play a growing role: minority-owned firms, depressed firms and areas, small businesses, firms that avoid discrimination.</li><li>U.S. federal, state and local governments: more than 89,000 buying units purchasing over $1 trillion a year. The SBA and the GSA publish guides on how to sell to the government; much buying has gone online.</li><li>Many suppliers have not been marketing oriented — total spending is set by elected officials, and buying has emphasized price.</li></ul>'+
-   '<div class="case"><b class="t">Wright-Patterson Air Force Base (class example)</b>38,000+ employees — military, civilians, contractors; $4.3 billion a year in economic impact; 35,000 jobs in 14 counties around the base worth $1.4 billion. Home of Air Force Materiel Command ($184 billion — a third of the Air Force budget), AFIT, AFRL, AFLCMC, NAIC, NSIC and the 445th Airlift Wing (C-17s).</div>'+
-   '<div class="case"><b class="t">W. W. Grainger (class example)</b>Fortune 500 industrial supplier founded in 1927 in Chicago by Bill Grainger to give customers a consistent supply of motors. Now motors, lighting, material handling, fasteners, plumbing, tools and safety supplies plus inventory management and technical support, for 4.5 million customers through about 331 branches, online channels (Grainger.com, KeepStock, eProcurement) and 34 distribution facilities. Revenue almost entirely B-to-B: $16.48 billion (2023), operating income $2.57 billion, net income $1.9 billion, 26,000 employees.</div>'}
+   '<div class="box"><h4>Disadvantages</h4><ul><li>Can erode relationships as buyers search for new suppliers</li><li>Buyers use the internet to pit suppliers against one another, purchase by purchase</li></ul></div></div>'}
  ],
  decks:[
   {id:"terms", label:"Key terms", cards:[
@@ -126,8 +116,7 @@ CH.c6 = {n:6, title:"Business Markets and Business Buyer Behavior", short:"Busin
    ["Performance review","Rating satisfaction with suppliers and deciding to continue, modify or drop them"],
    ["E-procurement","Purchasing through electronic connections between buyers and sellers, usually online"],
    ["Reverse auction","A buyer posts purchasing requests online and invites suppliers to bid"],
-   ["Extranet","A direct procurement link with a key supplier"],
-   ["B-to-B digital and social media marketing","Using digital and social approaches to engage business customers anywhere, any time"]]},
+   ["Extranet","A direct procurement link with a key supplier"]]},
   {id:"lists", label:"Lists & numbers", cards:[
    ["Four differences in business demand","Fewer but larger buyers; derived; inelastic; fluctuating"],
    ["What a business purchase involves more of","More decision participants, more professional purchasing effort, more buyer–seller interaction, more time"],
@@ -144,16 +133,7 @@ CH.c6 = {n:6, title:"Business Markets and Business Buyer Behavior", short:"Busin
    ["Walmart’s purchasing department is called","The Supplier Development Department"],
    ["IBM and Six Flags","Systems selling — Maximo software plus the services to implement it"],
    ["The 2011 Japan tsunami illustrates","Supply conditions — an environmental influence"],
-   ["Figure 6.1 buyer responses","Product or service choice, supplier choice, order quantities, delivery terms and times, service terms, payment"]]},
-  {id:"beyond", label:"Beyond the guide", match:false, cards:[
-   ["Institutional market","Schools, hospitals, nursing homes and prisons that provide goods and services to people in their care","Not on the Exam 2 study guide"],
-   ["Government market","Governmental units that purchase or rent goods and services to carry out their functions","Not on the Exam 2 study guide"],
-   ["Institutional market characteristics","Low budgets and captive patrons","Not on the Exam 2 study guide"],
-   ["How governments buy","Favor domestic suppliers, require bids, award the lowest bidder, weigh noneconomic factors","Not on the Exam 2 study guide"],
-   ["Noneconomic factors in government buying","Minority firms, depressed firms and areas, small businesses","Not on the Exam 2 study guide"],
-   ["WPAFB’s Air Force Materiel Command budget","$184 billion — a third of the Air Force budget","Class example"],
-   ["Grainger’s 2023 revenue","$16.48 billion; net income $1.9 billion; 26,000 employees; founded 1927 in Chicago","Class example"],
-   ["Maersk’s goal for digital and social media","“To get closer to our customers”","Objective 6.4 — not on the study guide"]]}
+   ["Figure 6.1 buyer responses","Product or service choice, supplier choice, order quantities, delivery terms and times, service terms, payment"]]}
  ]
 };
 
@@ -187,18 +167,10 @@ QB = QB.concat([
  {tp:"c6",t:"mc",q:"A machine breaks down and needs new parts. In the business buying process this is:",a:"an internal stimulus for problem recognition",w:["an external stimulus for problem recognition","proposal solicitation","order-routine specification"],e:"Internal stimulus. A trade show or an ad would be external."},
  {tp:"c6",t:"mc",q:"Putting purchasing requests online and inviting suppliers to bid for the business is a:",a:"reverse auction",w:["trading exchange","extranet","straight rebuy"],e:"A reverse auction."},
  {tp:"c6",t:"mc",q:"A disadvantage of e-procurement is that it:",a:"can erode buyer–supplier relationships",w:["raises purchasing costs","slows order processing","limits access to new suppliers"],e:"Buyers use the web to pit suppliers against each other purchase by purchase."},
- {tp:"c6",off:true,t:"mc",q:"Maersk Line’s stated goal for its digital and social media was:",a:"to get closer to our customers",w:["to cut its sales force","to lower shipping rates","to replace its website"],e:"“The goal is… to get closer to our customers.”"},
- {tp:"c6",off:true,t:"mc",q:"Institutional markets are characterized by:",a:"low budgets and captive patrons",w:["high budgets and free choice","competitive bids and lowest price","derived demand and extranets"],e:"Low budgets, captive patrons — schools, hospitals, nursing homes, prisons."},
- {tp:"c6",off:true,t:"mc",q:"Government markets normally award the contract to:",a:"the lowest bidder",w:["the largest supplier","the first bidder","a foreign supplier"],e:"The lowest bidder, after requiring bids and favoring domestic suppliers."},
- {tp:"c6",off:true,t:"mc",q:"Which is a NONECONOMIC factor government buyers are asked to consider?",a:"Minority-owned firms",w:["Lowest price","Delivery speed","Product quality"],e:"Minority firms, depressed firms, small businesses."},
  {tp:"c6",t:"mc",q:"By the class slide, the global B2B e-commerce market in 2024 was about:",a:"$30 trillion — over five times the B2C market",w:["$6 trillion — equal to B2C","$1 trillion","$30 billion"],e:"$30 trillion vs $6 trillion B2C."},
  {tp:"c6",t:"mc",q:"Small businesses make up what share of U.S. businesses (2024)?",a:"99.9%",w:["46%","44%","59%"],e:"99.9% of businesses; 46% of the private workforce; 44% of GDP."},
- {tp:"c6",off:true,t:"mc",q:"Wright-Patterson AFB is home to Air Force Materiel Command, whose budget is about:",a:"$184 billion — a third of the Air Force budget",w:["$4.3 billion","$1.4 billion","$16.48 billion"],e:"$184B. $4.3B is the base’s annual economic impact."},
- {tp:"c6",off:true,t:"mc",q:"Grainger was founded in 1927 to provide customers with:",a:"a consistent supply of motors",w:["office supplies","safety equipment","shipping containers"],e:"Bill Grainger, Chicago, motors."},
- {tp:"c6",off:true,ap:true,t:"mc",q:"A hospital’s purchasing agent must find food vendors that meet a minimum quality standard at the lowest possible price. This is typical of:",a:"the institutional market",w:["the government market","the consumer market","a reverse auction"],e:"Low budgets, captive patrons."},
  {tp:"c6",ap:true,t:"mc",q:"An engineer writes the technical specs that a new part must meet. Which buying-center role is she playing?",a:"Influencer",w:["Gatekeeper","Buyer","User"],e:"Influencers help define specifications; technical personnel are especially important."},
  {tp:"c6",ap:true,t:"mc",q:"A receptionist declines to put a salesperson through to the plant manager. Which role is that?",a:"Gatekeeper",w:["Decider","Buyer","Influencer"],e:"Controlling the flow of information = gatekeeper."},
- {tp:"c6",off:true,ap:true,t:"mc",q:"A city government must buy from whoever submits the lowest qualifying bid. Which market is this?",a:"Government market",w:["Institutional market","Consumer market","Reseller market"],e:"Bids and lowest bidder."},
  {tp:"c6",ap:true,t:"mc",q:"A company puts its need for 10,000 laptops online and lets suppliers bid the price down. This is:",a:"a reverse auction",w:["an extranet","systems selling","a modified rebuy"],e:"Reverse auction."},
  {tp:"c6",ap:true,t:"mc",q:"Home sales fall 5%, and orders for lumber-mill equipment fall 40%. This illustrates:",a:"fluctuating (derived) demand",w:["inelastic demand","elastic consumer demand","a straight rebuy"],e:"A small change in consumer demand → a large change in business demand."},
  {tp:"c6",ap:true,t:"mc",q:"A university orders the same 9-by-12 envelopes it has ordered for years, with no changes. This is:",a:"a straight rebuy",w:["a modified rebuy","a new task","systems selling"],e:"Routine reorder, no modifications."},
@@ -213,8 +185,6 @@ QB = QB.concat([
  {tp:"c6",t:"tf",q:"Sometimes even people in the buying center are not aware of all the buying participants.",a:true,e:"True — informal participants may sway the decision behind the scenes."},
  {tp:"c6",t:"tf",q:"Business buying decisions have the same four groups of influences as consumer decisions, with an extra organizational layer.",a:true,e:"True — environmental, interpersonal, individual, plus organizational."},
  {tp:"c6",t:"tf",q:"E-procurement frees buyers’ time to focus on strategic issues.",a:true,e:"True."},
- {tp:"c6",off:true,t:"tf",q:"Government buying is rarely watched by outside publics.",a:false,e:"False — it is carefully watched, from Congress to private groups."},
- {tp:"c6",off:true,t:"tf",q:"Many companies that sell to the government have not been marketing oriented.",a:true,e:"True — spending is set by elected officials and price has dominated."},
  {tp:"c6",t:"tf",q:"Small businesses employ less than a quarter of the U.S. private workforce.",a:false,e:"False — 59 million people, 46%."},
  {tp:"c6",t:"tf",q:"The consumer decision process has more steps than the business buying process.",a:false,e:"False — five vs eight."},
  {tp:"c6",t:"tf",q:"Business demand is described as inelastic because it is not much affected by price changes in the short run.",a:true,e:"True."},

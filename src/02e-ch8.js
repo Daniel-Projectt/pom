@@ -1,8 +1,8 @@
 /* ================================================================ chapter 8
-   Products, Services, and Brands. Sections follow the Exam 2 study guide — which
-   limits Branding Strategy to brand equity and brand value; the rest of branding
-   is kept as "beyond the guide." Content from the Pearson slides and notes plus
-   the professor's additions (Apple's timeline, core-value examples, the
+   Products, Services, and Brands. Sections are the Exam 2 study guide's — which
+   limits Branding Strategy to brand equity and brand value, so the rest of
+   branding is not here. Content from the Pearson slides and notes plus the
+   professor's additions inside those sections (core-value examples, the
    Starbucks product mix, line stretching and filling, the 2025/2026 rankings).  */
 CH.c8 = {n:8, title:"Products, Services, and Brands: Building Customer Value", short:"Products",
  notes:[
@@ -92,30 +92,7 @@ CH.c8 = {n:8, title:"Products, Services, and Brands: Building Customer Value", s
    '<tr><td class="num">4</td><td class="sm">Google</td><td class="num">$317.1B</td><td class="sm">Amazon</td><td class="num">$1.02T</td></tr>'+
    '<tr><td class="num">5</td><td class="sm">Samsung</td><td class="num">$90.5B</td><td class="sm">NVIDIA</td><td class="num">$814.9B</td></tr>'+
    '</tbody></table></div>'+
-   '<p class="ask">Why the two lists differ: Interbrand blends financial performance, role in purchase decisions and brand strength; Kantar BrandZ focuses on financial value integrated with consumer sentiment surveys.</p>'},
-  {id:"c8-beyond", h:"Beyond the guide: brand sponsorship and development", beyond:true, body:
-   '<p class="ask">The rest of branding strategy — Figure 8.2. The study guide limits Branding Strategy to brand equity and brand value, so this is for completeness; not in the quizzes.</p>'+
-   '<h3>Figure 8.2 · Major brand strategy decisions</h3>'+
-   '<div class="flow"><div class="step"><b>Brand positioning</b>Attributes, benefits, beliefs and values.</div><div class="step"><b>Brand name selection</b>Selection, protection.</div><div class="step"><b>Brand sponsorship</b>Manufacturer’s brand, private brand, licensing, co-branding.</div><div class="step"><b>Brand development</b>Line extensions, brand extensions, multibrands, new brands.</div></div>'+
-   '<h3>Brand sponsorship</h3>'+
-   '<ul><li><b>Manufacturer’s (national) brand</b> — long dominant at retail.</li><li><b>Private (store, distributor) brand</b> — booming: Kroger store brands are 25% of its sales; Walmart’s Great Value, Sam’s Choice, Equate and others are 20% of its sales, more than all P&G brands combined, and Great Value is the nation’s largest single food brand. 80% of shoppers believe store-brand quality is equal or better; Trader Joe’s and Whole Foods make premium store brands.</li><li><b>Licensed brand</b> — names, symbols, celebrities or characters licensed for a fee: an instant, proven brand name.</li><li><b>Co-brand</b> — two established brand names of different companies on one product: Benjamin Moore and Pottery Barn, Taco Bell and Doritos. Broader appeal and entry into new categories, but complex contracts, coordination, and damage to one brand can tarnish the other.</li></ul>'+
-   '<h3>Brand development</h3>'+
-   '<ul><li><b>Line extensions</b> — existing brand name, existing category (new flavors, forms, sizes).</li><li><b>Brand extensions</b> — existing brand name, new category.</li><li><b>Multibrands</b> — new brand names in an existing category.</li><li><b>New brands</b> — new name, new category.</li></ul>'},
-  {id:"c8-apple", h:"Beyond the guide: Apple’s comeback", beyond:true, body:
-   '<p class="ask">The chapter’s class opener on challenges — not a study-guide section; not in the quizzes.</p>'+
-   '<div class="tblwrap"><table class="tbl n0"><tbody>'+
-   '<tr><td class="head">April 1976</td><td class="sm">Founded by Steve Jobs and Steve Wozniak. 1977 revenue: $0.0008 billion.</td></tr>'+
-   '<tr><td class="head">1980</td><td class="sm">IPO, fueled by Apple II sales; $0.117 billion.</td></tr>'+
-   '<tr><td class="head">1983</td><td class="sm">Launches the Macintosh (as dated on the slide); brings in CEO John Sculley; revenue about $1 billion.</td></tr>'+
-   '<tr><td class="head">1985</td><td class="sm">Pushes Steve Jobs out.</td></tr>'+
-   '<tr><td class="head">1997</td><td class="sm">February: buys NeXT and brings back Jobs. July: Jobs becomes CEO. Microsoft invests $150 million in non-voting stock. 1998 revenue $5.9B — the decline starts to reverse.</td></tr>'+
-   '<tr><td class="head">2001</td><td class="sm">The iPod; $5.73B.</td></tr>'+
-   '<tr><td class="head">2007</td><td class="sm">The iPhone; $24.01B.</td></tr>'+
-   '<tr><td class="head">2010 · 2015 · 2020</td><td class="sm">$76.28B · $234B · $294B.</td></tr>'+
-   '<tr><td class="head">2018 · 2020</td><td class="sm">A $1 trillion company; then $2 trillion.</td></tr>'+
-   '<tr><td class="head">2024 · 2025</td><td class="sm">$391B; about $416B at the end of 2025 (+6.43%), $465B projected for 2026.</td></tr>'+
-   '<tr><td class="head">2026</td><td class="sm">A $4.95 trillion company.</td></tr>'+
-   '</tbody></table></div>'}
+   '<p class="ask">Why the two lists differ: Interbrand blends financial performance, role in purchase decisions and brand strength; Kantar BrandZ focuses on financial value integrated with consumer sentiment surveys.</p>'}
  ],
  decks:[
   {id:"terms", label:"Key terms", cards:[
@@ -174,19 +151,7 @@ CH.c8 = {n:8, title:"Products, Services, and Brands: Building Customer Value", s
    ["Four advantages of high brand equity","Awareness and loyalty; leverage with resellers; easier extensions; defense against price competition"],
    ["Payless “Palessi”","Influencers paid up to $645 for shoes that sell for under $40"],
    ["Interbrand #1, 2025","Apple, $470.9 billion (Kantar BrandZ 2026: Google, $1.48 trillion)"],
-   ["Core value: Rolex · Chipotle · Edward Jones · Carnival","Status, value and reliability · healthy fast casual · financial security and peace of mind · fun, indulgent memories"]]},
-  {id:"beyond", label:"Beyond the guide", match:false, cards:[
-   ["Private (store) brand","A brand created and owned by a reseller","Sponsorship — not on the study guide"],
-   ["Co-branding","Two established brand names of different companies used on the same product","Sponsorship — not on the study guide"],
-   ["Licensed brand","A name, symbol, celebrity or character licensed for a fee — an instant, proven name","Sponsorship — not on the study guide"],
-   ["Line extension","Extending an existing brand name to new forms, colors, sizes or flavors of an existing category","Development — not on the study guide"],
-   ["Brand extension","Extending an existing brand name to a new product category","Development — not on the study guide"],
-   ["Multibrands","New brand names in an existing product category","Development — not on the study guide"],
-   ["Four brand strategy decisions (Figure 8.2)","Brand positioning, brand name selection, brand sponsorship, brand development","Not on the study guide"],
-   ["Four sponsorship options","Manufacturer’s brand, private brand, licensed brand, co-brand","Not on the study guide"],
-   ["Four development strategies","Line extensions, brand extensions, multibrands, new brands","Not on the study guide"],
-   ["Kroger and Walmart store brands","25% and 20% of sales; Great Value is the largest single food brand","Not on the study guide"],
-   ["Apple’s milestones","1976 founded · 1985 Jobs out · 1997 Jobs back · 2001 iPod · 2007 iPhone · 2018 $1T · 2026 $4.95T","Class opener"]]}
+   ["Core value: Rolex · Chipotle · Edward Jones · Carnival","Status, value and reliability · healthy fast casual · financial security and peace of mind · fun, indulgent memories"]]}
  ]
 };
 
@@ -231,19 +196,10 @@ QB = QB.concat([
  {tp:"c8",t:"mc",q:"Young &amp; Rubicam’s BrandAsset Valuator measures brand strength on:",a:"differentiation, relevance, knowledge and esteem",w:["width, length, depth and consistency","quality, features, style and design","awareness, interest, trial and adoption"],e:"The four consumer perception dimensions."},
  {tp:"c8",t:"mc",q:"The fundamental asset underlying brand equity is:",a:"customer equity",w:["brand value","the product mix","conformance quality"],e:"Think of the company as a portfolio of customers."},
  {tp:"c8",t:"mc",q:"Which is an advantage of high brand equity?",a:"More leverage in bargaining with resellers",w:["Lower conformance quality","Fewer product lines","Less need for customer equity"],e:"Awareness and loyalty, leverage with resellers, easier extensions, defense against price competition."},
- {tp:"c8",off:true,t:"mc",q:"Kroger’s store brands account for about what share of its sales?",a:"25%",w:["5%","50%","80%"],e:"25%; Walmart’s private brands about 20%."},
- {tp:"c8",off:true,t:"mc",q:"Taco Bell and Doritos on one product is an example of:",a:"co-branding",w:["licensing","a private brand","a line extension"],e:"Two established brands of different companies on the same product."},
- {tp:"c8",off:true,t:"mc",q:"Paying a fee to use a celebrity’s name or a movie character on your product is:",a:"licensing",w:["co-branding","multibranding","a store brand"],e:"A licensed brand — an instant, proven name."},
- {tp:"c8",off:true,t:"mc",q:"Using an existing brand name in a new product category is:",a:"a brand extension",w:["a line extension","a multibrand","a new brand"],e:"Line extension = same category; brand extension = new category."},
- {tp:"c8",off:true,t:"mc",q:"Introducing additional brand names in an existing category is:",a:"multibranding",w:["line extension","brand extension","co-branding"],e:"Multibrands."},
  {tp:"c8",t:"mc",q:"Interbrand’s most valuable brand of 2025, per the class slide, was:",a:"Apple, at $470.9 billion",w:["Google, at $1.48 trillion","Microsoft, at $388.5 billion","NVIDIA, at $814.9 billion"],e:"Apple led Interbrand 2025; Google led Kantar BrandZ 2026."},
- {tp:"c8",off:true,t:"mc",q:"Apple became a $1 trillion company in:",a:"2018",w:["2007","2020","2026"],e:"2018; $2T in 2020; $4.95T in 2026."},
- {tp:"c8",off:true,t:"mc",q:"Which product introduction on Apple’s timeline came in 2007?",a:"The iPhone",w:["The iPod","The Macintosh","The iPad"],e:"iPod 2001, iPhone 2007."},
  {tp:"c8",ap:true,t:"mc",q:"A haircut cannot be sampled before it is bought. Which service characteristic is that?",a:"Intangibility",w:["Perishability","Variability","Inseparability"],e:"Cannot be seen, tasted, felt, heard or smelled before purchase."},
  {tp:"c8",ap:true,t:"mc",q:"An empty airline seat on today’s flight cannot be sold tomorrow. Which characteristic?",a:"Perishability",w:["Intangibility","Inseparability","Variability"],e:"Cannot be stored."},
  {tp:"c8",ap:true,t:"mc",q:"A hotel invests in three months of training so every employee treats guests the same way. It is fighting service:",a:"variability",w:["perishability","intangibility","inseparability"],e:"Quality depends on who provides it — training reduces variability."},
- {tp:"c8",off:true,ap:true,t:"mc",q:"Colgate adds a whitening version to its toothpaste line. This is:",a:"a line extension",w:["a brand extension","a multibrand","a new brand"],e:"Same brand, same category."},
- {tp:"c8",off:true,ap:true,t:"mc",q:"A grocery chain launches its own “Great Value”-style label. This is:",a:"a private brand",w:["a manufacturer’s brand","a licensed brand","a co-brand"],e:"A store (private, distributor) brand."},
  {tp:"c8",ap:true,t:"mc",q:"A car dealer includes free car washes and a loaner car with every purchase. Which product level is it building?",a:"The augmented product",w:["The core customer value","The actual product","The product mix"],e:"Support services augment the actual product."},
  {tp:"c8",ap:true,t:"mc",q:"A camera bought at a pharmacy on vacation is which type of product?",a:"Convenience",w:["Specialty","Shopping","Unsought"],e:"The slides’ puzzle — the same camera can be shopping or specialty for other buyers."},
  {tp:"c8",ap:true,t:"mc",q:"Shoppers pay far more for a pair of shoes once a well-known name is on them. Which concept explains that?",a:"Brand equity",w:["Conformance quality","Line stretching","Perishability"],e:"The differential effect of knowing the brand name — the Palessi stunt."},
@@ -257,8 +213,6 @@ QB = QB.concat([
  {tp:"c8",t:"tf",q:"Product mix length is the number of product lines the company carries.",a:false,e:"False — that is width; length is the total number of items."},
  {tp:"c8",t:"tf",q:"In services, the provider becomes the image of the service firm.",a:true,e:"True — it is nearly impossible to separate the person from the service."},
  {tp:"c8",t:"tf",q:"Service quality is easier to define and judge than product quality.",a:false,e:"False — it is harder."},
- {tp:"c8",off:true,t:"tf",q:"Damage to one brand’s reputation cannot affect a co-brand.",a:false,e:"False — it can tarnish the co-brand as well."},
- {tp:"c8",off:true,t:"tf",q:"80% of shoppers believe store-brand quality is equal to or better than national brands.",a:true,e:"True."},
  {tp:"c8",t:"tf",q:"Companies should think of themselves as portfolios of brands rather than portfolios of customers.",a:false,e:"False — the reverse; customer equity is the fundamental asset."},
  {tp:"c8",t:"tf",q:"A brand has positive brand equity when consumers react more favorably to it than to a generic or unbranded product.",a:true,e:"True."},
  {tp:"c8",t:"tf",q:"Brand valuation — estimating a brand’s total financial value — is easy and exact.",a:false,e:"False — measuring it is difficult, which is why Interbrand and Kantar disagree."}

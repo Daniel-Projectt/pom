@@ -70,7 +70,7 @@ function fromPair(tp, idx, reverse){
   q.miss = p[0] + " — <b>" + p[1] + "</b>";
   return q;
 }
-/* Only what the study guide asks for: questions marked off:true (beyond the guide) never enter a quiz */
+/* A question marked off:true never enters a quiz (none is, now that the page holds only the study guide) */
 function bankFor(tp){ var out = []; QB.forEach(function(b, i){ if(b.off) return; if(!tp || b.tp === tp) out.push({b:b, i:i}); }); return out; }
 
 /* A chapter quiz: mostly written questions, about a third identification */

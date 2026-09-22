@@ -1,8 +1,8 @@
 /* ================================================================ chapter 5
-   Consumer Markets and Buyer Behavior. Sections follow the Exam 2 study guide;
+   Consumer Markets and Buyer Behavior. Sections are the Exam 2 study guide's;
    content is from the Pearson slides and notes plus the professor's additions
-   (bottled water, social class by net worth, the Honda family, the brand-
-   personality quiz, Beyond Meat).                                                */
+   inside those sections (bottled water, social class by net worth, the Honda
+   family, the brand-personality quiz).                                           */
 var CH = {};
 CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
  notes:[
@@ -121,11 +121,7 @@ CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
    '<p>New-product marketers target innovators and early adopters, who in turn influence later adopters.</p>'+
    '<h3 class="sub" id="c5-rate">Characteristics that affect the rate of adoption</h3>'+
    '<ul><li><b>Relative advantage</b> — the degree to which the innovation appears superior to existing products.</li><li><b>Compatibility</b> — how well it fits the values and experiences of potential consumers.</li><li><b>Complexity</b> — how difficult it is to understand or use.</li><li><b>Trialability</b> — whether it can be tried on a limited basis.</li><li><b>Observability</b> — whether the results can be observed or described to others.</li></ul>'+
-   '<p>Also: initial and ongoing costs, risk and uncertainty, social approval.</p>'},
-  {id:"c5-cases", h:"Beyond the guide: the Beyond Meat case", beyond:true, body:
-   '<p class="ask">The chapter’s class opener — a case, not a study-guide section. Kept for the story; not in the quizzes.</p>'+
-   '<div class="case"><b class="t">A cultural shift that ran out of buyers</b>Beyond Meat IPO’d in May 2019 at a $1.46 billion valuation; investor hype drove its all-time-high close of <b>$234.90 on July 26, 2019</b>. Its highest annual revenue was 2021, $464.7 million (gross income $113.28 million); it has never reported a full-year profit. Q2 2025 revenue fell 19.6% to $75 million with a net loss of $52.9 million; the 52-week low was $2.23 in May 2025, and the market summary on the slide showed <b>$0.79</b> in January 2026 — down 99.55% over five years.</div>'+
-   '<p>The lesson the professor pairs with chapter 5: spotting a cultural shift (health, plant-based) creates the opportunity, but the buyer’s black box — taste, price, the novelty wearing off — decides whether it lasts.</p>'}
+   '<p>Also: initial and ongoing costs, risk and uncertainty, social approval.</p>'}
  ],
  decks:[
   {id:"terms", label:"Key terms", cards:[
@@ -189,7 +185,7 @@ CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
  ]
 };
 
-/* ---- chapter 5 questions. off:true = beyond the study guide (kept out of quizzes) ---- */
+/* ---- chapter 5 questions ---- */
 var QB = [
  {tp:"c5",t:"mc",q:"Consumer buyer behavior refers to the buying behavior of:",a:"final consumers — individuals and households buying for personal consumption",w:["organizations buying for resale","wholesalers and retailers","governments and institutions"],e:"Final consumers. Organizations are chapter 6."},
  {tp:"c5",t:"mc",q:"In the model of buyer behavior, the “black box” contains:",a:"the buyer’s characteristics and decision process",w:["the four Ps","economic and cultural stimuli","purchase behavior and brand engagement"],e:"Stimuli enter the black box (characteristics + decision process) and produce responses."},
@@ -226,7 +222,6 @@ var QB = [
  {tp:"c5",t:"mc",q:"Which adopter group is described as “guided by respect” — opinion leaders who adopt early but carefully?",a:"Early adopters",w:["Innovators","Early mainstream","Late mainstream"],e:"Early adopters. Innovators are venturesome; the early mainstream deliberate; the late mainstream skeptical; laggards tradition bound."},
  {tp:"c5",t:"mc",q:"The degree to which an innovation may be tried on a limited basis is its:",a:"trialability",w:["observability","compatibility","relative advantage"],e:"Trialability."},
  {tp:"c5",t:"mc",q:"The degree to which an innovation fits the values and experiences of potential consumers is its:",a:"compatibility",w:["complexity","trialability","observability"],e:"Compatibility."},
- {tp:"c5",off:true,t:"mc",q:"Beyond Meat’s all-time-high closing stock price came:",a:"a few months after its May 2019 IPO",w:["in May 2025","in 2021, its best revenue year","the week of its IPO"],e:"$234.90 on July 26, 2019. By January 2026 it was $0.79."},
  {tp:"c5",ap:true,t:"mc",q:"A student researches laptops for weeks, compares specs, reads reviews and finally buys. This is:",a:"complex buying behavior",w:["habitual buying behavior","variety-seeking buying behavior","dissonance-reducing buying behavior"],e:"High involvement, significant brand differences."},
  {tp:"c5",ap:true,t:"mc",q:"A shopper grabs a different flavor of chips each week just to try something new. This is:",a:"variety-seeking buying behavior",w:["habitual buying behavior","complex buying behavior","dissonance-reducing buying behavior"],e:"Low involvement, significant differences — brand switching without dissatisfaction."},
  {tp:"c5",ap:true,t:"mc",q:"A family buys a Honda because the parents always drove Hondas. Which factor is at work?",a:"Family — a social factor",w:["Occupation — a personal factor","Learning — a psychological factor","Subculture — a cultural factor"],e:"The class’s Honda family: the brand parents used becomes the brand the children buy."},
@@ -247,5 +242,4 @@ var QB = [
  {tp:"c5",t:"tf",q:"Almost all major purchases result in some cognitive dissonance.",a:true,e:"True."},
  {tp:"c5",t:"tf",q:"Lagging adopters are the first to try a new product.",a:false,e:"False — they are last; innovators are first."},
  {tp:"c5",t:"tf",q:"New-product marketers should direct initial efforts toward innovators and early adopters.",a:true,e:"True — they influence later adopters."},
- {tp:"c5",off:true,t:"tf",q:"Beyond Meat has reported a full-year profit every year since 2021.",a:false,e:"False — it has operated at a loss since 2021 and never reported a full-year profit."}
 ];

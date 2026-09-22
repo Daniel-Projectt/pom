@@ -50,7 +50,7 @@ const items = $$('#guideRoot .gitem');
 ok(items.length === 16, 'guide shows the handout’s 16 sections', items.length);
 ok(/0 of 16/.test($('#gCount').textContent), 'progress starts at 0 of 16', $('#gCount').textContent);
 ok(!!$('#guideRoot .handout') && $$('#guideRoot .handout .hrules li').length === 4 && /Study Guide for Exam 2/.test($('#guideRoot .handout h2').textContent), 'the handout header with its four instructions');
-ok($$('#guideRoot .gsub .btn').length >= 30 && $$('#guideRoot .gbeyond').length === 3, 'subsection buttons and the beyond-the-guide notes');
+ok($$('#guideRoot .gsub .btn').length >= 30 && $$('#guideRoot .gbeyond').length === 0, 'subsection buttons, and no beyond-the-guide notes');
 
 head('guide checkboxes and jumps');
 const cb = $('#guideRoot input[data-g="g5-decide"]'); cb.checked = true; cb.dispatchEvent(new w.Event('change', { bubbles: true }));
@@ -69,8 +69,8 @@ topic('guide');
 click($('#guideRoot .gitem[data-gi="g7-position"] .gsub .btn[data-a="c7-value"]'));
 ok(visible(panel('c7/notes')) && d.getElementById('c7-value').closest('.note-sec').id === 'c7-position', 'value propositions live inside Differentiation and Positioning');
 topic('guide');
-click($('#guideRoot [data-go="extra/videos"]'));
-ok(visible(panel('extra/videos')) && $$('#videosRoot .vid').length >= 20, 'the videos button opens the video list');
+click($('#guideRoot [data-go="exam/mock"]'));
+ok(visible(panel('exam/mock')) && !!$('#mxStart'), 'the practice-exam button opens the exam setup');
 
 head('every tab and mode');
 const modes = {};
@@ -91,7 +91,7 @@ ok(errors.length === 0, 'no errors after visiting every mode', errors.join(' || 
 head('notes');
 tps.forEach(t => { topic(t); mode(t, 'notes'); ok($$('#' + t + 'Notes .note-sec').length >= 4, t + ': note sections rendered'); ok($$('#' + t + 'Notes .secnav a').length >= 4, t + ': section nav rendered'); ok($$('#' + t + 'Notes h3.sub').length >= 5, t + ': subsection headings rendered'); });
 ok($$('#c5Notes .mx-c').length === 4 && $$('#c7Notes .vp .cell').length === 9, 'the 2x2 and the 3x3 grids rendered');
-ok($$('#c6Notes .note-sec.beyond').length === 1 && $$('#c8Notes .note-sec.beyond').length === 2 && $$('#c7Notes .note-sec.beyond').length === 0, 'beyond-the-guide sections marked');
+ok(tps.every(t => $$('#' + t + 'Notes .note-sec').length === 4 && $$('#' + t + 'Notes .note-sec.beyond').length === 0), 'exactly four sections per chapter, none beyond the guide');
 
 head('flashcards');
 tps.forEach(t => {
@@ -102,13 +102,9 @@ tps.forEach(t => {
   click(p.querySelector('.next')); ok(/^2 of /.test(c.textContent) && !p.querySelector('.flash').classList.contains('flipped'), t + ': next card, unflipped');
   key('ArrowLeft'); ok(/^1 of /.test(c.textContent), t + ': arrow key goes back');
   const decks = Array.from(p.querySelectorAll('[data-deck]'));
-  ok(decks.length >= 2, t + ': at least two decks');
+  ok(decks.length === 2, t + ': two decks, nothing beyond the guide');
   click(decks[1]); ok(/^1 of \d+$/.test(c.textContent) && decks[1].getAttribute('aria-pressed') === 'true', t + ': second deck loads');
 });
-topic('c8'); mode('c8', 'cards'); click($('#topic-c8 [data-deck="beyond"]'));
-ok(/of 11$/.test(panel('c8/cards').querySelector('.counter').textContent), 'chapter 8 beyond-the-guide deck has eleven cards', panel('c8/cards').querySelector('.counter').textContent);
-click(panel('c8/cards').querySelector('.flip'));
-ok(/not on the study guide|class opener/i.test(panel('c8/cards').querySelector('.face.back').textContent), 'beyond-the-guide cards say so on the back', panel('c8/cards').querySelector('.face.back').textContent);
 
 head('match');
 tps.forEach(t => {
@@ -159,14 +155,10 @@ click($('#mxT button[data-t="ap"]')); click($('#mxN button[data-n="25"]')); clic
 ok($$('#mockExam .dots i').length === 25 && $('#mockExam .qtag').textContent === 'Application', 'application-only exam');
 ok(/"types":"ap"/.test(w.localStorage.getItem('pom.mockcfg') || ''), 'exam settings remembered');
 
-head('in class');
-topic('extra'); mode('extra', 'themes');
-ok($$('#themesRoot .theme').length === 4 && $$('#themesRoot .verse').length === 4 && $$('#themesRoot .rule').length === 2, 'themes, verses and announcements rendered');
-mode('extra', 'videos');
-ok($$('#videosRoot .vid a[target="_blank"]').length >= 20, 'video links open in a new tab');
-
 head('remembers where you were');
-ok(w.localStorage.getItem('pom.topic') === 'extra' && w.localStorage.getItem('pom.mode.extra') === 'videos', 'topic and mode saved');
+topic('c7'); mode('c7', 'cards');
+ok(w.localStorage.getItem('pom.topic') === 'c7' && w.localStorage.getItem('pom.mode.c7') === 'cards', 'topic and mode saved');
+ok(!$('.topic-btn[data-topic="extra"]') && $$('.topic-btn').length === 6, 'six tabs and no In Class tab');
 
 head('errors');
 ok(errors.length === 0, 'no runtime errors anywhere', errors.join(' || '));

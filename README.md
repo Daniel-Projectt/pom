@@ -3,19 +3,13 @@
 Study site for chapters 5-8 of Principles of Marketing (Kotler, Armstrong & Balasubramanian):
 https://daniel-projectt.github.io/pom/
 
-Built around the professor's Study Guide for Exam 2 (MRKT 3600, Fall 2026) and the four
-"enhanced" class decks: the Pearson slides and notes, plus the professor's additions (cases,
-figures, Scripture, videos). Same look as the Greek study sheet.
-
-The handout's sections are the spine: the Guide tab lists them item by item, the notes are grouped
-under those exact headings, and the quizzes draw only from them. What the deck covered but the
-handout leaves out (institutional and government markets, brand sponsorship and development, the
-class openers) is kept in the notes labeled "beyond the guide" and excluded from the quizzes.
+The professor's Study Guide for Exam 2 (MRKT 3600, Fall 2026), filled in from the four class
+decks: the Pearson slides and notes, plus the professor's own examples inside the guide's
+sections. Only what the handout asks for is on the page. Same look as the Greek study sheet.
 
 ## Tabs
 - Guide - the Study Guide for Exam 2, section by section, with check-offs and links to each subsection
-- Chapters 5-8 - notes, two flashcard decks each (plus a "beyond the guide" deck where needed), match, quiz
-- In Class - the theme each chapter opens with, Scripture, announcements, and every video shown
+- Chapters 5-8 - the handout's four sections per chapter as notes, two flashcard decks each, match, quiz
 - Practice Exam - questions from all four chapters, by type and chapter
 
 ## Install on a phone

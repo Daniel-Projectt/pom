@@ -70,7 +70,8 @@ function fromPair(tp, idx, reverse){
   q.miss = p[0] + " — <b>" + p[1] + "</b>";
   return q;
 }
-function bankFor(tp){ var out = []; QB.forEach(function(b, i){ if(!tp || b.tp === tp) out.push({b:b, i:i}); }); return out; }
+/* Only what the study guide asks for: questions marked off:true (beyond the guide) never enter a quiz */
+function bankFor(tp){ var out = []; QB.forEach(function(b, i){ if(b.off) return; if(!tp || b.tp === tp) out.push({b:b, i:i}); }); return out; }
 
 /* A chapter quiz: mostly written questions, about a third identification */
 function topicQuestions(tp, keys, n){
@@ -101,7 +102,7 @@ function mockQuestions(cfg){
   var n = cfg.n || 25;
   var pool = [];
   QB.forEach(function(b, i){
-    if(tps.indexOf(b.tp) < 0) return;
+    if(b.off || tps.indexOf(b.tp) < 0) return;
     if(cfg.types === "mc" && b.t !== "mc") return;
     if(cfg.types === "tf" && b.t !== "tf") return;
     if(cfg.types === "ap" && !b.ap) return;

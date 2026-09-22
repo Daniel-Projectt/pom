@@ -1,18 +1,21 @@
 /* ================================================================ chapter 7
-   Customer Value–Driven Marketing Strategy. From the Pearson slides and notes
-   plus the professor's additions (Tide, Marriott, Starbucks loyalty, Liquid
-   Death, the requirements for effective segmentation).                            */
+   Customer Value–Driven Marketing Strategy. Sections follow the Exam 2 study
+   guide; content is from the Pearson slides and notes plus the professor's
+   additions (Tide, Marriott, Starbucks loyalty, Liquid Death, the requirements
+   for effective segmentation).                                                   */
 CH.c7 = {n:7, title:"Customer Value–Driven Marketing Strategy", short:"Strategy",
  notes:[
-  {id:"c7-stp", h:"Figure 7.1 · Designing a customer-driven marketing strategy", know:true, body:
+  {id:"c7-strategy", h:"Marketing Strategy", body:
    '<p class="knowline"><span class="know">Objective 7.1 — the four steps</span></p>'+
    '<p>Companies cannot appeal to all buyers in the marketplace, or at least not to all in the same way. Most have moved from mass marketing to <b>target marketing</b>: identifying market segments, selecting one or more, and developing products and programs tailored to each.</p>'+
    '<div class="quote">Marketing boils down to two questions: 1. Which customers will we serve? 2. How will we serve them? The goal is to create more value for the customers we serve than competitors do.<small>Figure 7.1 note</small></div>'+
+   '<h3>Figure 7.1 · Designing a customer-driven marketing strategy</h3>'+
    '<div class="boxrow"><div class="box"><h4>Select customers to serve</h4><ul><li><b>Segmentation</b> — divide the total market into smaller segments.</li><li><b>Targeting</b> — select the segment or segments to enter.</li></ul></div>'+
    '<div class="box"><h4>Decide on a value proposition</h4><ul><li><b>Differentiation</b> — differentiate the market offering to create superior customer value.</li><li><b>Positioning</b> — position the market offering in the minds of target customers.</li></ul></div></div>'+
    '<p>At the center of the figure: <b>create value for targeted customers</b>. The chapter’s opening case is P&G “competing with itself — and winning”: more than 61 top-selling brands in 180+ countries; Tide alone offers brands and sub-brands (Tide with Downy pods) that give each detergent segment its own value proposition.</p>'+
    '<div class="case"><b class="t">Tide, from the class slide</b>1949: introduced as the world’s first heavy-duty detergent for washing machines, a white powdered bead instead of soap flakes. 1984: a clear, orange-tinted liquid; today the liquid is dark blue, except Tide Free, which is clear. Annual sales are <b>twice</b> the nearest competitor, Gain. Costs about <b>50% more</b> than the average detergent and commands <b>40%</b> of the detergent market. 28 liquid, 5 powder and 17 pod options — about 50. Brings P&G about $5–7 billion a year ($2 billion from pods) out of a P&G total of $87 billion.</div>'},
-  {id:"c7-seg", h:"Market segmentation", know:true, body:
+  {id:"c7-seg", h:"Market Segmentation", body:
+   '<h3 class="sub" id="c7-bases">Segmenting consumer markets</h3>'+
    '<p class="knowline"><span class="know">Objective 7.2 — the bases</span></p>'+
    '<p><b>Market segmentation</b> divides a market into smaller segments with distinct needs, characteristics or behaviors that might require separate marketing strategies or mixes. Buyers differ in wants, resources, locations, buying attitudes and buying practices; segmentation lets companies reach smaller groups more efficiently and effectively.</p>'+
    '<h3>Geographic</h3><p>Nations, regions, states, counties, cities, even neighborhoods. Operate in a few areas, or in all but pay attention to local differences. Domino’s keeps its focus decidedly local — local coupons, GPS store locator, Pizza Tracker from store to door.</p>'+
@@ -28,8 +31,8 @@ CH.c7 = {n:7, title:"Customer Value–Driven Marketing Strategy", short:"Strateg
    '<tr><td class="head">Loyalty status</td><td class="sm">How attached: completely loyal (Starbucks holds about $1.75–2.0 billion in loyalty dollars), somewhat loyal (two or three brands), not loyal at all (want something different each time, or buy what’s on sale).</td></tr>'+
    '</tbody></table></div>'+
    '<h3>Multiple segmentation bases</h3><p>Marketers rarely stop at one variable. Experian’s <b>Mosaic USA</b> classifies U.S. households into 71 lifestyle segments and 19 levels of affluence; Acxiom’s <b>Personicx</b> clusters carry names like “Skyboxes and Suburbans,” “Shooting Stars,” “Soccer and SUVs,” “Raisin’ Grandkids” and “Cartoons and Carpools.” Why: to identify and understand key segments, reach them efficiently, and tailor offerings and messages.</p>'+
-   '<h3>Business markets</h3><p>The objective covers business markets too. The deck skipped them; the book says business marketers use the same variables plus operating characteristics, purchasing approaches, situational factors and personal characteristics.</p>'},
-  {id:"c7-req", h:"Requirements for effective segmentation", know:true, body:
+   '<h3>Business markets</h3><p>Objective 7.2 covers business markets too. The deck skipped them; the book says business marketers use the same variables plus operating characteristics, purchasing approaches, situational factors and personal characteristics.</p>'+
+   '<h3 class="sub" id="c7-req">Requirements for effective segmentation</h3>'+
    '<p class="knowline"><span class="know">Five requirements</span></p>'+
    '<div class="levels">'+
    '<div class="lv"><b>Measurable</b><span>The size, purchasing power and profiles of the segment can be measured.</span></div>'+
@@ -37,21 +40,22 @@ CH.c7 = {n:7, title:"Customer Value–Driven Marketing Strategy", short:"Strateg
    '<div class="lv"><b>Substantial</b><span>The segments are profitable enough to serve.</span></div>'+
    '<div class="lv"><b>Differentiable</b><span>The segments respond differently to marketing mix elements.</span></div>'+
    '<div class="lv"><b>Actionable</b><span>Effective programs can be designed and executed for serving the segments.</span></div></div>'},
-  {id:"c7-target", h:"Market targeting", know:true, body:
+  {id:"c7-target", h:"Market Targeting", body:
+   '<h3 class="sub" id="c7-eval">Evaluating market segments</h3>'+
    '<p class="knowline"><span class="know">Objective 7.3</span></p>'+
    '<p><b>Market targeting</b> involves evaluating each segment’s attractiveness and selecting one or more segments to enter. A <b>target market</b> is a set of buyers who share common needs or characteristics that the company decides to serve.</p>'+
-   '<h3>Evaluating market segments</h3>'+
    '<ul><li><b>Segment size and growth</b> — relative; the largest, fastest-growing segments are not always the most attractive for every company. Smaller companies may target smaller segments that are more profitable for them.</li><li><b>Segment structural attractiveness</b> — strong and aggressive competitors, new entrants, substitute products, the power of buyers, powerful suppliers.</li><li><b>Company objectives and resources</b> — enter only segments where the company can create superior value and gain advantage.</li></ul>'+
-   '<h3>Figure 7.2 · Market-targeting strategies, broad to narrow</h3>'+
+   '<h3 class="sub" id="c7-strategies">Figure 7.2 · Market-targeting strategies, broad to narrow</h3>'+
    '<div class="flow">'+
    '<div class="step"><b>Undifferentiated (mass)</b>One offer to the whole market, focused on common needs rather than differences. Most modern marketers doubt it: hard to satisfy everyone, and focused firms do better in specific segments.</div>'+
    '<div class="step"><b>Differentiated (segmented)</b>Several segments, a separate offer for each. Higher sales and a stronger position, but more expensive to execute — weigh sales against costs. Marriott’s 30+ brands: Ritz-Carlton, St. Regis and W for luxury; Marriott, Sheraton, Westin upscale; Courtyard for business travelers; Residence Inn extended stay; Aloft for the tech-savvy; Marriott Vacation Club timeshares.</div>'+
    '<div class="step"><b>Concentrated (niche)</b>A large share of one or a few smaller segments. Fits limited resources and deep knowledge of the market; more effective and efficient — Harry’s sells razors direct to a value- and convenience-oriented segment giants like Gillette underserved; Stance Socks. Higher risk: if the segment sours or a giant enters, the company suffers.</div>'+
    '<div class="step"><b>Micromarketing</b>Tailoring to specific individuals and locations. <b>Local marketing</b> — cities, neighborhoods, stores (My Macy’s, 69 districts; location-based mobile offers); drawbacks: higher costs, logistics, a diluted image. <b>Individual marketing</b> — one-to-one, mass customization; Rolls-Royce Bespoke; M&M’s with your kids’ faces.</div></div>'+
    '<div class="quote">Rather than seeing a customer in every individual, micromarketers see the individual in every customer.<small>Kotler</small></div>'+
-   '<h3>Choosing a targeting strategy</h3>'+
+   '<h3 class="sub" id="c7-choose">Choosing a targeting strategy</h3>'+
    '<ul><li><b>Company resources</b> — limited resources → concentrated.</li><li><b>Product variability</b> — uniform products (grapefruit, steel) → undifferentiated.</li><li><b>Product life-cycle stage</b> — a new product may launch one version; in maturity, differentiated makes more sense.</li><li><b>Market variability</b> — if buyers have the same tastes and react the same way → undifferentiated.</li><li><b>Competitors’ strategies</b> — when competitors go undifferentiated, gain an edge with differentiated or concentrated marketing.</li></ul>'},
-  {id:"c7-diff", h:"Differentiation and positioning", body:
+  {id:"c7-position", h:"Differentiation and Positioning", body:
+   '<h3 class="sub" id="c7-diff">Differentiation and positioning</h3>'+
    '<p class="knowline"><span class="know">Objective 7.4</span></p>'+
    '<p><b>Product position</b> is the way the product is defined by consumers on important attributes — the place it occupies in consumers’ minds relative to competing products. <b>Products are made in factories, but brands happen in the minds of consumers.</b> IKEA is the “Life Improvement Store”; Dreft is the gentle detergent for baby clothes; IHOP, “Come hungry. Leave happy.”; Olive Garden, “When you’re here, you’re family.” Versa and Fit are positioned on economy, Mercedes and Cadillac on luxury, Porsche and BMW on performance. Consumers position products with or without marketers — so marketers plan positions rather than leave them to chance.</p>'+
    '<p><b>Differentiation</b> means making the market offering different to create superior customer value. <b>Competitive advantage</b> is an advantage over competitors gained by offering greater value — through lower prices, or more benefits that justify higher prices. Solid positions cannot be built on empty promises: a company must first <i>live</i> the slogan.</p>'+
@@ -68,9 +72,8 @@ CH.c7 = {n:7, title:"Customer Value–Driven Marketing Strategy", short:"Strateg
    '<p>Dunkin’ and Starbucks are both coffee-and-snack shops, yet target very different customers: Dunkin’ the <b>average Joe, on the go</b>; Starbucks <b>upscale, high-brow, a destination</b>. Each succeeds by creating the right value proposition for its own mix of customers.</p>'+
    '<h3>Which differences are worth establishing</h3>'+
    '<p>Not all brand differences are meaningful; each can create costs as well as benefits. A difference is worth it to the extent that it is:</p>'+
-   '<div class="chips"><span class="chip"><b>Important</b> — delivers a highly valued benefit</span><span class="chip"><b>Distinctive</b> — competitors don’t offer it, or not this way</span><span class="chip"><b>Superior</b> — to other ways of getting the benefit</span><span class="chip"><b>Communicable</b> — and visible to buyers</span><span class="chip"><b>Preemptive</b> — not easily copied</span><span class="chip"><b>Affordable</b> — buyers can pay for it</span><span class="chip"><b>Profitable</b> — the company can introduce it profitably</span></div>'},
-  {id:"c7-value", h:"Value propositions and the positioning statement", know:true, body:
-   '<p class="knowline"><span class="know">Figure 7.4</span></p>'+
+   '<div class="chips"><span class="chip"><b>Important</b> — delivers a highly valued benefit</span><span class="chip"><b>Distinctive</b> — competitors don’t offer it, or not this way</span><span class="chip"><b>Superior</b> — to other ways of getting the benefit</span><span class="chip"><b>Communicable</b> — and visible to buyers</span><span class="chip"><b>Preemptive</b> — not easily copied</span><span class="chip"><b>Affordable</b> — buyers can pay for it</span><span class="chip"><b>Profitable</b> — the company can introduce it profitably</span></div>'+
+   '<h3 class="sub" id="c7-value">Figure 7.4 · Possible value propositions</h3>'+
    '<p>The <b>value proposition</b> is the full mix of benefits on which a brand is differentiated and positioned — the answer to the customer’s question, <b>“Why should I buy your brand?”</b> BMW’s “ultimate driving machine” hinges on performance but includes luxury and styling at a price that is higher than average but seems fair. Apple’s: style, integration, connectivity, ease of use.</p>'+
    '<div class="vp"><div class="mx-corner"></div><div class="mx-h">Price: more</div><div class="mx-h">Price: the same</div><div class="mx-h">Price: less</div>'+
    '<div class="mx-v">Benefits: more</div><div class="cell win">More for more<small>winning</small></div><div class="cell win">More for the same<small>winning</small></div><div class="cell win">More for less<small>winning</small></div>'+
@@ -78,10 +81,10 @@ CH.c7 = {n:7, title:"Customer Value–Driven Marketing Strategy", short:"Strateg
    '<div class="mx-v">Less</div><div class="cell lose">Less for more<small>losing</small></div><div class="cell lose">Less for the same<small>losing</small></div><div class="cell win">Less for much less<small>winning</small></div></div>'+
    '<ul><li><b>More for more</b> — the most upscale product at a higher price. Profitable but vulnerable: it invites imitators claiming the same quality for less.</li><li><b>More for the same</b> — attack a more-for-more competitor with comparable quality at a lower price. Lexus versus Mercedes and BMW.</li><li><b>The same for less</b> — everyone likes a good deal. Walmart; category killers like Best Buy, PetSmart, David’s Bridal, DSW.</li><li><b>Less for much less</b> — few people need or can afford the very best in everything. Family Dollar, Dollar General.</li><li><b>More for less</b> — the winning proposition everyone claims; achievable in the short run (early Home Depot) but offering more usually costs more, so hard to sustain.</li></ul>'+
    '<p>In any market there is room for many companies, each occupying a different position; each must find the positioning that makes it special to its target consumers.</p>'+
-   '<h3>The positioning statement</h3>'+
+   '<h3 class="sub" id="c7-statement">The positioning statement, and delivering the position</h3>'+
    '<div class="quote">To (target segment and need) our (brand) is (concept) that (point of difference).<small>The form on the slide; the class illustrated it with Aveeno</small></div>'+
    '<p>Kotler’s worked example: “To busy multitaskers who need help remembering things, Evernote is a digital content management application that makes it easy to capture and remember moments and ideas from your everyday life using your computer, phone, tablet, and the web.” The case for superiority is made on the points of difference — USPS ships packages like UPS and FedEx but differentiates with flat-rate boxes: “If it fits, it ships.”</p>'+
-   '<h3>Communicating and delivering the position</h3>'+
+   '<h3>Communicating and delivering the chosen position</h3>'+
    '<ul><li>Choosing the positioning is often easier than implementing it. All the marketing-mix efforts must support the strategy — concrete action, not just talk.</li><li>Establishing or changing a position usually takes a long time; maintaining it requires consistent performance and communication.</li><li>Monitor and adapt over time, but avoid abrupt changes that confuse consumers.</li></ul>'+
    '<div class="case"><b class="t">Liquid Death (class example)</b>Canned water positioned as the eco-friendly alternative to plastic bottles. Through #DeathToPlastics it donates 10% of profits from each can to fight plastic pollution and deliver clean drinking water. The WSJ video’s title says it all: the branding sells even though the water isn’t special.</div>'}
  ],

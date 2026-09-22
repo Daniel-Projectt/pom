@@ -47,20 +47,27 @@ head('landing');
 ok(errors.length === 0, 'no errors while loading', errors.join(' || '));
 ok(visible($('#topic-guide')) && !visible($('#topic-c5')), 'opens on the Guide');
 const items = $$('#guideRoot .gitem');
-ok(items.length === 28, 'guide shows all 28 review items', items.length);
-ok(/0 of 28/.test($('#gCount').textContent), 'progress starts at 0 of 28', $('#gCount').textContent);
-ok($$('#guideRoot .obj').length === 4 && $$('#guideRoot .obj li').length === 17, 'objectives listed under each chapter (17)', $$('#guideRoot .obj li').length);
+ok(items.length === 16, 'guide shows the handout’s 16 sections', items.length);
+ok(/0 of 16/.test($('#gCount').textContent), 'progress starts at 0 of 16', $('#gCount').textContent);
+ok(!!$('#guideRoot .handout') && $$('#guideRoot .handout .hrules li').length === 4 && /Study Guide for Exam 2/.test($('#guideRoot .handout h2').textContent), 'the handout header with its four instructions');
+ok($$('#guideRoot .gsub .btn').length >= 30 && $$('#guideRoot .gbeyond').length === 3, 'subsection buttons and the beyond-the-guide notes');
 
 head('guide checkboxes and jumps');
-const cb = $('#guideRoot input[data-g="g5-types"]'); cb.checked = true; cb.dispatchEvent(new w.Event('change', { bubbles: true }));
-ok(/1 of 28/.test($('#gCount').textContent), 'checking an item moves the progress', $('#gCount').textContent);
-ok(/g5-types":true/.test(w.localStorage.getItem('pom.guide') || ''), 'the check is saved on the device');
+const cb = $('#guideRoot input[data-g="g5-decide"]'); cb.checked = true; cb.dispatchEvent(new w.Event('change', { bubbles: true }));
+ok(/1 of 16/.test($('#gCount').textContent), 'checking an item moves the progress', $('#gCount').textContent);
+ok(/g5-decide":true/.test(w.localStorage.getItem('pom.guide') || ''), 'the check is saved on the device');
 click($('#gPrint')); ok(w.__printed === 1, 'print button prints');
-click($('#guideRoot .gitem[data-gi="g6-center"] button[data-go]'));
-ok(visible($('#topic-c6')) && visible(panel('c6/notes')) && !!d.getElementById('c6-center'), 'buying center: jumps to the chapter 6 notes');
+click($('#guideRoot .gitem[data-gi="g6-behavior"] > button[data-go]'));
+ok(visible($('#topic-c6')) && visible(panel('c6/notes')) && !!d.getElementById('c6-behavior'), 'Business Buyer Behavior: jumps to the chapter 6 notes');
 topic('guide');
-click($('#guideRoot .gitem[data-gi="g8-services"] button[data-go]'));
-ok(visible(panel('c8/notes')) && !!d.getElementById('c8-services'), 'services: jumps to the chapter 8 notes');
+click($('#guideRoot .gitem[data-gi="g8-brands"] > button[data-go]'));
+ok(visible(panel('c8/notes')) && !!d.getElementById('c8-brands'), 'Branding Strategy: jumps to the chapter 8 notes');
+topic('guide');
+click($('#guideRoot .gitem[data-gi="g5-chars"] .gsub .btn[data-a="c5-psych"]'));
+ok(visible(panel('c5/notes')) && !!d.getElementById('c5-psych') && d.getElementById('c5-psych').closest('.note-sec').id === 'c5-chars', 'a subsection button lands inside its handout section');
+topic('guide');
+click($('#guideRoot .gitem[data-gi="g7-position"] .gsub .btn[data-a="c7-value"]'));
+ok(visible(panel('c7/notes')) && d.getElementById('c7-value').closest('.note-sec').id === 'c7-position', 'value propositions live inside Differentiation and Positioning');
 topic('guide');
 click($('#guideRoot [data-go="extra/videos"]'));
 ok(visible(panel('extra/videos')) && $$('#videosRoot .vid').length >= 20, 'the videos button opens the video list');
@@ -82,8 +89,9 @@ Object.keys(modes).forEach(t => {
 ok(errors.length === 0, 'no errors after visiting every mode', errors.join(' || '));
 
 head('notes');
-tps.forEach(t => { topic(t); mode(t, 'notes'); ok($$('#' + t + 'Notes .note-sec').length >= 6, t + ': note sections rendered'); ok($$('#' + t + 'Notes .secnav a').length >= 6, t + ': section nav rendered'); });
+tps.forEach(t => { topic(t); mode(t, 'notes'); ok($$('#' + t + 'Notes .note-sec').length >= 4, t + ': note sections rendered'); ok($$('#' + t + 'Notes .secnav a').length >= 4, t + ': section nav rendered'); ok($$('#' + t + 'Notes h3.sub').length >= 5, t + ': subsection headings rendered'); });
 ok($$('#c5Notes .mx-c').length === 4 && $$('#c7Notes .vp .cell').length === 9, 'the 2x2 and the 3x3 grids rendered');
+ok($$('#c6Notes .note-sec.beyond').length === 1 && $$('#c8Notes .note-sec.beyond').length === 2 && $$('#c7Notes .note-sec.beyond').length === 0, 'beyond-the-guide sections marked');
 
 head('flashcards');
 tps.forEach(t => {
@@ -94,9 +102,13 @@ tps.forEach(t => {
   click(p.querySelector('.next')); ok(/^2 of /.test(c.textContent) && !p.querySelector('.flash').classList.contains('flipped'), t + ': next card, unflipped');
   key('ArrowLeft'); ok(/^1 of /.test(c.textContent), t + ': arrow key goes back');
   const decks = Array.from(p.querySelectorAll('[data-deck]'));
-  ok(decks.length === 2, t + ': two decks');
+  ok(decks.length >= 2, t + ': at least two decks');
   click(decks[1]); ok(/^1 of \d+$/.test(c.textContent) && decks[1].getAttribute('aria-pressed') === 'true', t + ': second deck loads');
 });
+topic('c8'); mode('c8', 'cards'); click($('#topic-c8 [data-deck="beyond"]'));
+ok(/of 11$/.test(panel('c8/cards').querySelector('.counter').textContent), 'chapter 8 beyond-the-guide deck has eleven cards', panel('c8/cards').querySelector('.counter').textContent);
+click(panel('c8/cards').querySelector('.flip'));
+ok(/not on the study guide|class opener/i.test(panel('c8/cards').querySelector('.face.back').textContent), 'beyond-the-guide cards say so on the back', panel('c8/cards').querySelector('.face.back').textContent);
 
 head('match');
 tps.forEach(t => {

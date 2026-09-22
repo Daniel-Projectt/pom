@@ -398,10 +398,22 @@ kbd{font-family:var(--sans);font-size:10px;border:1px solid var(--line-strong);b
 .face .bsound{font-size:15px;line-height:1.55}
 @media (max-width:640px){ .flash{height:440px} }
 
-/* guide */
-.gtop{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:860px;margin:0 auto 26px}
-.gtop .box ul{margin:0;line-height:1.5}
-.gtop .box li{margin:4px 0}
+/* subsections inside a study-guide section */
+.note-sec h3.sub{font-family:var(--serif);font-weight:400;font-style:italic;font-size:20px;letter-spacing:0;text-transform:none;color:var(--ink);margin:30px 0 10px;padding-top:16px;border-top:1px solid var(--line)}
+.note-sec .divider + h3.sub{margin-top:0;padding-top:0;border-top:0}
+.note-sec.beyond h2{color:var(--muted)}
+
+/* guide: the handout */
+.handout{max-width:760px;margin:0 auto 18px;background:var(--surface);border:1px solid var(--line);border-radius:4px;box-shadow:var(--shadow);padding:34px 40px 26px;text-align:center}
+.handout .hcourse{font-family:var(--sans);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.handout h2{font-family:var(--serif);font-weight:400;font-size:27px;margin:10px 0 2px}
+.handout .hscope{font-style:italic;color:var(--muted);margin:0 0 16px;font-size:15px}
+.handout .hrules{text-align:left;margin:0 auto;padding-left:20px;max-width:600px;font-size:15px;line-height:1.55}
+.handout .hrules li{margin:5px 0}
+.gsub{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.gsub .btn{padding:6px 10px;min-height:30px;font-size:9.5px;letter-spacing:.12em}
+.gbeyond{text-align:center;font-style:italic;color:var(--muted);font-size:14px;margin:6px auto 0;max-width:640px;line-height:1.5}
+@media (max-width:640px){ .handout{padding:24px 20px 20px} }
 .gprog{max-width:820px;margin:0 auto 22px;text-align:center}
 .gprog .count{font-family:var(--sans);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
 .gprog .bar{height:3px;background:var(--line);margin:8px auto 0;max-width:420px;overflow:hidden;border-radius:2px}
@@ -503,7 +515,7 @@ kbd{font-family:var(--sans);font-size:10px;border:1px solid var(--line-strong);b
 
     <!-- ================= GUIDE ================= -->
     <section class="topic" id="topic-guide">
-      <p class="intro">The learning objectives from each chapter&rsquo;s slides, turned into a review list. Check an item off once you can explain it without looking; <b>Study it</b> jumps to the notes.</p>
+      <p class="intro">The professor&rsquo;s Study Guide for Exam 2, section by section. Check an item off once you can explain it without looking; <b>Study it</b> jumps to the notes, the small buttons to each subsection.</p>
       <div class="modes"><div class="seg" data-modes="guide">
         <button type="button" data-mode="overview" aria-pressed="true">The review list</button>
       </div></div>
@@ -596,7 +608,7 @@ kbd{font-family:var(--sans);font-size:10px;border:1px solid var(--line-strong);b
 
     <!-- ================= PRACTICE EXAM ================= -->
     <section class="topic" id="topic-exam" hidden>
-      <p class="intro">Questions from all four chapters, reshuffled each run. Instant feedback with the reason.</p>
+      <p class="intro">Questions from all four chapters as the study guide scopes them &mdash; what the guide leaves out stays out. Application questions included, since the handout says to expect them. Reshuffled each run, with the reason behind every answer.</p>
       <div class="modes"><div class="seg" data-modes="exam">
         <button type="button" data-mode="mock" aria-pressed="true">Practice exam</button>
       </div></div>
@@ -606,7 +618,7 @@ kbd{font-family:var(--sans);font-size:10px;border:1px solid var(--line-strong);b
   </main>
 
   <footer>
-    <p>Built from the class slides for chapters 5&ndash;8 (Kotler, Armstrong &amp; Balasubramanian, <i>Principles of Marketing</i>, 20th ed.; chapter 5 from the 19th) and the professor&rsquo;s additions to them.</p>
+    <p>Built from the Study Guide for Exam 2 and the class slides for chapters 5&ndash;8 (Kotler, Armstrong &amp; Balasubramanian, <i>Principles of Marketing</i>, 20th ed.; chapter 5 from the 19th), with the professor&rsquo;s additions.</p>
     <span class="keys">Flashcards <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>Space</kbd> &nbsp;&middot;&nbsp; Quizzes <kbd>1</kbd>&ndash;<kbd>4</kbd> <kbd>Enter</kbd></span>
   </footer>
 
@@ -615,106 +627,76 @@ kbd{font-family:var(--sans);font-size:10px;border:1px solid var(--line-strong);b
 (function(){
 "use strict";
 /* ================================================================ the course
-   From the four "enhanced" chapter decks (Pearson slides plus the professor's
-   additions). No syllabus or quizzes were in the export, so this is only what the
-   slides say.                                                                    */
+   From the "Study Guide for Exam 2" handout (MRKT 3600, Fall 2026) and the four
+   "enhanced" chapter decks (Pearson slides plus the professor's additions).      */
 var COURSE = {
- about:"Principles of Marketing at Cedarville’s School of Business. The text is Kotler, Armstrong &amp; Balasubramanian, <i>Principles of Marketing</i>, 20th edition (the chapter 5 deck is from the 19th). The slides answer one question per chapter: how do buyers decide, how do business buyers decide, whom do we serve and how, and what exactly are we selling?",
- chapters:[
-  ["5","Consumer Markets and Buyer Behavior","How final consumers decide — the black box, four factors, four buying types, five stages, adoption."],
-  ["6","Business Markets and Business Buyer Behavior","How organizations buy — derived demand, buying situations, the buying center, eight steps."],
-  ["7","Customer Value–Driven Marketing Strategy","Segmentation, targeting, differentiation, positioning — which customers, and how to serve them."],
-  ["8","Products, Services, and Brands","Three levels of a product, classifications, lines and mix, the four service characteristics, brand equity."]],
- extras:[
-  "Each deck opens with a life theme and Scripture — relationships, choices, attitude, challenges. They are on the <b>In Class</b> tab.",
-  "The professor adds current cases (Beyond Meat, Tide, Marriott, Liquid Death, Apple, Starbucks, Grainger, WPAFB) and videos. The cases are inside the chapter notes; the videos have their own list."]
+ code:"MRKT 3600 Principles of Marketing", term:"Fall 2026",
+ exam:"Study Guide for Exam 2", scope:"Chapters 5–8 of <i>Principles of Marketing</i> by Kotler and Armstrong, 20th edition",
+ rules:[
+  "The following sections contain the information you should master to be prepared for Exam 2.",
+  "Be sure to review all of the content in the subsections.",
+  "Also, master slides that I emphasized in class as “important.”",
+  "Note that you may be asked questions that involve applying some of the concepts and definitions we covered."],
+ about:"Every heading below is a heading from the handout, in its order and words. Each one has the subsections it covers, a one-breath answer, and a link into the notes. The practice exam draws only from these sections; the material the guide leaves out is kept in the notes, labeled <b>beyond the guide</b>."
 };
 
-/* Learning objectives, in the slides' own words */
-var OBJECTIVES = {
- c5:["5.1 Define the consumer market and construct a simple model of consumer buyer behavior.",
-     "5.2 Name the four major factors that influence consumer buyer behavior.",
-     "5.3 List and define the major types of buying decision behavior and the stages in the buyer decision process.",
-     "5.4 Describe the adoption and diffusion process for new products."],
- c6:["6.1 Define the business market and explain how business markets differ from consumer markets.",
-     "6.2 Identify the major factors that influence business buyer behavior.",
-     "6.3 List and define the steps in the business buying decision process.",
-     "6.4 Discuss how digital and social media have changed business-to-business marketing.",
-     "6.5 Compare the institutional and government markets and explain how institutional and government buyers make their buying decisions."],
- c7:["7.1 Define the major steps in designing a customer-driven marketing strategy: market segmentation, targeting, differentiation, and positioning.",
-     "7.2 List and discuss the major bases for segmenting consumer and business markets.",
-     "7.3 Explain how companies identify attractive market segments and choose a market-targeting strategy.",
-     "7.4 Discuss how companies differentiate and position their products for maximum competitive advantage."],
- c8:["8.1 Define product and describe the major classifications of products and services.",
-     "8.2 Describe the decisions companies make regarding their individual products and services, product lines, and product mixes.",
-     "8.3 Identify the four characteristics that affect the marketing of services and the additional marketing considerations that services require.",
-     "8.4 Discuss branding strategy — the decisions companies make in building and managing their brands."]
-};
-
-/* ================================================================ the review list
-   One item per thing the objectives and the professor's own lists ask for.
-   "a" is the note section to scroll to; "know" marks lists to know cold.      */
+/* ================================================================ the study guide
+   One item per section on the handout. "a" is the note section; "subs" are the
+   subsections inside it. "beyond" lists what the deck covered but the handout
+   does not ask for.                                                              */
 var GUIDE = {sections:[
- {h:"Chapter 5 · Consumer Markets and Buyer Behavior", tp:"c5", items:[
-  {id:"g5-model", t:"The model of buyer behavior", a:"c5-model",
-   short:"Marketing stimuli (the four Ps) and other stimuli (economic, technological, social, cultural) enter the buyer’s black box — characteristics and decision process — and come out as responses: attitudes and preferences, purchase behavior, brand engagement."},
-  {id:"g5-factors", t:"The four factors that influence consumer behavior", know:true, a:"c5-factors",
-   short:"Cultural (culture, subculture, social class) · social (groups and social networks, family, roles and status) · personal (age and life-cycle stage, occupation, economic situation, lifestyle, personality and self-concept) · psychological (motivation, perception, learning, beliefs and attitudes)."},
-  {id:"g5-cultural", t:"Cultural factors: culture, subculture, social class", a:"c5-cultural",
-   short:"Culture is learned values and behaviors; marketers watch for shifts (bottled water). Subcultures share value systems from common experience. Social classes are relatively permanent, ordered divisions with similar buying behavior — in the U.S. the lines are not fixed."},
-  {id:"g5-social", t:"Social and personal factors", a:"c5-social",
-   short:"Reference groups, word of mouth, influencers, opinion leaders; family as the most important consumer-buying organization; roles and status. Then occupation, age and life stage (PRIZM), economic situation, lifestyle (AIOs), personality and brand personality."},
-  {id:"g5-psych", t:"Psychological factors: motivation, Maslow, learning", a:"c5-psych",
-   short:"A motive is a need pressing enough to seek satisfaction; Maslow orders needs from physiological to self-actualization; learning works through drives, stimuli, cues, responses and reinforcement."},
-  {id:"g5-types", t:"The four types of buying decision behavior", know:true, a:"c5-types",
-   short:"By involvement and brand differences: complex (high, significant), dissonance-reducing (high, few), variety-seeking (low, significant), habitual (low, few)."},
-  {id:"g5-process", t:"The five stages of the buyer decision process", know:true, a:"c5-process",
-   short:"Need recognition → information search → evaluation of alternatives → purchase decision → postpurchase behavior. It starts long before the purchase and continues long after."},
-  {id:"g5-adopt", t:"Adoption, adopter categories, rate of adoption", know:true, a:"c5-newprod",
-   short:"Awareness, interest, evaluation, trial, adoption. Innovators 2.5%, early adopters 13.5%, early mainstream 34%, late mainstream 34%, lagging adopters 16%. Rate depends on relative advantage, compatibility, complexity, trialability, observability."},
-  {id:"g5-brandp", t:"Brand personality traits and the class answer key", a:"c5-social",
-   short:"Sincerity → KIA, excitement → BMW, competence → Honda, sophistication → Infiniti, ruggedness → Jeep."}]},
- {h:"Chapter 6 · Business Markets and Business Buyer Behavior", tp:"c6", items:[
-  {id:"g6-diff", t:"How business markets differ from consumer markets", know:true, a:"c6-diff",
-   short:"Fewer, larger buyers; derived, inelastic and fluctuating demand; professional buyers; complex, formal decisions; buyer and seller dependent on each other."},
-  {id:"g6-sit", t:"The three buying situations, and systems selling", a:"c6-situations",
-   short:"Straight rebuy (same envelope, year after year), modified rebuy (change the opening from side to top), new task (a clear plastic mailer). Systems selling: a complete solution from one seller."},
-  {id:"g6-center", t:"The buying center and its five roles", know:true, a:"c6-center",
-   short:"Users, influencers, buyers, deciders, gatekeepers — a set of roles, not a fixed unit. Classroom furniture: students and faculty use; the purchasing director buys and gatekeeps; the CFO decides."},
-  {id:"g6-infl", t:"Major influences on business buyers", a:"c6-influences",
-   short:"Environmental (economy, supply conditions, technology, politics, competition, culture) · organizational (objectives, strategies, structure, systems, procedures) · interpersonal (influence, expertise, authority, dynamics) · individual (age, job, motives, personality, buying style)."},
-  {id:"g6-steps", t:"The eight steps of the business buying process", know:true, a:"c6-process",
-   short:"Problem recognition → general need description → product specification → supplier search → proposal solicitation → supplier selection → order-routine specification → performance review."},
-  {id:"g6-digital", t:"E-procurement and B-to-B digital marketing", a:"c6-process",
-   short:"Reverse auctions, trading exchanges, company buying sites, extranets. Benefits: new suppliers, lower costs, faster orders. Risk: erodes relationships. Maersk’s goal: “to get closer to our customers.”"},
-  {id:"g6-inst", t:"Institutional and government markets", a:"c6-inst",
-   short:"Institutions: low budgets, captive patrons. Governments favor domestic suppliers, require bids, usually award the lowest bidder, and weigh noneconomic factors — minority firms, depressed firms, small businesses."}]},
- {h:"Chapter 7 · Customer Value–Driven Marketing Strategy", tp:"c7", items:[
-  {id:"g7-stp", t:"The four steps: segmentation, targeting, differentiation, positioning", know:true, a:"c7-stp",
-   short:"Select customers to serve (segment, target) and decide on a value proposition (differentiate, position) — to create value for targeted customers. Two questions: which customers, and how will we serve them?"},
-  {id:"g7-bases", t:"The bases for segmenting consumer markets", know:true, a:"c7-seg",
-   short:"Geographic, demographic (age and life cycle, gender, income…), psychographic (social class, lifestyle, personality), behavioral (occasions, benefits sought, user status, usage rate, loyalty status)."},
-  {id:"g7-req", t:"Requirements for effective segmentation", know:true, a:"c7-req",
-   short:"Measurable, accessible, substantial, differentiable, actionable."},
-  {id:"g7-eval", t:"Evaluating segments and the four targeting strategies", know:true, a:"c7-target",
-   short:"Size and growth, structural attractiveness, company objectives and resources. Then undifferentiated, differentiated, concentrated, micromarketing (local and individual). Choice depends on resources, product variability, life-cycle stage, market variability, competitors."},
-  {id:"g7-diff", t:"Differentiation and competitive advantage", a:"c7-diff",
-   short:"Differentiate along product, services, channels, people, image. A difference is worth it if it is important, distinctive, superior, communicable, preemptive, affordable, profitable."},
-  {id:"g7-vp", t:"Value propositions and the positioning statement", know:true, a:"c7-value",
-   short:"Winning: more for more, more for the same, the same for less, less for much less, more for less. Statement: To (target segment and need) our (brand) is (concept) that (point of difference)."}]},
- {h:"Chapter 8 · Products, Services, and Brands", tp:"c8", items:[
-  {id:"g8-levels", t:"Product, service, and the three levels of a product", know:true, a:"c8-what",
-   short:"Core customer value (what is the buyer really buying?), actual product (brand name, features, design, packaging, quality level), augmented product (delivery and credit, after-sale service, warranty, product support)."},
-  {id:"g8-class", t:"Product classifications", know:true, a:"c8-class",
-   short:"Consumer: convenience, shopping, specialty, unsought. Industrial: materials and parts, capital items, supplies and services. Plus organization, person, place and social marketing."},
-  {id:"g8-decisions", t:"Individual product decisions", a:"c8-decisions",
-   short:"Attributes (quality, features, style and design), branding, packaging, labeling, product support services."},
-  {id:"g8-mix", t:"Product lines and the product mix", know:true, a:"c8-lines",
-   short:"Line length; line stretching and line filling. Mix width (number of lines), length (total items), depth (versions of each product), consistency."},
-  {id:"g8-services", t:"The four service characteristics and the service-profit chain", know:true, a:"c8-services",
-   short:"Intangibility, inseparability, variability, perishability. Internal service quality → satisfied, productive employees → greater service value → satisfied, loyal customers → healthy profits and growth. Internal and interactive marketing."},
-  {id:"g8-brands", t:"Brand equity, brand value, sponsorship and development", know:true, a:"c8-brands",
-   short:"Equity: the differential effect of knowing the name. Value: total financial worth. Sponsorship: manufacturer’s, private, licensed, co-brand. Development: line extensions, brand extensions, multibrands, new brands."}]}
+ {h:"Chapter 5", tp:"c5", beyond:"The Beyond Meat case (the class opener) is not a study-guide section.", items:[
+  {id:"g5-model", t:"Model of Consumer Behavior", a:"c5-model",
+   short:"Consumer buyer behavior and consumer markets, defined. Figure 5.1: marketing stimuli (the four Ps) and other stimuli (economic, technological, social, cultural) enter the buyer’s black box — characteristics and decision process — and come out as responses: attitudes and preferences, purchase behavior, brand engagement.",
+   subs:[["Figure 5.1", "c5-model"]]},
+  {id:"g5-chars", t:"Characteristics Affecting Consumer Behavior", a:"c5-chars",
+   short:"The four factors of Figure 5.2. Cultural: culture, subculture, social class. Social: groups and social networks, family, roles and status. Personal: age and life-cycle stage, occupation, economic situation, lifestyle, personality and self-concept. Psychological: motivation (Maslow), perception, learning, beliefs and attitudes.",
+   subs:[["The four factors", "c5-factors"], ["Cultural", "c5-cultural"], ["Social", "c5-social"], ["Personal", "c5-personal"], ["Psychological", "c5-psych"]]},
+  {id:"g5-decide", t:"Buying Decision Behavior and The Buyer Decision Process", a:"c5-decide",
+   short:"Figure 5.4: complex, dissonance-reducing, variety-seeking and habitual buying, by involvement and brand differences. Figure 5.5: need recognition → information search → evaluation of alternatives → purchase decision → postpurchase behavior; cognitive dissonance; the customer journey.",
+   subs:[["Four types of buying behavior", "c5-types"], ["The five stages", "c5-process"]]},
+  {id:"g5-newprod", t:"The Buyer Decision Process for New Products", a:"c5-newprod",
+   short:"Adoption: awareness, interest, evaluation, trial, adoption. Adopter categories — innovators 2.5%, early adopters 13.5%, early mainstream 34%, late mainstream 34%, lagging adopters 16% — and their values. Rate of adoption: relative advantage, compatibility, complexity, trialability, observability.",
+   subs:[["The adoption process", "c5-adoption"], ["Adopter categories", "c5-adopters"], ["Rate of adoption", "c5-rate"]]}]},
+ {h:"Chapter 6", tp:"c6", beyond:"Institutional and government markets, and B-to-B digital and social media marketing (objective 6.4), are in the notes but not on the handout.", items:[
+  {id:"g6-intro", t:"Introduction", a:"c6-intro",
+   short:"Business buyer behavior: the buying behavior of organizations that buy goods and services to make other products and services that are sold, rented or supplied to others. The business buying process. Most large companies sell to other organizations, and the business market involves far more dollars and items than consumer markets.",
+   subs:[["Definitions and the numbers", "c6-intro"]]},
+  {id:"g6-markets", t:"Business Markets", a:"c6-markets",
+   short:"How business markets differ: fewer but larger buyers; derived, inelastic and fluctuating demand; a buying unit with more participants, more professional effort, more interaction and more time; more complex decisions; supplier development. The class’s consumer-vs-business table. Figure 6.1.",
+   subs:[["Structure and demand", "c6-demand"], ["The comparison table", "c6-table"], ["Figure 6.1", "c6-model"]]},
+  {id:"g6-behavior", t:"Business Buyer Behavior", a:"c6-behavior",
+   short:"Straight rebuy, modified rebuy and new task (the class’s envelope); systems selling. The buying center and its five roles — users, influencers, buyers, deciders, gatekeepers. Figure 6.2: environmental, organizational, interpersonal and individual influences.",
+   subs:[["Buying situations", "c6-situations"], ["The buying center", "c6-center"], ["Influences · Figure 6.2", "c6-influences"]]},
+  {id:"g6-process", t:"The Business Buyer Decision Process", a:"c6-process",
+   short:"The eight steps: problem recognition, general need description, product specification, supplier search, proposal solicitation, supplier selection, order-routine specification, performance review. E-procurement and online purchasing — its ways, advantages and disadvantage.",
+   subs:[["The eight steps", "c6-steps"], ["E-procurement", "c6-eproc"]]}]},
+ {h:"Chapter 7", tp:"c7", beyond:"", items:[
+  {id:"g7-strategy", t:"Marketing Strategy", a:"c7-strategy",
+   short:"Figure 7.1: segmentation and targeting select the customers to serve; differentiation and positioning decide the value proposition — to create value for targeted customers. The two questions: which customers will we serve, and how?",
+   subs:[["Figure 7.1", "c7-strategy"]]},
+  {id:"g7-seg", t:"Market Segmentation", a:"c7-seg",
+   short:"Geographic, demographic (age and life cycle, gender, income), psychographic (social class, lifestyle, personality) and behavioral bases (occasions, benefits sought, user status, usage rate, loyalty status); multiple segmentation bases; the five requirements — measurable, accessible, substantial, differentiable, actionable.",
+   subs:[["The bases", "c7-bases"], ["Requirements for effective segmentation", "c7-req"]]},
+  {id:"g7-target", t:"Market Targeting", a:"c7-target",
+   short:"Evaluating segments — size and growth, structural attractiveness, company objectives and resources. Figure 7.2, broad to narrow: undifferentiated, differentiated, concentrated, micromarketing (local and individual). The five factors in choosing a strategy.",
+   subs:[["Evaluating segments", "c7-eval"], ["Figure 7.2 strategies", "c7-strategies"], ["Choosing a strategy", "c7-choose"]]},
+  {id:"g7-position", t:"Differentiation and Positioning", a:"c7-position",
+   short:"Product position; competitive advantage; differentiating on product, services, channels, people, image; the seven criteria for a worthwhile difference; Figure 7.4 value propositions; the positioning statement; communicating and delivering the position.",
+   subs:[["Differentiation", "c7-diff"], ["Value propositions · Figure 7.4", "c7-value"], ["Positioning statement", "c7-statement"]]}]},
+ {h:"Chapter 8", tp:"c8", beyond:"Brand sponsorship and brand development (the rest of branding strategy) and Apple’s timeline (the class opener) are in the notes but not on the handout.", items:[
+  {id:"g8-what", t:"What is a Product", a:"c8-what",
+   short:"Product and service, defined. Figure 8.1: core customer value, actual product, augmented product. Consumer products — convenience, shopping, specialty, unsought (Table 8.1) — and industrial products; organizations, persons, places and ideas as products.",
+   subs:[["Three levels · Figure 8.1", "c8-levels"], ["Classifications", "c8-class"]]},
+  {id:"g8-decisions", t:"Product and Service Decisions", a:"c8-decisions",
+   short:"Product attributes — quality (level and consistency), features, style and design; branding; packaging; labeling; product support services. Product lines (length, stretching, filling) and the product mix (width, length, depth, consistency).",
+   subs:[["Individual product decisions", "c8-attributes"], ["Lines and the mix", "c8-lines"]]},
+  {id:"g8-services", t:"Services Marketing", a:"c8-services",
+   short:"The four characteristics — intangibility, inseparability, variability, perishability. The service-profit chain. Internal and interactive marketing; service differentiation, quality and productivity.",
+   subs:[["Four characteristics", "c8-four"], ["Service-profit chain", "c8-chain"], ["Three kinds of service marketing", "c8-three"]]},
+  {id:"g8-brands", t:"Branding Strategy (Brand Equity and Brand Value only)", a:"c8-brands",
+   short:"Brand equity: the differential effect that knowing the brand name has on customer response; BrandAsset Valuator’s four dimensions; the advantages of high equity; customer equity underneath. Brand value: the total financial value of a brand; the rankings.",
+   subs:[["Brand equity", "c8-equity"], ["Brand value", "c8-value"]]}]}
 ]};
 
 /* ================================================================ in class */
@@ -781,13 +763,14 @@ var VIDEOS = [
 ];
 
 /* ================================================================ chapter 5
-   Consumer Markets and Buyer Behavior. From the Pearson slides and notes plus
-   the professor's additions (bottled water, social class by net worth, the
-   Honda family, the brand-personality quiz, Beyond Meat).                        */
+   Consumer Markets and Buyer Behavior. Sections follow the Exam 2 study guide;
+   content is from the Pearson slides and notes plus the professor's additions
+   (bottled water, social class by net worth, the Honda family, the brand-
+   personality quiz, Beyond Meat).                                                */
 var CH = {};
 CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
  notes:[
-  {id:"c5-model", h:"Consumer markets and the model of buyer behavior", body:
+  {id:"c5-model", h:"Model of Consumer Behavior", body:
    '<p><b>Consumer buyer behavior</b> is the buying behavior of final consumers — individuals and households that buy goods and services for personal consumption. <b>Consumer markets</b> are made up of all those individuals and households.</p>'+
    '<p>Large companies research what consumers buy, where, how, how much, when — and <i>why</i>. The whats and wheres can be measured; the whys are locked in the consumer’s mind, and often consumers themselves don’t know.</p>'+
    '<div class="quote">How do consumers respond to various marketing efforts the company might use?<small>The central question for marketers</small></div>'+
@@ -796,15 +779,16 @@ CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
    '<div class="step"><b>Buyer’s black box</b>Buyer’s characteristics; buyer’s decision process.</div>'+
    '<div class="step"><b>Buyer responses</b>Buying attitudes and preferences; purchase behavior — what, when, where, how much; brand engagements and relationships.</div></div>'+
    '<div class="exam-tip"><b>Why “black box”</b>Stimuli go in and responses come out, but you can’t see inside. Marketers spend a lot of energy and dollars trying to figure out what makes customers tick.</div>'},
-  {id:"c5-factors", h:"Figure 5.2 · The four factors that influence consumer behavior", know:true, body:
+  {id:"c5-chars", h:"Characteristics Affecting Consumer Behavior", body:
+   '<h3 class="sub" id="c5-factors">Figure 5.2 · The four factors</h3>'+
    '<p class="knowline"><span class="know">Objective 5.2 — name the four</span></p>'+
    '<p>Consumer purchases are influenced strongly by cultural, social, personal and psychological characteristics. For the most part marketers cannot control these factors, but they must take them into account.</p>'+
    '<div class="boxrow four"><div class="box"><h4>Cultural</h4><ul><li>Culture</li><li>Subculture</li><li>Social class</li></ul></div>'+
    '<div class="box"><h4>Social</h4><ul><li>Groups and social networks</li><li>Family</li><li>Roles and status</li></ul></div>'+
    '<div class="box"><h4>Personal</h4><ul><li>Age and life-cycle stage</li><li>Occupation</li><li>Economic situation</li><li>Lifestyle</li><li>Personality and self-concept</li></ul></div>'+
    '<div class="box"><h4>Psychological</h4><ul><li>Motivation</li><li>Perception</li><li>Learning</li><li>Beliefs and attitudes</li></ul></div></div>'+
-   '<p class="ask">Discussion question from the slides: what factors influenced your decision to buy the specific smartphone you have?</p>'},
-  {id:"c5-cultural", h:"Cultural factors", body:
+   '<p class="ask">Discussion question from the slides: what factors influenced your decision to buy the specific smartphone you have?</p>'+
+   '<h3 class="sub" id="c5-cultural">Cultural factors</h3>'+
    '<h3>Culture</h3>'+
    '<p><b>Culture</b> is the set of basic values, perceptions, wants and behaviors learned by a member of society from family and other important institutions. It exerts a broad and deep influence. Marketers are always trying to <b>spot cultural shifts</b> to discover new products that might be wanted — the shift toward health and fitness created a huge industry.</p>'+
    '<div class="case"><b class="t">The class’s three shifts: bottled water · working mothers · no plastic straws</b>Four causes for the shift to bottled water: (1) distrust of public water supplies, (2) increased emphasis on healthy living, (3) convenience, (4) thirst-producing medications. Annual U.S. consumption is now about <b>58 gallons a year</b>, up 38 percent since 1998. PepsiCo answers with bubly, LIFEWTR, Propel and Aquafina; Coca-Cola’s smartwater comes pH balanced, sparkling, alkaline 9+pH and antioxidant.</div>'+
@@ -820,8 +804,8 @@ CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
    '<div class="tblwrap"><table class="tbl n0"><thead><tr><th>Social class by net worth (median, 2021 census data)</th><th></th></tr></thead><tbody>'+
    '<tr><td class="head">Lower class</td><td class="num">$12,000</td></tr><tr><td class="head">Lower-middle class</td><td class="num">$61,260</td></tr><tr><td class="head">Middle class</td><td class="num">$145,200</td></tr><tr><td class="head">Upper-middle class</td><td class="num">$269,100</td></tr><tr><td class="head">Upper class</td><td class="num">$805,400</td></tr>'+
    '</tbody></table></div>'+
-   '<p>Some finance experts prefer net worth to income because it accounts for financial habits: a high income spent as fast as it comes leaves little to show. The regional slides make the same point — the salary needed to take home $100K ranges from about $134K to $155K by state, and the living wage for a family of five with one parent working runs from $68,868 (Nashville) to $112,566 (San Francisco).</p>'},
-  {id:"c5-social", h:"Social and personal factors", body:
+   '<p>Some finance experts prefer net worth to income because it accounts for financial habits: a high income spent as fast as it comes leaves little to show. The regional slides make the same point — the salary needed to take home $100K ranges from about $134K to $155K by state, and the living wage for a family of five with one parent working runs from $68,868 (Nashville) to $112,566 (San Francisco).</p>'+
+   '<h3 class="sub" id="c5-social">Social factors</h3>'+
    '<h3>Groups and social networks</h3>'+
    '<ul><li><b>Reference groups</b> serve as direct or indirect points of comparison in forming attitudes and behavior.</li>'+
    '<li><b>Word-of-mouth influence</b> — the personal words of trusted friends and other consumers are more credible than commercial sources.</li>'+
@@ -831,7 +815,7 @@ CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
    '<h3>Family, roles and status</h3>'+
    '<p><b>Family is the most important consumer-buying organization in society.</b> Marketers study the roles and influence of husband, wife and children on different purchases. The class illustrated it with one family’s Hondas — Civic, CR-V, Odyssey, HR-V, CR-V — the brand parents used becomes the brand the children buy.</p>'+
    '<p>A person belongs to many groups; the position in each is a <b>role</b> (the activities people are expected to perform) carrying a <b>status</b> (the esteem society gives it). People choose products appropriate to their roles and status — the working mother who is brand manager, wife and mother, and avid fan buys differently in each.</p>'+
-   '<h3>Personal factors</h3>'+
+   '<h3 class="sub" id="c5-personal">Personal factors</h3>'+
    '<ul><li><b>Occupation</b> affects the goods and services bought. Companies can specialize in an occupational group — FIGS sells modern, functional scrubs direct to medical professionals.</li>'+
    '<li><b>Age and life-cycle stage</b> affect tastes in food, clothes, furniture and recreation. Nielsen’s <b>PRIZM Lifestage Groups</b> system: 66 segments in 11 life-stage groups, from “Striving Singles” and “Young Achievers” to “Affluent Empty Nests” and “Sustaining Seniors,” built on demographics plus behavior and lifestyle.</li>'+
    '<li><b>Economic situation</b> — trends in spending, personal income, savings, interest rates (the 2021 real estate boom). In frugal times companies redesign, reposition and reprice; Target stressed the “Pay less” side of “Expect more. Pay less.”</li>'+
@@ -844,8 +828,8 @@ CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
    '<tr><td class="head">Competence</td><td class="sm">reliable, intelligent, successful</td><td class="sm"><b>Honda</b></td></tr>'+
    '<tr><td class="head">Sophistication</td><td class="sm">upper class, charming</td><td class="sm"><b>Infiniti</b></td></tr>'+
    '<tr><td class="head">Ruggedness</td><td class="sm">outdoorsy, tough</td><td class="sm"><b>Jeep</b></td></tr>'+
-   '</tbody></table></div>'},
-  {id:"c5-psych", h:"Psychological factors", body:
+   '</tbody></table></div>'+
+   '<h3 class="sub" id="c5-psych">Psychological factors</h3>'+
    '<h3>Motivation</h3>'+
    '<p>A <b>motive</b> (or drive) is a need that is sufficiently pressing to direct the person to seek satisfaction. <b>Motivation research</b> is qualitative research designed to probe consumers’ hidden, subconscious motivations — therapy-like interviews, describing brands as animals or cars, even hypnosis. It looks goofy to some, but many marketers use these “interpretive consumer research” approaches to dig deeper.</p>'+
    '<h3>Figure 5.3 · Maslow’s hierarchy of needs</h3>'+
@@ -861,7 +845,8 @@ CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
    '<h3>Learning</h3>'+
    '<p><b>Learning</b> is the change in behavior arising from experience. It occurs through the interplay of <b>drives, stimuli, cues, responses and reinforcement</b>. A drive is a strong internal stimulus calling for action; it becomes a motive when directed toward a stimulus object (a camera). Cues are minor stimuli that determine when, where and how the person responds (brands in a window, a sale price, a friend’s advice). If buying the Nikon is rewarding, the response is reinforced — next time the odds of buying Nikon are higher.</p>'+
    '<div class="exam-tip"><b>The practical significance for marketers</b>Build demand for a product by associating it with strong drives, using motivating cues, and providing positive reinforcement.</div>'},
-  {id:"c5-types", h:"Figure 5.4 · The four types of buying decision behavior", know:true, body:
+  {id:"c5-decide", h:"Buying Decision Behavior and The Buyer Decision Process", body:
+   '<h3 class="sub" id="c5-types">Figure 5.4 · The four types of buying decision behavior</h3>'+
    '<p class="knowline"><span class="know">Objective 5.3</span></p>'+
    '<p>Buying differs for toothpaste, a smartphone, financial services and a new car. Two variables sort it: the buyer’s <b>involvement</b> and the <b>differences between brands</b>. (Adapted from Henry Assael, <i>Consumer Behavior and Marketing Action</i>.)</p>'+
    '<div class="matrix"><div class="mx-corner"></div><div class="mx-h">Significant differences between brands</div><div class="mx-h">Few differences between brands</div>'+
@@ -870,8 +855,8 @@ CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
    '<div class="mx-c"><span class="lab">High involvement · few differences</span><h4>Dissonance-reducing buying behavior</h4>Expensive, infrequent, risky — but the buyer sees little difference among brands, so may buy fairly quickly, responding to price or convenience, and feel dissonance afterward.<i>Carpeting.</i></div>'+
    '<div class="mx-v">Low involvement</div>'+
    '<div class="mx-c"><span class="lab">Low involvement · significant differences</span><h4>Variety-seeking buying behavior</h4>Low cost, not risky, bought often; the buyer switches brands just to try something different, not out of dissatisfaction. Market leaders dominate shelf space; challengers use lower prices, free samples and advertising.<i>Cookies.</i></div>'+
-   '<div class="mx-c"><span class="lab">Low involvement · few differences</span><h4>Habitual buying behavior</h4>Low cost, frequent, not self-expressive; the buyer picks a familiar brand out of habit, not loyalty, and may respond to price or a coupon.<i>Salt — what brand of salt do you buy, and why?</i></div></div>'},
-  {id:"c5-process", h:"Figure 5.5 · The buyer decision process", know:true, body:
+   '<div class="mx-c"><span class="lab">Low involvement · few differences</span><h4>Habitual buying behavior</h4>Low cost, frequent, not self-expressive; the buyer picks a familiar brand out of habit, not loyalty, and may respond to price or a coupon.<i>Salt — what brand of salt do you buy, and why?</i></div></div>'+
+   '<h3 class="sub" id="c5-process">Figure 5.5 · The buyer decision process</h3>'+
    '<p class="knowline"><span class="know">The five stages</span></p>'+
    '<p>The buying process starts long before the actual purchase and continues long after — it may even end in a decision not to buy. Buyers may pass quickly or slowly, and in routine purchases skip or reverse stages. Marketers must focus on the entire process, not just the purchase decision.</p>'+
    '<div class="flow">'+
@@ -882,12 +867,13 @@ CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
    '<div class="step"><b>5 · Postpurchase behavior</b>Satisfaction depends on the gap between <b>expectations</b> and <b>perceived performance</b>. Marketers aim not just to meet expectations but to delight.</div></div>'+
    '<p><b>Cognitive dissonance</b> is buyer discomfort caused by postpurchase conflict. Consumers feel at least some dissonance after every major purchase — glad for the chosen brand’s benefits, uneasy about its drawbacks and the benefits of the brands not bought. Marketers should alleviate it by reinforcing the chosen brand’s benefits.</p>'+
    '<p>The <b>customer journey</b> is the sum of the ongoing experiences consumers have with a brand that affect their buying behavior, engagement and advocacy over time; understanding it lets marketers create experiences that lead to positive purchase, engagement and advocacy.</p>'},
-  {id:"c5-newprod", h:"The buyer decision process for new products", know:true, body:
+  {id:"c5-newprod", h:"The Buyer Decision Process for New Products", body:
+   '<h3 class="sub" id="c5-adoption">The adoption process</h3>'+
    '<p class="knowline"><span class="know">Objective 5.4</span></p>'+
    '<p>A <b>new product</b> is a good, service or idea perceived by some potential customers as new. The <b>adoption process</b> is the mental process an individual goes through from first learning about an innovation to final regular use.</p>'+
    '<div class="flow"><div class="step"><b>Awareness</b>Aware of the product but lacking information.</div><div class="step"><b>Interest</b>Seeks information.</div><div class="step"><b>Evaluation</b>Considers whether trying it makes sense.</div><div class="step"><b>Trial</b>Tries it on a small scale to estimate its value.</div><div class="step"><b>Adoption</b>Decides on full and regular use.</div></div>'+
    '<p>If consumers don’t perceive a need, advertising can trigger it; if they know the product but hold unfavorable attitudes, change the product or the perceptions.</p>'+
-   '<h3>Figure 5.6 · Adopter categories by time of adoption</h3>'+
+   '<h3 class="sub" id="c5-adopters">Figure 5.6 · Adopter categories by time of adoption</h3>'+
    '<div class="tblwrap"><table class="tbl"><thead><tr><th>Group</th><th>Share</th><th>Value</th><th>From the class slide</th></tr></thead><tbody>'+
    '<tr><td class="head">Innovators</td><td class="num">2.5%</td><td class="sm"><b>Venturesome</b> — try new ideas at some risk.</td><td class="sm">Risk takers, often affluent, scientifically associated with the new product.</td></tr>'+
    '<tr><td class="head">Early adopters</td><td class="num">13.5%</td><td class="sm">Guided by <b>respect</b> — opinion leaders who adopt early but carefully.</td><td class="sm">Most influential in any market space — “thought leaders,” high social status, reasonably affluent, active in social media.</td></tr>'+
@@ -897,10 +883,11 @@ CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
    '</tbody></table></div>'+
    '<p class="ask">The professor’s slide lists lagging adopters at 10%; Figure 5.6 and the arithmetic (2.5 + 13.5 + 34 + 34 + 16 = 100) say 16%. Use 16% unless he says otherwise.</p>'+
    '<p>New-product marketers target innovators and early adopters, who in turn influence later adopters.</p>'+
-   '<h3>Characteristics that affect the rate of adoption</h3>'+
+   '<h3 class="sub" id="c5-rate">Characteristics that affect the rate of adoption</h3>'+
    '<ul><li><b>Relative advantage</b> — the degree to which the innovation appears superior to existing products.</li><li><b>Compatibility</b> — how well it fits the values and experiences of potential consumers.</li><li><b>Complexity</b> — how difficult it is to understand or use.</li><li><b>Trialability</b> — whether it can be tried on a limited basis.</li><li><b>Observability</b> — whether the results can be observed or described to others.</li></ul>'+
    '<p>Also: initial and ongoing costs, risk and uncertainty, social approval.</p>'},
-  {id:"c5-cases", h:"The class case: Beyond Meat", body:
+  {id:"c5-cases", h:"Beyond the guide: the Beyond Meat case", beyond:true, body:
+   '<p class="ask">The chapter’s class opener — a case, not a study-guide section. Kept for the story; not in the quizzes.</p>'+
    '<div class="case"><b class="t">A cultural shift that ran out of buyers</b>Beyond Meat IPO’d in May 2019 at a $1.46 billion valuation; investor hype drove its all-time-high close of <b>$234.90 on July 26, 2019</b>. Its highest annual revenue was 2021, $464.7 million (gross income $113.28 million); it has never reported a full-year profit. Q2 2025 revenue fell 19.6% to $75 million with a net loss of $52.9 million; the 52-week low was $2.23 in May 2025, and the market summary on the slide showed <b>$0.79</b> in January 2026 — down 99.55% over five years.</div>'+
    '<p>The lesson the professor pairs with chapter 5: spotting a cultural shift (health, plant-based) creates the opportunity, but the buyer’s black box — taste, price, the novelty wearing off — decides whether it lasts.</p>'}
  ],
@@ -962,12 +949,11 @@ CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
    ["Median net worth, middle class (2021)","$145,200 — lower $12,000, lower-middle $61,260, upper-middle $269,100, upper $805,400"],
    ["PRIZM Lifestage Groups","Nielsen’s system: 66 segments in 11 life-stage groups"],
    ["The most important consumer-buying organization","The family"],
-   ["Beyond Meat’s all-time high","$234.90 on July 26, 2019 — a few months after the May 2019 IPO"],
    ["What determines postpurchase satisfaction","The relationship between expectations and perceived performance"]]}
  ]
 };
 
-/* ---- chapter 5 questions ---- */
+/* ---- chapter 5 questions. off:true = beyond the study guide (kept out of quizzes) ---- */
 var QB = [
  {tp:"c5",t:"mc",q:"Consumer buyer behavior refers to the buying behavior of:",a:"final consumers — individuals and households buying for personal consumption",w:["organizations buying for resale","wholesalers and retailers","governments and institutions"],e:"Final consumers. Organizations are chapter 6."},
  {tp:"c5",t:"mc",q:"In the model of buyer behavior, the “black box” contains:",a:"the buyer’s characteristics and decision process",w:["the four Ps","economic and cultural stimuli","purchase behavior and brand engagement"],e:"Stimuli enter the black box (characteristics + decision process) and produce responses."},
@@ -1004,7 +990,7 @@ var QB = [
  {tp:"c5",t:"mc",q:"Which adopter group is described as “guided by respect” — opinion leaders who adopt early but carefully?",a:"Early adopters",w:["Innovators","Early mainstream","Late mainstream"],e:"Early adopters. Innovators are venturesome; the early mainstream deliberate; the late mainstream skeptical; laggards tradition bound."},
  {tp:"c5",t:"mc",q:"The degree to which an innovation may be tried on a limited basis is its:",a:"trialability",w:["observability","compatibility","relative advantage"],e:"Trialability."},
  {tp:"c5",t:"mc",q:"The degree to which an innovation fits the values and experiences of potential consumers is its:",a:"compatibility",w:["complexity","trialability","observability"],e:"Compatibility."},
- {tp:"c5",t:"mc",q:"Beyond Meat’s all-time-high closing stock price came:",a:"a few months after its May 2019 IPO",w:["in May 2025","in 2021, its best revenue year","the week of its IPO"],e:"$234.90 on July 26, 2019. By January 2026 it was $0.79."},
+ {tp:"c5",off:true,t:"mc",q:"Beyond Meat’s all-time-high closing stock price came:",a:"a few months after its May 2019 IPO",w:["in May 2025","in 2021, its best revenue year","the week of its IPO"],e:"$234.90 on July 26, 2019. By January 2026 it was $0.79."},
  {tp:"c5",ap:true,t:"mc",q:"A student researches laptops for weeks, compares specs, reads reviews and finally buys. This is:",a:"complex buying behavior",w:["habitual buying behavior","variety-seeking buying behavior","dissonance-reducing buying behavior"],e:"High involvement, significant brand differences."},
  {tp:"c5",ap:true,t:"mc",q:"A shopper grabs a different flavor of chips each week just to try something new. This is:",a:"variety-seeking buying behavior",w:["habitual buying behavior","complex buying behavior","dissonance-reducing buying behavior"],e:"Low involvement, significant differences — brand switching without dissatisfaction."},
  {tp:"c5",ap:true,t:"mc",q:"A family buys a Honda because the parents always drove Hondas. Which factor is at work?",a:"Family — a social factor",w:["Occupation — a personal factor","Learning — a psychological factor","Subculture — a cultural factor"],e:"The class’s Honda family: the brand parents used becomes the brand the children buy."},
@@ -1025,24 +1011,25 @@ var QB = [
  {tp:"c5",t:"tf",q:"Almost all major purchases result in some cognitive dissonance.",a:true,e:"True."},
  {tp:"c5",t:"tf",q:"Lagging adopters are the first to try a new product.",a:false,e:"False — they are last; innovators are first."},
  {tp:"c5",t:"tf",q:"New-product marketers should direct initial efforts toward innovators and early adopters.",a:true,e:"True — they influence later adopters."},
- {tp:"c5",t:"tf",q:"Beyond Meat has reported a full-year profit every year since 2021.",a:false,e:"False — it has operated at a loss since 2021 and never reported a full-year profit."}
+ {tp:"c5",off:true,t:"tf",q:"Beyond Meat has reported a full-year profit every year since 2021.",a:false,e:"False — it has operated at a loss since 2021 and never reported a full-year profit."}
 ];
 
 /* ================================================================ chapter 6
-   Business Markets and Business Buyer Behavior. From the Pearson slides and notes
-   plus the professor's additions (small business, the Cedarville envelope, the
-   classroom-furniture buying center, WPAFB, Grainger).                            */
+   Business Markets and Business Buyer Behavior. Sections follow the Exam 2 study
+   guide; content is from the Pearson slides and notes plus the professor's
+   additions (small business, the Cedarville envelope, the classroom-furniture
+   buying center, WPAFB, Grainger).                                               */
 CH.c6 = {n:6, title:"Business Markets and Business Buyer Behavior", short:"Business",
  notes:[
-  {id:"c6-what", h:"Business markets", body:
+  {id:"c6-intro", h:"Introduction", body:
    '<p><b>Business buyer behavior</b> is the buying behavior of the organizations that buy goods and services for use in the production of other products and services that are sold, rented or supplied to others. The <b>business buying process</b> is how business buyers determine which products and services are needed, then find, evaluate and choose among alternative brands.</p>'+
-   '<p>Most large companies sell to other organizations — Boeing, DuPont, IBM, Caterpillar. Even consumer-products companies first sell to intermediaries. The business market is huge: it involves far more dollars and items than consumer markets.</p>'+
+   '<p>Most large companies sell to other organizations — Boeing, DuPont, IBM, Caterpillar. Even consumer-products companies first sell to intermediaries. B-to-B marketers must understand business markets and business buyer behavior, then engage business customers and build profitable relationships by creating superior customer value. The business market is huge: it involves far more dollars and items than consumer markets.</p>'+
    '<div class="boxrow"><div class="box"><h4>The numbers on the class slides</h4><ul><li>Global B2B e-commerce: <b>$30 trillion</b> in 2024 — over five times the $6 trillion B2C market.</li><li>LinkedIn: more than 590 million business professionals in 200+ countries — the go-to B-to-B social selling platform, “market to who matters.”</li></ul></div>'+
    '<div class="box"><h4>Small business in the U.S. (2024)</h4><ul><li><b>34.8 million</b> small businesses — 99.9% of U.S. businesses.</li><li>They employ 59 million people, 46% of the private workforce.</li><li>They contribute 44% of GDP. “Small business drives the American economy.”</li></ul></div></div>'},
-  {id:"c6-diff", h:"How business markets differ from consumer markets", know:true, body:
-   '<p class="knowline"><span class="know">Objective 6.1</span></p>'+
-   '<p>Both involve people in buying roles making decisions to satisfy needs. The differences are in market structure and demand, the nature of the buying unit, and the types of decisions and the decision process.</p>'+
-   '<h3>Market structure and demand</h3>'+
+  {id:"c6-markets", h:"Business Markets", body:
+   '<p class="knowline"><span class="know">Objective 6.1 — how they differ</span></p>'+
+   '<p>Both markets involve people in buying roles making decisions to satisfy needs. The differences are in market structure and demand, the nature of the buying unit, and the types of decisions and the decision process.</p>'+
+   '<h3 class="sub" id="c6-demand">Market structure and demand</h3>'+
    '<ul><li><b>Fewer but larger buyers</b> — even in large business markets, a few buyers account for most of the purchasing.</li>'+
    '<li><b>Derived demand</b> — business demand ultimately derives from demand for consumer goods. Consumers buy Intel processors only when they buy devices with Intel inside.</li>'+
    '<li><b>Inelastic demand</b> — not much affected by price changes, especially in the short run.</li>'+
@@ -1051,7 +1038,7 @@ CH.c6 = {n:6, title:"Business Markets and Business Buyer Behavior", short:"Busin
    '<p>A business purchase usually involves <b>more decision participants</b>, <b>more professional purchasing effort</b> (purchasing agents, a formal process, specifications and quotes), <b>more buyer–seller interaction</b> and <b>more time</b>. Large sums, technical and economic considerations, people at many levels, written purchase orders and formal approval. B-to-B marketers face a new breed of better-trained supply managers, so they need well-trained marketers and salespeople.</p>'+
    '<h3>Types of decisions and the decision process</h3>'+
    '<p>Business buyers face more complex decisions. In the short run sales go to suppliers who meet immediate needs; in the long run marketers keep customers by partnering to solve their problems. <b>Supplier development</b> is the systematic development of networks of supplier-partners to ensure a dependable supply — Walmart doesn’t have a “Purchasing Department,” it has a “Supplier Development Department.”</p>'+
-   '<h3>The comparison table from class</h3>'+
+   '<h3 class="sub" id="c6-table">The comparison table from class</h3>'+
    '<div class="tblwrap"><table class="tbl n0"><thead><tr><th>Consumer</th><th>Business</th></tr></thead><tbody>'+
    '<tr><td class="sm">Many, small markets</td><td class="sm">Fewer, large markets</td></tr>'+
    '<tr><td class="sm">Direct demand</td><td class="sm">Derived demand</td></tr>'+
@@ -1062,11 +1049,12 @@ CH.c6 = {n:6, title:"Business Markets and Business Buyer Behavior", short:"Busin
    '<tr><td class="sm">Informal decision process</td><td class="sm">Formal decision process</td></tr>'+
    '<tr><td class="sm">Independent of the seller</td><td class="sm">Buyer and seller are dependent</td></tr>'+
    '</tbody></table></div>'+
-   '<h3>Figure 6.1 · The model of business buyer behavior</h3>'+
+   '<h3 class="sub" id="c6-model">Figure 6.1 · The model of business buyer behavior</h3>'+
    '<div class="flow"><div class="step"><b>The environment</b>Marketing stimuli: product, price, place, promotion. Other stimuli: economic, technological, political, cultural, competitive.</div>'+
    '<div class="step"><b>The buying organization</b>The <b>buying center</b> and the <b>buying decision process</b> — with interpersonal and individual influences inside organizational influences.</div>'+
    '<div class="step"><b>Buyer responses</b>Product or service choice, supplier choice, order quantities, delivery terms and times, service terms, payment.</div></div>'},
-  {id:"c6-situations", h:"The three buying situations, and systems selling", body:
+  {id:"c6-behavior", h:"Business Buyer Behavior", body:
+   '<h3 class="sub" id="c6-situations">Major types of buying situations</h3>'+
    '<div class="tblwrap"><table class="tbl"><thead><tr><th>Situation</th><th>Definition</th><th>The class’s envelope</th></tr></thead><tbody>'+
    '<tr><td class="head">Straight rebuy</td><td class="sm">The buyer routinely reorders something without any modifications.</td><td class="sm">The same envelope, year after year: 9" × 12", white, 20# paper, open-end adhesive, one-color printing, 100,000 in groups of 100, 10,000 per delivery.</td></tr>'+
    '<tr><td class="head">Modified rebuy</td><td class="sm">The buyer wants to modify product specifications, prices, terms or suppliers.</td><td class="sm">Change the opening from side (open-end) to top (open-top). Same quote form, one line different.</td></tr>'+
@@ -1074,8 +1062,8 @@ CH.c6 = {n:6, title:"Business Markets and Business Buyer Behavior", short:"Busin
    '</tbody></table></div>'+
    '<p class="ask">Discussion question from the slides: how would buying a chair like the one you’re sitting in differ for the university versus you buying one for your desk? The university buys more, asks users, organizes the effort, and negotiates bulk pricing.</p>'+
    '<h3>Systems selling</h3>'+
-   '<p>Many business buyers prefer to buy a <b>complete solution to a problem from a single seller</b> rather than assembling separate products and services from several suppliers. <b>Systems selling</b> (or solutions selling) is often a key strategy for winning and holding accounts. IBM didn’t just hand Six Flags its Maximo asset-management software; its Professional Services group customized it, implemented it across the parks, and trained on site — selling the complete solution to a complex asset-management problem.</p>'},
-  {id:"c6-center", h:"The buying center", know:true, body:
+   '<p>Many business buyers prefer to buy a <b>complete solution to a problem from a single seller</b> rather than assembling separate products and services from several suppliers. <b>Systems selling</b> (or solutions selling) is often a key strategy for winning and holding accounts. IBM didn’t just hand Six Flags its Maximo asset-management software; its Professional Services group customized it, implemented it across the parks, and trained on site — selling the complete solution to a complex asset-management problem.</p>'+
+   '<h3 class="sub" id="c6-center">Participants in the business buying process: the buying center</h3>'+
    '<p class="knowline"><span class="know">The five roles</span></p>'+
    '<p>The <b>buying center</b> is all the individuals and units that play a role in the business purchase decision-making process. It is not a fixed, formally identified unit — it is a set of buying roles assumed by different people for different purchases, and its size and makeup vary by product and situation.</p>'+
    '<div class="tblwrap"><table class="tbl"><thead><tr><th>Role</th><th>Who they are</th><th>Classroom furniture (class example)</th></tr></thead><tbody>'+
@@ -1086,8 +1074,8 @@ CH.c6 = {n:6, title:"Business Markets and Business Buyer Behavior", short:"Busin
    '<tr><td class="head">Gatekeepers</td><td class="sm">Control the flow of information; purchasing agents can keep salespeople from users or deciders — so can technical staff and even secretaries.</td><td class="sm">Purchasing director</td></tr>'+
    '</tbody></table></div>'+
    '<h3>The marketing challenge</h3>'+
-   '<ul><li>Who participates in the decision? What is each participant’s relative influence? What evaluation criteria does each use?</li><li>Are there <b>informal participants</b>? The class example: the campus interior designer. Kotler’s: a corporate jet decision swayed behind the scenes by a board member who loves flying.</li><li>In a typical organization the buying activity has two parts: the buying center and the decision process.</li></ul>'},
-  {id:"c6-influences", h:"Figure 6.2 · Major influences on business buyers", body:
+   '<ul><li>Who participates in the decision? What is each participant’s relative influence? What evaluation criteria does each use?</li><li>Are there <b>informal participants</b>? The class example: the campus interior designer. Kotler’s: a corporate jet decision swayed behind the scenes by a board member who loves flying.</li><li>In a typical organization the buying activity has two parts: the buying center and the decision process.</li></ul>'+
+   '<h3 class="sub" id="c6-influences">Figure 6.2 · Major influences on business buyers</h3>'+
    '<p class="knowline"><span class="know">Objective 6.2</span></p>'+
    '<p>Like consumer decisions, business decisions are affected by a complex combination of influences — with an extra layer of <b>organizational</b> factors.</p>'+
    '<div class="boxrow four"><div class="box"><h4>Environmental</h4><ul><li>The economy</li><li>Supply conditions</li><li>Technology</li><li>Politics / regulation</li><li>Competition</li><li>Culture and customs</li></ul></div>'+
@@ -1097,8 +1085,9 @@ CH.c6 = {n:6, title:"Business Markets and Business Buyer Behavior", short:"Busin
    '<h3>The class’s examples</h3>'+
    '<ul><li><b>Supply conditions</b> — the 2011 tsunami in Japan, and what it did to Honda’s supply.</li><li><b>Organizational objectives</b> — GM and EDS; the pyramid: objectives → strategies → structure → systems → procedures.</li><li><b>Interpersonal expertise</b> — who in the room actually knows the product.</li><li><b>Individual personality and relationship</b> — Starkey Ranch, the master-planned community: people buy from people they trust.</li></ul>'+
    '<p>The business marketer must ask: how many people are involved, who are they, what are their criteria, and what are the company’s policies and limits on its buyers?</p>'},
-  {id:"c6-process", h:"The business buying process, e-procurement, and B-to-B digital marketing", know:true, body:
-   '<p class="knowline"><span class="know">Objective 6.3 — the eight steps</span></p>'+
+  {id:"c6-process", h:"The Business Buyer Decision Process", body:
+   '<h3 class="sub" id="c6-steps">The eight steps</h3>'+
+   '<p class="knowline"><span class="know">Objective 6.3</span></p>'+
    '<div class="flow">'+
    '<div class="step"><b>1 · Problem recognition</b>Someone recognizes a problem or need — from <b>internal</b> stimuli (a machine breaks down, a manager is unhappy with a supplier) or <b>external</b> stimuli (a trade show, an ad, a better price).</div>'+
    '<div class="step"><b>2 · General need description</b>Describe the characteristics and quantity of the needed item.</div>'+
@@ -1110,15 +1099,14 @@ CH.c6 = {n:6, title:"Business Markets and Business Buyer Behavior", short:"Busin
    '<div class="step"><b>8 · Performance review</b>Rate satisfaction and decide to continue, modify or drop the supplier.</div></div>'+
    '<p>Business marketers often alert customers to problems in their advertising and then show the solution: Salesforce’s “Blaze your trail” ads show problems it solved for Intuit; Quill.com’s award-winning ad asks what to do when your printer runs out of toner.</p>'+
    '<p>Compare the consumer’s five stages (need recognition → information search → evaluation of alternatives → purchase decision → postpurchase behavior) — the class put the two flows side by side.</p>'+
-   '<h3>E-procurement and online purchasing</h3>'+
+   '<h3 class="sub" id="c6-eproc">E-procurement and online purchasing</h3>'+
    '<p>Online procurement is standard procedure today. Companies do it through <b>reverse auctions</b> (post purchasing requests and invite bids), <b>trading exchanges</b>, their own <b>company buying sites</b>, and <b>extranet</b> links with key suppliers. Staples Business Advantage serves business customers of any size.</p>'+
    '<div class="boxrow"><div class="box"><h4>Advantages</h4><ul><li>Access to new suppliers</li><li>Lowers costs</li><li>Speeds order processing and delivery</li><li>Enhances information sharing</li><li>Improves sales</li><li>Facilitates service and support</li><li>Frees buyers to focus on strategic issues</li></ul></div>'+
    '<div class="box"><h4>Disadvantages</h4><ul><li>Can erode relationships as buyers search for new suppliers</li><li>Buyers use the internet to pit suppliers against one another, purchase by purchase</li></ul></div></div>'+
-   '<h3>B-to-B digital and social media marketing</h3>'+
-   '<p class="knowline"><span class="know">Objective 6.4</span></p>'+
+   '<h3 class="sub" id="c6-digital">B-to-B digital and social media marketing — objective 6.4, not on the study guide</h3>'+
    '<p><b>B-to-B digital and social media marketing</b> uses digital and social approaches to engage business customers and manage relationships anywhere, any time — websites, blogs, apps, LinkedIn, YouTube, Facebook, Twitter. Container-shipping giant <b>Maersk Line</b> engages business customers through “a boatload” of digital and social media: “The goal is… to get closer to our customers.” “Social media is about communication, not marketing. It’s about engaging, not pushing.”</p>'},
-  {id:"c6-inst", h:"Institutional and government markets", body:
-   '<p class="knowline"><span class="know">Objective 6.5</span></p>'+
+  {id:"c6-inst", h:"Beyond the guide: Institutional and Government Markets", beyond:true, body:
+   '<p class="ask">Objective 6.5 in the deck, but not a section on the Exam 2 study guide. Kept for reference; not in the quizzes.</p>'+
    '<h3>Institutional markets</h3>'+
    '<p>Schools, hospitals, nursing homes and prisons that provide goods and services to people in their care. Characteristics: <b>low budgets</b> and <b>captive patrons</b>. A hospital purchasing agent must find food vendors whose quality meets a minimum standard at low prices. Many marketers set up separate divisions — General Mills Foodservice, P&G Professional.</p>'+
    '<h3>Government markets</h3>'+
@@ -1155,9 +1143,7 @@ CH.c6 = {n:6, title:"Business Markets and Business Buyer Behavior", short:"Busin
    ["E-procurement","Purchasing through electronic connections between buyers and sellers, usually online"],
    ["Reverse auction","A buyer posts purchasing requests online and invites suppliers to bid"],
    ["Extranet","A direct procurement link with a key supplier"],
-   ["B-to-B digital and social media marketing","Using digital and social approaches to engage business customers anywhere, any time"],
-   ["Institutional market","Schools, hospitals, nursing homes and prisons that provide goods and services to people in their care"],
-   ["Government market","Governmental units that purchase or rent goods and services to carry out their functions"]]},
+   ["B-to-B digital and social media marketing","Using digital and social approaches to engage business customers anywhere, any time"]]},
   {id:"lists", label:"Lists & numbers", cards:[
    ["Four differences in business demand","Fewer but larger buyers; derived; inelastic; fluctuating"],
    ["What a business purchase involves more of","More decision participants, more professional purchasing effort, more buyer–seller interaction, more time"],
@@ -1168,17 +1154,22 @@ CH.c6 = {n:6, title:"Business Markets and Business Buyer Behavior", short:"Busin
    ["The eight steps","Problem recognition, general need description, product specification, supplier search, proposal solicitation, supplier selection, order-routine specification, performance review"],
    ["Four ways to do e-procurement","Reverse auctions, trading exchanges, company buying sites, extranet links"],
    ["The main disadvantage of e-procurement","It can erode relationships as buyers search for new suppliers"],
-   ["Institutional market characteristics","Low budgets and captive patrons"],
-   ["How governments buy","Favor domestic suppliers, require bids, award the lowest bidder, weigh noneconomic factors"],
-   ["Noneconomic factors in government buying","Minority firms, depressed firms and areas, small businesses"],
    ["Global B2B e-commerce vs B2C (2024)","$30 trillion vs $6 trillion — over five times"],
    ["Small businesses in the U.S. (2024)","34.8 million — 99.9% of businesses, 59 million employees, 46% of the private workforce, 44% of GDP"],
    ["LinkedIn membership","More than 590 million business professionals"],
    ["Walmart’s purchasing department is called","The Supplier Development Department"],
    ["IBM and Six Flags","Systems selling — Maximo software plus the services to implement it"],
-   ["WPAFB’s Air Force Materiel Command budget","$184 billion — a third of the Air Force budget"],
-   ["Grainger’s 2023 revenue","$16.48 billion; net income $1.9 billion; 26,000 employees; founded 1927 in Chicago"],
-   ["The 2011 Japan tsunami illustrates","Supply conditions — an environmental influence"]]}
+   ["The 2011 Japan tsunami illustrates","Supply conditions — an environmental influence"],
+   ["Figure 6.1 buyer responses","Product or service choice, supplier choice, order quantities, delivery terms and times, service terms, payment"]]},
+  {id:"beyond", label:"Beyond the guide", match:false, cards:[
+   ["Institutional market","Schools, hospitals, nursing homes and prisons that provide goods and services to people in their care","Not on the Exam 2 study guide"],
+   ["Government market","Governmental units that purchase or rent goods and services to carry out their functions","Not on the Exam 2 study guide"],
+   ["Institutional market characteristics","Low budgets and captive patrons","Not on the Exam 2 study guide"],
+   ["How governments buy","Favor domestic suppliers, require bids, award the lowest bidder, weigh noneconomic factors","Not on the Exam 2 study guide"],
+   ["Noneconomic factors in government buying","Minority firms, depressed firms and areas, small businesses","Not on the Exam 2 study guide"],
+   ["WPAFB’s Air Force Materiel Command budget","$184 billion — a third of the Air Force budget","Class example"],
+   ["Grainger’s 2023 revenue","$16.48 billion; net income $1.9 billion; 26,000 employees; founded 1927 in Chicago","Class example"],
+   ["Maersk’s goal for digital and social media","“To get closer to our customers”","Objective 6.4 — not on the study guide"]]}
  ]
 };
 
@@ -1212,47 +1203,58 @@ QB = QB.concat([
  {tp:"c6",t:"mc",q:"A machine breaks down and needs new parts. In the business buying process this is:",a:"an internal stimulus for problem recognition",w:["an external stimulus for problem recognition","proposal solicitation","order-routine specification"],e:"Internal stimulus. A trade show or an ad would be external."},
  {tp:"c6",t:"mc",q:"Putting purchasing requests online and inviting suppliers to bid for the business is a:",a:"reverse auction",w:["trading exchange","extranet","straight rebuy"],e:"A reverse auction."},
  {tp:"c6",t:"mc",q:"A disadvantage of e-procurement is that it:",a:"can erode buyer–supplier relationships",w:["raises purchasing costs","slows order processing","limits access to new suppliers"],e:"Buyers use the web to pit suppliers against each other purchase by purchase."},
- {tp:"c6",t:"mc",q:"Maersk Line’s stated goal for its digital and social media was:",a:"to get closer to our customers",w:["to cut its sales force","to lower shipping rates","to replace its website"],e:"“The goal is… to get closer to our customers.”"},
- {tp:"c6",t:"mc",q:"Institutional markets are characterized by:",a:"low budgets and captive patrons",w:["high budgets and free choice","competitive bids and lowest price","derived demand and extranets"],e:"Low budgets, captive patrons — schools, hospitals, nursing homes, prisons."},
- {tp:"c6",t:"mc",q:"Government markets normally award the contract to:",a:"the lowest bidder",w:["the largest supplier","the first bidder","a foreign supplier"],e:"The lowest bidder, after requiring bids and favoring domestic suppliers."},
- {tp:"c6",t:"mc",q:"Which is a NONECONOMIC factor government buyers are asked to consider?",a:"Minority-owned firms",w:["Lowest price","Delivery speed","Product quality"],e:"Minority firms, depressed firms, small businesses."},
+ {tp:"c6",off:true,t:"mc",q:"Maersk Line’s stated goal for its digital and social media was:",a:"to get closer to our customers",w:["to cut its sales force","to lower shipping rates","to replace its website"],e:"“The goal is… to get closer to our customers.”"},
+ {tp:"c6",off:true,t:"mc",q:"Institutional markets are characterized by:",a:"low budgets and captive patrons",w:["high budgets and free choice","competitive bids and lowest price","derived demand and extranets"],e:"Low budgets, captive patrons — schools, hospitals, nursing homes, prisons."},
+ {tp:"c6",off:true,t:"mc",q:"Government markets normally award the contract to:",a:"the lowest bidder",w:["the largest supplier","the first bidder","a foreign supplier"],e:"The lowest bidder, after requiring bids and favoring domestic suppliers."},
+ {tp:"c6",off:true,t:"mc",q:"Which is a NONECONOMIC factor government buyers are asked to consider?",a:"Minority-owned firms",w:["Lowest price","Delivery speed","Product quality"],e:"Minority firms, depressed firms, small businesses."},
  {tp:"c6",t:"mc",q:"By the class slide, the global B2B e-commerce market in 2024 was about:",a:"$30 trillion — over five times the B2C market",w:["$6 trillion — equal to B2C","$1 trillion","$30 billion"],e:"$30 trillion vs $6 trillion B2C."},
  {tp:"c6",t:"mc",q:"Small businesses make up what share of U.S. businesses (2024)?",a:"99.9%",w:["46%","44%","59%"],e:"99.9% of businesses; 46% of the private workforce; 44% of GDP."},
- {tp:"c6",t:"mc",q:"Wright-Patterson AFB is home to Air Force Materiel Command, whose budget is about:",a:"$184 billion — a third of the Air Force budget",w:["$4.3 billion","$1.4 billion","$16.48 billion"],e:"$184B. $4.3B is the base’s annual economic impact."},
- {tp:"c6",t:"mc",q:"Grainger was founded in 1927 to provide customers with:",a:"a consistent supply of motors",w:["office supplies","safety equipment","shipping containers"],e:"Bill Grainger, Chicago, motors."},
- {tp:"c6",ap:true,t:"mc",q:"A hospital’s purchasing agent must find food vendors that meet a minimum quality standard at the lowest possible price. This is typical of:",a:"the institutional market",w:["the government market","the consumer market","a reverse auction"],e:"Low budgets, captive patrons."},
+ {tp:"c6",off:true,t:"mc",q:"Wright-Patterson AFB is home to Air Force Materiel Command, whose budget is about:",a:"$184 billion — a third of the Air Force budget",w:["$4.3 billion","$1.4 billion","$16.48 billion"],e:"$184B. $4.3B is the base’s annual economic impact."},
+ {tp:"c6",off:true,t:"mc",q:"Grainger was founded in 1927 to provide customers with:",a:"a consistent supply of motors",w:["office supplies","safety equipment","shipping containers"],e:"Bill Grainger, Chicago, motors."},
+ {tp:"c6",off:true,ap:true,t:"mc",q:"A hospital’s purchasing agent must find food vendors that meet a minimum quality standard at the lowest possible price. This is typical of:",a:"the institutional market",w:["the government market","the consumer market","a reverse auction"],e:"Low budgets, captive patrons."},
  {tp:"c6",ap:true,t:"mc",q:"An engineer writes the technical specs that a new part must meet. Which buying-center role is she playing?",a:"Influencer",w:["Gatekeeper","Buyer","User"],e:"Influencers help define specifications; technical personnel are especially important."},
  {tp:"c6",ap:true,t:"mc",q:"A receptionist declines to put a salesperson through to the plant manager. Which role is that?",a:"Gatekeeper",w:["Decider","Buyer","Influencer"],e:"Controlling the flow of information = gatekeeper."},
- {tp:"c6",ap:true,t:"mc",q:"A city government must buy from whoever submits the lowest qualifying bid. Which market is this?",a:"Government market",w:["Institutional market","Consumer market","Reseller market"],e:"Bids and lowest bidder."},
+ {tp:"c6",off:true,ap:true,t:"mc",q:"A city government must buy from whoever submits the lowest qualifying bid. Which market is this?",a:"Government market",w:["Institutional market","Consumer market","Reseller market"],e:"Bids and lowest bidder."},
  {tp:"c6",ap:true,t:"mc",q:"A company puts its need for 10,000 laptops online and lets suppliers bid the price down. This is:",a:"a reverse auction",w:["an extranet","systems selling","a modified rebuy"],e:"Reverse auction."},
  {tp:"c6",ap:true,t:"mc",q:"Home sales fall 5%, and orders for lumber-mill equipment fall 40%. This illustrates:",a:"fluctuating (derived) demand",w:["inelastic demand","elastic consumer demand","a straight rebuy"],e:"A small change in consumer demand → a large change in business demand."},
+ {tp:"c6",ap:true,t:"mc",q:"A university orders the same 9-by-12 envelopes it has ordered for years, with no changes. This is:",a:"a straight rebuy",w:["a modified rebuy","a new task","systems selling"],e:"Routine reorder, no modifications."},
+ {tp:"c6",ap:true,t:"mc",q:"A software vendor sells not just the program but installation, customization and training as one package. This is:",a:"systems selling",w:["a reverse auction","supplier development","a straight rebuy"],e:"A complete solution from a single seller — like IBM and Six Flags."},
+ {tp:"c6",t:"mc",q:"In Figure 6.1, which of these is one of the buyer responses?",a:"Supplier choice",w:["Cultural stimuli","The buying center","Competitive stimuli"],e:"Responses: product or service choice, supplier choice, order quantities, delivery terms and times, service terms, payment."},
+ {tp:"c6",t:"mc",q:"Supplier development is:",a:"the systematic development of networks of supplier-partners to ensure a dependable supply",w:["training a supplier’s sales force","buying from whichever supplier is cheapest today","a reverse auction among suppliers"],e:"Walmart’s Supplier Development Department, not a purchasing department."},
+ {tp:"c6",t:"mc",q:"Per the class slide, LinkedIn’s membership is more than:",a:"590 million business professionals",w:["59 million","5.9 billion","34.8 million"],e:"590 million, in more than 200 countries — the go-to B-to-B social selling platform."},
+ {tp:"c6",t:"tf",q:"E-procurement gives buyers access to new suppliers and lowers purchasing costs.",a:true,e:"True — and it speeds order processing and delivery."},
  {tp:"c6",t:"tf",q:"Business markets involve far more dollars and items than consumer markets.",a:true,e:"True."},
  {tp:"c6",t:"tf",q:"The buying center is a fixed, formally identified unit within the organization.",a:false,e:"False — it is a set of roles assumed by different people for different purchases."},
  {tp:"c6",t:"tf",q:"In routine buying, the buyers are often the deciders.",a:true,e:"True."},
  {tp:"c6",t:"tf",q:"Sometimes even people in the buying center are not aware of all the buying participants.",a:true,e:"True — informal participants may sway the decision behind the scenes."},
  {tp:"c6",t:"tf",q:"Business buying decisions have the same four groups of influences as consumer decisions, with an extra organizational layer.",a:true,e:"True — environmental, interpersonal, individual, plus organizational."},
  {tp:"c6",t:"tf",q:"E-procurement frees buyers’ time to focus on strategic issues.",a:true,e:"True."},
- {tp:"c6",t:"tf",q:"Government buying is rarely watched by outside publics.",a:false,e:"False — it is carefully watched, from Congress to private groups."},
- {tp:"c6",t:"tf",q:"Many companies that sell to the government have not been marketing oriented.",a:true,e:"True — spending is set by elected officials and price has dominated."},
+ {tp:"c6",off:true,t:"tf",q:"Government buying is rarely watched by outside publics.",a:false,e:"False — it is carefully watched, from Congress to private groups."},
+ {tp:"c6",off:true,t:"tf",q:"Many companies that sell to the government have not been marketing oriented.",a:true,e:"True — spending is set by elected officials and price has dominated."},
  {tp:"c6",t:"tf",q:"Small businesses employ less than a quarter of the U.S. private workforce.",a:false,e:"False — 59 million people, 46%."},
- {tp:"c6",t:"tf",q:"The consumer decision process has more steps than the business buying process.",a:false,e:"False — five vs eight."}
+ {tp:"c6",t:"tf",q:"The consumer decision process has more steps than the business buying process.",a:false,e:"False — five vs eight."},
+ {tp:"c6",t:"tf",q:"Business demand is described as inelastic because it is not much affected by price changes in the short run.",a:true,e:"True."},
+ {tp:"c6",t:"tf",q:"Business buyers and sellers tend to be more dependent on each other than consumers and sellers are.",a:true,e:"True — the last row of the class table."}
 ]);
 
 /* ================================================================ chapter 7
-   Customer Value–Driven Marketing Strategy. From the Pearson slides and notes
-   plus the professor's additions (Tide, Marriott, Starbucks loyalty, Liquid
-   Death, the requirements for effective segmentation).                            */
+   Customer Value–Driven Marketing Strategy. Sections follow the Exam 2 study
+   guide; content is from the Pearson slides and notes plus the professor's
+   additions (Tide, Marriott, Starbucks loyalty, Liquid Death, the requirements
+   for effective segmentation).                                                   */
 CH.c7 = {n:7, title:"Customer Value–Driven Marketing Strategy", short:"Strategy",
  notes:[
-  {id:"c7-stp", h:"Figure 7.1 · Designing a customer-driven marketing strategy", know:true, body:
+  {id:"c7-strategy", h:"Marketing Strategy", body:
    '<p class="knowline"><span class="know">Objective 7.1 — the four steps</span></p>'+
    '<p>Companies cannot appeal to all buyers in the marketplace, or at least not to all in the same way. Most have moved from mass marketing to <b>target marketing</b>: identifying market segments, selecting one or more, and developing products and programs tailored to each.</p>'+
    '<div class="quote">Marketing boils down to two questions: 1. Which customers will we serve? 2. How will we serve them? The goal is to create more value for the customers we serve than competitors do.<small>Figure 7.1 note</small></div>'+
+   '<h3>Figure 7.1 · Designing a customer-driven marketing strategy</h3>'+
    '<div class="boxrow"><div class="box"><h4>Select customers to serve</h4><ul><li><b>Segmentation</b> — divide the total market into smaller segments.</li><li><b>Targeting</b> — select the segment or segments to enter.</li></ul></div>'+
    '<div class="box"><h4>Decide on a value proposition</h4><ul><li><b>Differentiation</b> — differentiate the market offering to create superior customer value.</li><li><b>Positioning</b> — position the market offering in the minds of target customers.</li></ul></div></div>'+
    '<p>At the center of the figure: <b>create value for targeted customers</b>. The chapter’s opening case is P&G “competing with itself — and winning”: more than 61 top-selling brands in 180+ countries; Tide alone offers brands and sub-brands (Tide with Downy pods) that give each detergent segment its own value proposition.</p>'+
    '<div class="case"><b class="t">Tide, from the class slide</b>1949: introduced as the world’s first heavy-duty detergent for washing machines, a white powdered bead instead of soap flakes. 1984: a clear, orange-tinted liquid; today the liquid is dark blue, except Tide Free, which is clear. Annual sales are <b>twice</b> the nearest competitor, Gain. Costs about <b>50% more</b> than the average detergent and commands <b>40%</b> of the detergent market. 28 liquid, 5 powder and 17 pod options — about 50. Brings P&G about $5–7 billion a year ($2 billion from pods) out of a P&G total of $87 billion.</div>'},
-  {id:"c7-seg", h:"Market segmentation", know:true, body:
+  {id:"c7-seg", h:"Market Segmentation", body:
+   '<h3 class="sub" id="c7-bases">Segmenting consumer markets</h3>'+
    '<p class="knowline"><span class="know">Objective 7.2 — the bases</span></p>'+
    '<p><b>Market segmentation</b> divides a market into smaller segments with distinct needs, characteristics or behaviors that might require separate marketing strategies or mixes. Buyers differ in wants, resources, locations, buying attitudes and buying practices; segmentation lets companies reach smaller groups more efficiently and effectively.</p>'+
    '<h3>Geographic</h3><p>Nations, regions, states, counties, cities, even neighborhoods. Operate in a few areas, or in all but pay attention to local differences. Domino’s keeps its focus decidedly local — local coupons, GPS store locator, Pizza Tracker from store to door.</p>'+
@@ -1268,8 +1270,8 @@ CH.c7 = {n:7, title:"Customer Value–Driven Marketing Strategy", short:"Strateg
    '<tr><td class="head">Loyalty status</td><td class="sm">How attached: completely loyal (Starbucks holds about $1.75–2.0 billion in loyalty dollars), somewhat loyal (two or three brands), not loyal at all (want something different each time, or buy what’s on sale).</td></tr>'+
    '</tbody></table></div>'+
    '<h3>Multiple segmentation bases</h3><p>Marketers rarely stop at one variable. Experian’s <b>Mosaic USA</b> classifies U.S. households into 71 lifestyle segments and 19 levels of affluence; Acxiom’s <b>Personicx</b> clusters carry names like “Skyboxes and Suburbans,” “Shooting Stars,” “Soccer and SUVs,” “Raisin’ Grandkids” and “Cartoons and Carpools.” Why: to identify and understand key segments, reach them efficiently, and tailor offerings and messages.</p>'+
-   '<h3>Business markets</h3><p>The objective covers business markets too. The deck skipped them; the book says business marketers use the same variables plus operating characteristics, purchasing approaches, situational factors and personal characteristics.</p>'},
-  {id:"c7-req", h:"Requirements for effective segmentation", know:true, body:
+   '<h3>Business markets</h3><p>Objective 7.2 covers business markets too. The deck skipped them; the book says business marketers use the same variables plus operating characteristics, purchasing approaches, situational factors and personal characteristics.</p>'+
+   '<h3 class="sub" id="c7-req">Requirements for effective segmentation</h3>'+
    '<p class="knowline"><span class="know">Five requirements</span></p>'+
    '<div class="levels">'+
    '<div class="lv"><b>Measurable</b><span>The size, purchasing power and profiles of the segment can be measured.</span></div>'+
@@ -1277,21 +1279,22 @@ CH.c7 = {n:7, title:"Customer Value–Driven Marketing Strategy", short:"Strateg
    '<div class="lv"><b>Substantial</b><span>The segments are profitable enough to serve.</span></div>'+
    '<div class="lv"><b>Differentiable</b><span>The segments respond differently to marketing mix elements.</span></div>'+
    '<div class="lv"><b>Actionable</b><span>Effective programs can be designed and executed for serving the segments.</span></div></div>'},
-  {id:"c7-target", h:"Market targeting", know:true, body:
+  {id:"c7-target", h:"Market Targeting", body:
+   '<h3 class="sub" id="c7-eval">Evaluating market segments</h3>'+
    '<p class="knowline"><span class="know">Objective 7.3</span></p>'+
    '<p><b>Market targeting</b> involves evaluating each segment’s attractiveness and selecting one or more segments to enter. A <b>target market</b> is a set of buyers who share common needs or characteristics that the company decides to serve.</p>'+
-   '<h3>Evaluating market segments</h3>'+
    '<ul><li><b>Segment size and growth</b> — relative; the largest, fastest-growing segments are not always the most attractive for every company. Smaller companies may target smaller segments that are more profitable for them.</li><li><b>Segment structural attractiveness</b> — strong and aggressive competitors, new entrants, substitute products, the power of buyers, powerful suppliers.</li><li><b>Company objectives and resources</b> — enter only segments where the company can create superior value and gain advantage.</li></ul>'+
-   '<h3>Figure 7.2 · Market-targeting strategies, broad to narrow</h3>'+
+   '<h3 class="sub" id="c7-strategies">Figure 7.2 · Market-targeting strategies, broad to narrow</h3>'+
    '<div class="flow">'+
    '<div class="step"><b>Undifferentiated (mass)</b>One offer to the whole market, focused on common needs rather than differences. Most modern marketers doubt it: hard to satisfy everyone, and focused firms do better in specific segments.</div>'+
    '<div class="step"><b>Differentiated (segmented)</b>Several segments, a separate offer for each. Higher sales and a stronger position, but more expensive to execute — weigh sales against costs. Marriott’s 30+ brands: Ritz-Carlton, St. Regis and W for luxury; Marriott, Sheraton, Westin upscale; Courtyard for business travelers; Residence Inn extended stay; Aloft for the tech-savvy; Marriott Vacation Club timeshares.</div>'+
    '<div class="step"><b>Concentrated (niche)</b>A large share of one or a few smaller segments. Fits limited resources and deep knowledge of the market; more effective and efficient — Harry’s sells razors direct to a value- and convenience-oriented segment giants like Gillette underserved; Stance Socks. Higher risk: if the segment sours or a giant enters, the company suffers.</div>'+
    '<div class="step"><b>Micromarketing</b>Tailoring to specific individuals and locations. <b>Local marketing</b> — cities, neighborhoods, stores (My Macy’s, 69 districts; location-based mobile offers); drawbacks: higher costs, logistics, a diluted image. <b>Individual marketing</b> — one-to-one, mass customization; Rolls-Royce Bespoke; M&M’s with your kids’ faces.</div></div>'+
    '<div class="quote">Rather than seeing a customer in every individual, micromarketers see the individual in every customer.<small>Kotler</small></div>'+
-   '<h3>Choosing a targeting strategy</h3>'+
+   '<h3 class="sub" id="c7-choose">Choosing a targeting strategy</h3>'+
    '<ul><li><b>Company resources</b> — limited resources → concentrated.</li><li><b>Product variability</b> — uniform products (grapefruit, steel) → undifferentiated.</li><li><b>Product life-cycle stage</b> — a new product may launch one version; in maturity, differentiated makes more sense.</li><li><b>Market variability</b> — if buyers have the same tastes and react the same way → undifferentiated.</li><li><b>Competitors’ strategies</b> — when competitors go undifferentiated, gain an edge with differentiated or concentrated marketing.</li></ul>'},
-  {id:"c7-diff", h:"Differentiation and positioning", body:
+  {id:"c7-position", h:"Differentiation and Positioning", body:
+   '<h3 class="sub" id="c7-diff">Differentiation and positioning</h3>'+
    '<p class="knowline"><span class="know">Objective 7.4</span></p>'+
    '<p><b>Product position</b> is the way the product is defined by consumers on important attributes — the place it occupies in consumers’ minds relative to competing products. <b>Products are made in factories, but brands happen in the minds of consumers.</b> IKEA is the “Life Improvement Store”; Dreft is the gentle detergent for baby clothes; IHOP, “Come hungry. Leave happy.”; Olive Garden, “When you’re here, you’re family.” Versa and Fit are positioned on economy, Mercedes and Cadillac on luxury, Porsche and BMW on performance. Consumers position products with or without marketers — so marketers plan positions rather than leave them to chance.</p>'+
    '<p><b>Differentiation</b> means making the market offering different to create superior customer value. <b>Competitive advantage</b> is an advantage over competitors gained by offering greater value — through lower prices, or more benefits that justify higher prices. Solid positions cannot be built on empty promises: a company must first <i>live</i> the slogan.</p>'+
@@ -1308,9 +1311,8 @@ CH.c7 = {n:7, title:"Customer Value–Driven Marketing Strategy", short:"Strateg
    '<p>Dunkin’ and Starbucks are both coffee-and-snack shops, yet target very different customers: Dunkin’ the <b>average Joe, on the go</b>; Starbucks <b>upscale, high-brow, a destination</b>. Each succeeds by creating the right value proposition for its own mix of customers.</p>'+
    '<h3>Which differences are worth establishing</h3>'+
    '<p>Not all brand differences are meaningful; each can create costs as well as benefits. A difference is worth it to the extent that it is:</p>'+
-   '<div class="chips"><span class="chip"><b>Important</b> — delivers a highly valued benefit</span><span class="chip"><b>Distinctive</b> — competitors don’t offer it, or not this way</span><span class="chip"><b>Superior</b> — to other ways of getting the benefit</span><span class="chip"><b>Communicable</b> — and visible to buyers</span><span class="chip"><b>Preemptive</b> — not easily copied</span><span class="chip"><b>Affordable</b> — buyers can pay for it</span><span class="chip"><b>Profitable</b> — the company can introduce it profitably</span></div>'},
-  {id:"c7-value", h:"Value propositions and the positioning statement", know:true, body:
-   '<p class="knowline"><span class="know">Figure 7.4</span></p>'+
+   '<div class="chips"><span class="chip"><b>Important</b> — delivers a highly valued benefit</span><span class="chip"><b>Distinctive</b> — competitors don’t offer it, or not this way</span><span class="chip"><b>Superior</b> — to other ways of getting the benefit</span><span class="chip"><b>Communicable</b> — and visible to buyers</span><span class="chip"><b>Preemptive</b> — not easily copied</span><span class="chip"><b>Affordable</b> — buyers can pay for it</span><span class="chip"><b>Profitable</b> — the company can introduce it profitably</span></div>'+
+   '<h3 class="sub" id="c7-value">Figure 7.4 · Possible value propositions</h3>'+
    '<p>The <b>value proposition</b> is the full mix of benefits on which a brand is differentiated and positioned — the answer to the customer’s question, <b>“Why should I buy your brand?”</b> BMW’s “ultimate driving machine” hinges on performance but includes luxury and styling at a price that is higher than average but seems fair. Apple’s: style, integration, connectivity, ease of use.</p>'+
    '<div class="vp"><div class="mx-corner"></div><div class="mx-h">Price: more</div><div class="mx-h">Price: the same</div><div class="mx-h">Price: less</div>'+
    '<div class="mx-v">Benefits: more</div><div class="cell win">More for more<small>winning</small></div><div class="cell win">More for the same<small>winning</small></div><div class="cell win">More for less<small>winning</small></div>'+
@@ -1318,10 +1320,10 @@ CH.c7 = {n:7, title:"Customer Value–Driven Marketing Strategy", short:"Strateg
    '<div class="mx-v">Less</div><div class="cell lose">Less for more<small>losing</small></div><div class="cell lose">Less for the same<small>losing</small></div><div class="cell win">Less for much less<small>winning</small></div></div>'+
    '<ul><li><b>More for more</b> — the most upscale product at a higher price. Profitable but vulnerable: it invites imitators claiming the same quality for less.</li><li><b>More for the same</b> — attack a more-for-more competitor with comparable quality at a lower price. Lexus versus Mercedes and BMW.</li><li><b>The same for less</b> — everyone likes a good deal. Walmart; category killers like Best Buy, PetSmart, David’s Bridal, DSW.</li><li><b>Less for much less</b> — few people need or can afford the very best in everything. Family Dollar, Dollar General.</li><li><b>More for less</b> — the winning proposition everyone claims; achievable in the short run (early Home Depot) but offering more usually costs more, so hard to sustain.</li></ul>'+
    '<p>In any market there is room for many companies, each occupying a different position; each must find the positioning that makes it special to its target consumers.</p>'+
-   '<h3>The positioning statement</h3>'+
+   '<h3 class="sub" id="c7-statement">The positioning statement, and delivering the position</h3>'+
    '<div class="quote">To (target segment and need) our (brand) is (concept) that (point of difference).<small>The form on the slide; the class illustrated it with Aveeno</small></div>'+
    '<p>Kotler’s worked example: “To busy multitaskers who need help remembering things, Evernote is a digital content management application that makes it easy to capture and remember moments and ideas from your everyday life using your computer, phone, tablet, and the web.” The case for superiority is made on the points of difference — USPS ships packages like UPS and FedEx but differentiates with flat-rate boxes: “If it fits, it ships.”</p>'+
-   '<h3>Communicating and delivering the position</h3>'+
+   '<h3>Communicating and delivering the chosen position</h3>'+
    '<ul><li>Choosing the positioning is often easier than implementing it. All the marketing-mix efforts must support the strategy — concrete action, not just talk.</li><li>Establishing or changing a position usually takes a long time; maintaining it requires consistent performance and communication.</li><li>Monitor and adapt over time, but avoid abrupt changes that confuse consumers.</li></ul>'+
    '<div class="case"><b class="t">Liquid Death (class example)</b>Canned water positioned as the eco-friendly alternative to plastic bottles. Through #DeathToPlastics it donates 10% of profits from each can to fight plastic pollution and deliver clean drinking water. The WSJ video’s title says it all: the branding sells even though the water isn’t special.</div>'}
  ],
@@ -1440,12 +1442,15 @@ QB = QB.concat([
 ]);
 
 /* ================================================================ chapter 8
-   Products, Services, and Brands. From the Pearson slides and notes plus the
-   professor's additions (Apple's timeline, core-value examples, the Starbucks
-   product mix, line stretching and filling, the 2025/2026 brand rankings).       */
+   Products, Services, and Brands. Sections follow the Exam 2 study guide — which
+   limits Branding Strategy to brand equity and brand value; the rest of branding
+   is kept as "beyond the guide." Content from the Pearson slides and notes plus
+   the professor's additions (Apple's timeline, core-value examples, the
+   Starbucks product mix, line stretching and filling, the 2025/2026 rankings).  */
 CH.c8 = {n:8, title:"Products, Services, and Brands: Building Customer Value", short:"Products",
  notes:[
-  {id:"c8-what", h:"What is a product? The three levels", know:true, body:
+  {id:"c8-what", h:"What is a Product", body:
+   '<h3 class="sub" id="c8-levels">Product, service, and the three levels</h3>'+
    '<p class="knowline"><span class="know">Objective 8.1</span></p>'+
    '<p>A <b>product</b> is anything that can be offered in a market for attention, acquisition, use or consumption that might satisfy a need or want — not just cars, computers and phones but services, events, persons, places, organizations, ideas, or a mixture. A <b>service</b> is a product that consists of activities, benefits or satisfactions, essentially intangible, that does not result in the ownership of anything — banking, hotels, airlines, retail, wireless, home repair.</p>'+
    '<div class="case"><b class="t">Starbucks: delivering the “Starbucks Experience”</b>Starbucks didn’t sell just coffee; it sold an experience that “enriches people’s lives one moment, one human being, one extraordinary cup of coffee at a time” — a <b>“third place”</b> away from home and away from work. The smells, the grinding beans, the baristas blending and brewing are the product beyond the coffee. Buffalo Wild Wings doesn’t serve wings and beer; it gives the “Wings. Beer. Sports.” fan experience.</div>'+
@@ -1460,8 +1465,8 @@ CH.c8 = {n:8, title:"Products, Services, and Brands: Building Customer Value", s
    '<tr><td class="head">Edward Jones</td><td class="sm">Financial security and peace of mind</td></tr>'+
    '<tr><td class="head">Chipotle</td><td class="sm">A healthy choice, fast casual food</td></tr>'+
    '<tr><td class="head">Rolex</td><td class="sm">Status, value and reliability</td></tr>'+
-   '</tbody></table></div>'},
-  {id:"c8-class", h:"Product and service classifications", know:true, body:
+   '</tbody></table></div>'+
+   '<h3 class="sub" id="c8-class">Product and service classifications</h3>'+
    '<p>Two broad classes, based on who uses them: <b>consumer products</b> and <b>industrial products</b>. The distinction is the <i>purpose</i>: a lawn mower for home is a consumer product; the same mower bought for a landscaping business is an industrial product.</p>'+
    '<h3>Consumer products — Table 8.1</h3>'+
    '<div class="tblwrap"><table class="tbl"><thead><tr><th></th><th>Convenience</th><th>Shopping</th><th>Specialty</th><th>Unsought</th></tr></thead><tbody>'+
@@ -1476,7 +1481,8 @@ CH.c8 = {n:8, title:"Products, Services, and Brands: Building Customer Value", s
    '<ul><li><b>Materials and parts</b> — raw materials, and manufactured materials and parts.</li><li><b>Capital items</b> — aid in the buyer’s production or operations.</li><li><b>Supplies and services</b> — operating supplies, repair and maintenance items, business services.</li></ul>'+
    '<h3>Other marketable entities</h3>'+
    '<ul><li><b>Organization marketing</b> — creating, maintaining or changing attitudes and behavior toward an organization (corporate image campaigns).</li><li><b>Person marketing</b> — toward particular people: presidents, entertainers, athletes, doctors, lawyers.</li><li><b>Place marketing</b> — toward places: “Go NOLA,” Brand USA and DiscoverAmerica.com.</li><li><b>Social marketing</b> — using commercial marketing concepts to influence behavior that improves individual and social well-being.</li></ul>'},
-  {id:"c8-decisions", h:"Individual product and service decisions", body:
+  {id:"c8-decisions", h:"Product and Service Decisions", body:
+   '<h3 class="sub" id="c8-attributes">Individual product and service decisions</h3>'+
    '<p class="knowline"><span class="know">Objective 8.2</span></p>'+
    '<p>Developing a product means defining the benefits it will offer, communicated and delivered through <b>product attributes</b>: quality, features, style and design. Then branding, packaging, labeling and support services.</p>'+
    '<h3>Product quality</h3>'+
@@ -1485,8 +1491,8 @@ CH.c8 = {n:8, title:"Products, Services, and Brands: Building Customer Value", s
    '<h3>Style and design</h3><p><b>Style</b> describes appearance; <b>design</b> contributes to usefulness as well as looks — a larger concept. Good design doesn’t start with brainstorming and prototypes; it begins with <b>observing customers, understanding their needs, and shaping their product-use experience</b>. Sonos’s wireless speakers fill a house with sound and are easy to use.</p>'+
    '<h3>Branding</h3><p>A <b>brand</b> is a name, term, sign, symbol or design, or a combination, that identifies the maker or seller of a product or service. Brands help consumers identify products and say something about quality and consistency; for the seller they give legal protection, help segment markets, and communicate features. Payless’s “Palessi” stunt: fashion influencers paid as much as <b>$645</b> for shoes that normally sell for under $40.</p>'+
    '<h3>Packaging and labeling</h3><p><b>Packaging</b> — designing and producing the container or wrapper, now including “smart packaging.” Once its job was to hold and protect; now it is prime marketing space. <b>Labels</b> identify the product or brand, describe it (who made it, where, when, contents, how to use it safely), and promote the brand.</p>'+
-   '<h3>Product support services</h3><p>Support services augment actual products. Keeping customers happy after the sale is the key to lasting relationships. The Lexus Covenant: “Lexus will treat each customer as we would a guest in our home.” Lowe’s equipped employees with 42,000 iPhones to check inventory, look up purchase histories and compare prices without leaving the customer’s side.</p>'},
-  {id:"c8-lines", h:"Product lines and the product mix", know:true, body:
+   '<h3>Product support services</h3><p>Support services augment actual products. Keeping customers happy after the sale is the key to lasting relationships. The Lexus Covenant: “Lexus will treat each customer as we would a guest in our home.” Lowe’s equipped employees with 42,000 iPhones to check inventory, look up purchase histories and compare prices without leaving the customer’s side.</p>'+
+   '<h3 class="sub" id="c8-lines">Product lines and the product mix</h3>'+
    '<p>A <b>product line</b> is a group of products that are closely related because they function in a similar manner, are sold to the same customer groups, are marketed through the same outlets, or fall within given price ranges. The major decision is <b>line length</b>: too short if adding items would raise profits, too long if dropping items would.</p>'+
    '<ul><li><b>Line stretching</b> — introducing new products into existing lines; using an existing brand name for a new item in the same line (the Coke bottle lineup: Coca-Cola, Life, Zero, Diet, Fanta, Sprite, Sprite Zero).</li><li><b>Line filling</b> — adding new items to an existing line so there are no gaps for competitors to move into. BMW: Z4, 3, 5, 6, 7 Series plus M and X — “BMW hopes to move customers along the continuum every 7 years.”</li></ul>'+
    '<h3>The product mix</h3>'+
@@ -1498,27 +1504,30 @@ CH.c8 = {n:8, title:"Products, Services, and Brands: Building Customer Value", s
    '<tr><td class="head">Consistency</td><td class="sm">How closely the lines are related in end use, production requirements or distribution channels. Clorox’s mix is consistent with “make everyday life better every day.”</td></tr>'+
    '</tbody></table></div>'+
    '<p>These dimensions are the handles for defining product strategy; from time to time a company streamlines its mix to drop marginal lines and regain focus.</p>'},
-  {id:"c8-services", h:"Services marketing", know:true, body:
-   '<p class="knowline"><span class="know">Objective 8.3 — the four characteristics</span></p>'+
+  {id:"c8-services", h:"Services Marketing", body:
+   '<h3 class="sub" id="c8-four">Figure 8.3 · Four service characteristics</h3>'+
+   '<p class="knowline"><span class="know">Objective 8.3</span></p>'+
    '<div class="boxrow four"><div class="box"><h4>Intangibility</h4><p>Services cannot be seen, tasted, felt, heard or smelled before purchase.</p></div>'+
    '<div class="box"><h4>Inseparability</h4><p>Services cannot be separated from their providers.</p></div>'+
    '<div class="box"><h4>Variability</h4><p>Quality depends on who provides them and when, where and how.</p></div>'+
    '<div class="box"><h4>Perishability</h4><p>Services cannot be stored for later sale or use.</p></div></div>'+
    '<p>The biggest differences come from services being intangible and created through direct interaction with customers — think of an airline or Google versus Nike or Apple.</p>'+
-   '<h3>The service-profit chain</h3>'+
+   '<h3 class="sub" id="c8-chain">The service-profit chain</h3>'+
    '<p>Links service-firm profits with employee and customer satisfaction:</p>'+
    '<div class="flow"><div class="step"><b>1</b>Internal service quality — superior employee selection and training, a quality work environment, strong support.</div><div class="step"><b>2</b>Satisfied and productive service employees.</div><div class="step"><b>3</b>Greater service value — more effective and efficient value creation and delivery.</div><div class="step"><b>4</b>Satisfied and loyal customers — repeat purchases and referrals.</div><div class="step"><b>5</b>Healthy service profits and growth.</div></div>'+
    '<p>At Cisco, satisfied, loyal, productive employees united under “We Are Cisco” drive customer satisfaction and profitability. Good service firms position themselves strongly: FedEx “faster, farther”; Angie’s List “reviews you can trust”; Hampton “We love having you here.”</p>'+
-   '<h3>Three kinds of service marketing</h3>'+
+   '<h3 class="sub" id="c8-three">Three kinds of service marketing</h3>'+
    '<ul><li><b>Internal marketing</b> — orienting and motivating customer-contact employees and support people to work as a team for customer satisfaction. Everyone must be customer centered; internal marketing must <b>precede</b> external marketing.</li><li><b>Interactive marketing</b> — service quality depends heavily on the buyer–seller interaction during the service encounter. Four Seasons selects people with an innate “passion to serve” and trains them for three months.</li><li>Plus the traditional external marketing mix.</li></ul>'+
    '<h3>Three service tasks</h3>'+
    '<ul><li><b>Service differentiation</b> — offer, delivery, image.</li><li><b>Service quality</b> — harder to define and judge than product quality; <b>customer retention is perhaps the best measure</b>. Is it a competitive advantage?</li><li><b>Service productivity</b> — developing and managing staff.</li></ul>'+
    '<p>The class slide’s line: in service marketing it is nearly impossible to separate the person providing the service from the service itself — the provider becomes the image of the firm.</p>'},
-  {id:"c8-brands", h:"Brand strategy: building strong brands", know:true, body:
-   '<p class="knowline"><span class="know">Objective 8.4</span></p>'+
+  {id:"c8-brands", h:"Branding Strategy: Brand Equity and Brand Value", body:
+   '<p class="knowline"><span class="know">Objective 8.4 — the study guide asks for brand equity and brand value only</span></p>'+
    '<p>Brands are more than names and symbols: they represent consumers’ perceptions and feelings about a product and its performance — everything it means to them. A brand also facilitates the purchase decision as a <b>“short-cut.”</b></p>'+
-   '<h3>Brand equity and brand value</h3>'+
-   '<ul><li><b>Brand equity</b> is the differential effect that knowing the brand name has on customer response to the product or its marketing. Positive equity: consumers react more favorably than to a generic or unbranded product. The class’s shorthand: the brand is <b>“top of mind”</b> — the first one customers think of.</li><li>Young &amp; Rubicam’s <b>BrandAsset Valuator</b> measures strength on four dimensions: <b>differentiation, relevance, knowledge, esteem</b>.</li><li>High equity brings high awareness and loyalty, more leverage with resellers, easier launch of extensions, and defense against price competition. The fundamental asset underneath is <b>customer equity</b> — think of the company as a portfolio of customers, not of brands.</li><li><b>Brand value</b> is the total financial value of a brand. Kotler’s figures: Apple $185 billion, Google $113.6B, IBM $112.5B, McDonald’s $90B, Coca-Cola $78.4B, Microsoft $70B.</li></ul>'+
+   '<h3 class="sub" id="c8-equity">Brand equity</h3>'+
+   '<ul><li><b>Brand equity</b> is the differential effect that knowing the brand name has on customer response to the product or its marketing. Positive equity: consumers react more favorably than to a generic or unbranded product. The class’s shorthand: the brand is <b>“top of mind”</b> — the first one customers think of.</li><li>Young &amp; Rubicam’s <b>BrandAsset Valuator</b> measures strength on four dimensions: <b>differentiation, relevance, knowledge, esteem</b>. Brands with strong equity rate high on all four; positive equity comes from consumer feelings and connections, and strong brands are built around an ideal of improving consumers’ lives.</li><li>High equity brings a high level of consumer awareness and loyalty, more leverage in bargaining with resellers, easier launch of line and brand extensions, and a defense against fierce price competition.</li><li>The fundamental asset underneath is <b>customer equity</b> — the value of the customer relationships the brand creates. Companies should think of themselves as portfolios of customers, not portfolios of brands.</li></ul>'+
+   '<h3 class="sub" id="c8-value">Brand value</h3>'+
+   '<p><b>Brand value</b> is the total financial value of a brand; brand valuation is the process of estimating it, and measuring it is difficult. Kotler’s figures: Apple $185 billion, Google $113.6B, IBM $112.5B, McDonald’s $90B, Coca-Cola $78.4B, Microsoft $70B. The class slide brought the numbers up to date:</p>'+
    '<div class="tblwrap"><table class="tbl"><thead><tr><th>Rank</th><th>Interbrand Best Global Brands 2025</th><th>Value</th><th>Kantar BrandZ Most Valuable 2026</th><th>Value</th></tr></thead><tbody>'+
    '<tr><td class="num">1</td><td class="sm">Apple</td><td class="num">$470.9B</td><td class="sm">Google</td><td class="num">$1.48T</td></tr>'+
    '<tr><td class="num">2</td><td class="sm">Microsoft</td><td class="num">$388.5B</td><td class="sm">Apple</td><td class="num">$1.38T</td></tr>'+
@@ -1526,15 +1535,17 @@ CH.c8 = {n:8, title:"Products, Services, and Brands: Building Customer Value", s
    '<tr><td class="num">4</td><td class="sm">Google</td><td class="num">$317.1B</td><td class="sm">Amazon</td><td class="num">$1.02T</td></tr>'+
    '<tr><td class="num">5</td><td class="sm">Samsung</td><td class="num">$90.5B</td><td class="sm">NVIDIA</td><td class="num">$814.9B</td></tr>'+
    '</tbody></table></div>'+
-   '<p class="ask">The class slide explains the gap: Interbrand blends financial performance, role in purchase decisions and brand strength; Kantar BrandZ focuses on financial value integrated with consumer sentiment surveys.</p>'+
+   '<p class="ask">Why the two lists differ: Interbrand blends financial performance, role in purchase decisions and brand strength; Kantar BrandZ focuses on financial value integrated with consumer sentiment surveys.</p>'},
+  {id:"c8-beyond", h:"Beyond the guide: brand sponsorship and development", beyond:true, body:
+   '<p class="ask">The rest of branding strategy — Figure 8.2. The study guide limits Branding Strategy to brand equity and brand value, so this is for completeness; not in the quizzes.</p>'+
    '<h3>Figure 8.2 · Major brand strategy decisions</h3>'+
    '<div class="flow"><div class="step"><b>Brand positioning</b>Attributes, benefits, beliefs and values.</div><div class="step"><b>Brand name selection</b>Selection, protection.</div><div class="step"><b>Brand sponsorship</b>Manufacturer’s brand, private brand, licensing, co-branding.</div><div class="step"><b>Brand development</b>Line extensions, brand extensions, multibrands, new brands.</div></div>'+
    '<h3>Brand sponsorship</h3>'+
    '<ul><li><b>Manufacturer’s (national) brand</b> — long dominant at retail.</li><li><b>Private (store, distributor) brand</b> — booming: Kroger store brands are 25% of its sales; Walmart’s Great Value, Sam’s Choice, Equate and others are 20% of its sales, more than all P&G brands combined, and Great Value is the nation’s largest single food brand. 80% of shoppers believe store-brand quality is equal or better; Trader Joe’s and Whole Foods make premium store brands.</li><li><b>Licensed brand</b> — names, symbols, celebrities or characters licensed for a fee: an instant, proven brand name.</li><li><b>Co-brand</b> — two established brand names of different companies on one product: Benjamin Moore and Pottery Barn, Taco Bell and Doritos. Broader appeal and entry into new categories, but complex contracts, coordination, and damage to one brand can tarnish the other.</li></ul>'+
    '<h3>Brand development</h3>'+
    '<ul><li><b>Line extensions</b> — existing brand name, existing category (new flavors, forms, sizes).</li><li><b>Brand extensions</b> — existing brand name, new category.</li><li><b>Multibrands</b> — new brand names in an existing category.</li><li><b>New brands</b> — new name, new category.</li></ul>'},
-  {id:"c8-apple", h:"The class case: Apple’s comeback", body:
-   '<p>Chapter 8 opens on challenges, and the example is Apple.</p>'+
+  {id:"c8-apple", h:"Beyond the guide: Apple’s comeback", beyond:true, body:
+   '<p class="ask">The chapter’s class opener on challenges — not a study-guide section; not in the quizzes.</p>'+
    '<div class="tblwrap"><table class="tbl n0"><tbody>'+
    '<tr><td class="head">April 1976</td><td class="sm">Founded by Steve Jobs and Steve Wozniak. 1977 revenue: $0.0008 billion.</td></tr>'+
    '<tr><td class="head">1980</td><td class="sm">IPO, fueled by Apple II sales; $0.117 billion.</td></tr>'+
@@ -1588,12 +1599,7 @@ CH.c8 = {n:8, title:"Products, Services, and Brands: Building Customer Value", s
    ["Interactive marketing","Service quality depends heavily on the buyer–seller interaction during the service encounter"],
    ["Brand equity","The differential effect that knowing the brand name has on customer response to the product or its marketing"],
    ["Brand value","The total financial value of a brand"],
-   ["Customer equity","The value of the customer relationships that the brand creates"],
-   ["Private (store) brand","A brand created and owned by a reseller"],
-   ["Co-branding","Two established brand names of different companies used on the same product"],
-   ["Line extension","Extending an existing brand name to new forms, colors, sizes or flavors of an existing category"],
-   ["Brand extension","Extending an existing brand name to a new product category"],
-   ["Multibrands","New brand names in an existing product category"]]},
+   ["Customer equity","The value of the customer relationships that the brand creates"]]},
   {id:"lists", label:"Lists & numbers", cards:[
    ["The three levels of product","Core customer value, actual product, augmented product"],
    ["The actual product’s five parts","Brand name, features, design, packaging, quality level"],
@@ -1607,15 +1613,23 @@ CH.c8 = {n:8, title:"Products, Services, and Brands: Building Customer Value", s
    ["The service-profit chain’s five links","Internal service quality → satisfied, productive employees → greater service value → satisfied, loyal customers → healthy profits and growth"],
    ["Three service tasks","Service differentiation, service quality, service productivity"],
    ["Best measure of service quality, per the slide","Customer retention"],
-   ["Four brand strategy decisions","Brand positioning, brand name selection, brand sponsorship, brand development"],
-   ["Four sponsorship options","Manufacturer’s brand, private brand, licensed brand, co-brand"],
-   ["Four development strategies","Line extensions, brand extensions, multibrands, new brands"],
    ["BrandAsset Valuator dimensions","Differentiation, relevance, knowledge, esteem"],
-   ["Kroger and Walmart store brands","25% and 20% of sales; Great Value is the largest single food brand"],
+   ["Four advantages of high brand equity","Awareness and loyalty; leverage with resellers; easier extensions; defense against price competition"],
    ["Payless “Palessi”","Influencers paid up to $645 for shoes that sell for under $40"],
    ["Interbrand #1, 2025","Apple, $470.9 billion (Kantar BrandZ 2026: Google, $1.48 trillion)"],
-   ["Apple’s milestones","1976 founded · 1985 Jobs out · 1997 Jobs back · 2001 iPod · 2007 iPhone · 2018 $1T · 2026 $4.95T"],
-   ["Core value: Rolex · Chipotle · Edward Jones · Carnival","Status, value and reliability · healthy fast casual · financial security and peace of mind · fun, indulgent memories"]]}
+   ["Core value: Rolex · Chipotle · Edward Jones · Carnival","Status, value and reliability · healthy fast casual · financial security and peace of mind · fun, indulgent memories"]]},
+  {id:"beyond", label:"Beyond the guide", match:false, cards:[
+   ["Private (store) brand","A brand created and owned by a reseller","Sponsorship — not on the study guide"],
+   ["Co-branding","Two established brand names of different companies used on the same product","Sponsorship — not on the study guide"],
+   ["Licensed brand","A name, symbol, celebrity or character licensed for a fee — an instant, proven name","Sponsorship — not on the study guide"],
+   ["Line extension","Extending an existing brand name to new forms, colors, sizes or flavors of an existing category","Development — not on the study guide"],
+   ["Brand extension","Extending an existing brand name to a new product category","Development — not on the study guide"],
+   ["Multibrands","New brand names in an existing product category","Development — not on the study guide"],
+   ["Four brand strategy decisions (Figure 8.2)","Brand positioning, brand name selection, brand sponsorship, brand development","Not on the study guide"],
+   ["Four sponsorship options","Manufacturer’s brand, private brand, licensed brand, co-brand","Not on the study guide"],
+   ["Four development strategies","Line extensions, brand extensions, multibrands, new brands","Not on the study guide"],
+   ["Kroger and Walmart store brands","25% and 20% of sales; Great Value is the largest single food brand","Not on the study guide"],
+   ["Apple’s milestones","1976 founded · 1985 Jobs out · 1997 Jobs back · 2001 iPod · 2007 iPhone · 2018 $1T · 2026 $4.95T","Class opener"]]}
  ]
 };
 
@@ -1659,21 +1673,24 @@ QB = QB.concat([
  {tp:"c8",t:"mc",q:"The total financial value of a brand is its:",a:"brand value",w:["brand equity","customer equity","brand personality"],e:"Brand value — valuation is the process of estimating it."},
  {tp:"c8",t:"mc",q:"Young &amp; Rubicam’s BrandAsset Valuator measures brand strength on:",a:"differentiation, relevance, knowledge and esteem",w:["width, length, depth and consistency","quality, features, style and design","awareness, interest, trial and adoption"],e:"The four consumer perception dimensions."},
  {tp:"c8",t:"mc",q:"The fundamental asset underlying brand equity is:",a:"customer equity",w:["brand value","the product mix","conformance quality"],e:"Think of the company as a portfolio of customers."},
- {tp:"c8",t:"mc",q:"Kroger’s store brands account for about what share of its sales?",a:"25%",w:["5%","50%","80%"],e:"25%; Walmart’s private brands about 20%."},
- {tp:"c8",t:"mc",q:"Taco Bell and Doritos on one product is an example of:",a:"co-branding",w:["licensing","a private brand","a line extension"],e:"Two established brands of different companies on the same product."},
- {tp:"c8",t:"mc",q:"Paying a fee to use a celebrity’s name or a movie character on your product is:",a:"licensing",w:["co-branding","multibranding","a store brand"],e:"A licensed brand — an instant, proven name."},
- {tp:"c8",t:"mc",q:"Using an existing brand name in a new product category is:",a:"a brand extension",w:["a line extension","a multibrand","a new brand"],e:"Line extension = same category; brand extension = new category."},
- {tp:"c8",t:"mc",q:"Introducing additional brand names in an existing category is:",a:"multibranding",w:["line extension","brand extension","co-branding"],e:"Multibrands."},
+ {tp:"c8",t:"mc",q:"Which is an advantage of high brand equity?",a:"More leverage in bargaining with resellers",w:["Lower conformance quality","Fewer product lines","Less need for customer equity"],e:"Awareness and loyalty, leverage with resellers, easier extensions, defense against price competition."},
+ {tp:"c8",off:true,t:"mc",q:"Kroger’s store brands account for about what share of its sales?",a:"25%",w:["5%","50%","80%"],e:"25%; Walmart’s private brands about 20%."},
+ {tp:"c8",off:true,t:"mc",q:"Taco Bell and Doritos on one product is an example of:",a:"co-branding",w:["licensing","a private brand","a line extension"],e:"Two established brands of different companies on the same product."},
+ {tp:"c8",off:true,t:"mc",q:"Paying a fee to use a celebrity’s name or a movie character on your product is:",a:"licensing",w:["co-branding","multibranding","a store brand"],e:"A licensed brand — an instant, proven name."},
+ {tp:"c8",off:true,t:"mc",q:"Using an existing brand name in a new product category is:",a:"a brand extension",w:["a line extension","a multibrand","a new brand"],e:"Line extension = same category; brand extension = new category."},
+ {tp:"c8",off:true,t:"mc",q:"Introducing additional brand names in an existing category is:",a:"multibranding",w:["line extension","brand extension","co-branding"],e:"Multibrands."},
  {tp:"c8",t:"mc",q:"Interbrand’s most valuable brand of 2025, per the class slide, was:",a:"Apple, at $470.9 billion",w:["Google, at $1.48 trillion","Microsoft, at $388.5 billion","NVIDIA, at $814.9 billion"],e:"Apple led Interbrand 2025; Google led Kantar BrandZ 2026."},
- {tp:"c8",t:"mc",q:"Apple became a $1 trillion company in:",a:"2018",w:["2007","2020","2026"],e:"2018; $2T in 2020; $4.95T in 2026."},
- {tp:"c8",t:"mc",q:"Which product introduction on Apple’s timeline came in 2007?",a:"The iPhone",w:["The iPod","The Macintosh","The iPad"],e:"iPod 2001, iPhone 2007."},
+ {tp:"c8",off:true,t:"mc",q:"Apple became a $1 trillion company in:",a:"2018",w:["2007","2020","2026"],e:"2018; $2T in 2020; $4.95T in 2026."},
+ {tp:"c8",off:true,t:"mc",q:"Which product introduction on Apple’s timeline came in 2007?",a:"The iPhone",w:["The iPod","The Macintosh","The iPad"],e:"iPod 2001, iPhone 2007."},
  {tp:"c8",ap:true,t:"mc",q:"A haircut cannot be sampled before it is bought. Which service characteristic is that?",a:"Intangibility",w:["Perishability","Variability","Inseparability"],e:"Cannot be seen, tasted, felt, heard or smelled before purchase."},
  {tp:"c8",ap:true,t:"mc",q:"An empty airline seat on today’s flight cannot be sold tomorrow. Which characteristic?",a:"Perishability",w:["Intangibility","Inseparability","Variability"],e:"Cannot be stored."},
  {tp:"c8",ap:true,t:"mc",q:"A hotel invests in three months of training so every employee treats guests the same way. It is fighting service:",a:"variability",w:["perishability","intangibility","inseparability"],e:"Quality depends on who provides it — training reduces variability."},
- {tp:"c8",ap:true,t:"mc",q:"Colgate adds a whitening version to its toothpaste line. This is:",a:"a line extension",w:["a brand extension","a multibrand","a new brand"],e:"Same brand, same category."},
- {tp:"c8",ap:true,t:"mc",q:"A grocery chain launches its own “Great Value”-style label. This is:",a:"a private brand",w:["a manufacturer’s brand","a licensed brand","a co-brand"],e:"A store (private, distributor) brand."},
+ {tp:"c8",off:true,ap:true,t:"mc",q:"Colgate adds a whitening version to its toothpaste line. This is:",a:"a line extension",w:["a brand extension","a multibrand","a new brand"],e:"Same brand, same category."},
+ {tp:"c8",off:true,ap:true,t:"mc",q:"A grocery chain launches its own “Great Value”-style label. This is:",a:"a private brand",w:["a manufacturer’s brand","a licensed brand","a co-brand"],e:"A store (private, distributor) brand."},
  {tp:"c8",ap:true,t:"mc",q:"A car dealer includes free car washes and a loaner car with every purchase. Which product level is it building?",a:"The augmented product",w:["The core customer value","The actual product","The product mix"],e:"Support services augment the actual product."},
  {tp:"c8",ap:true,t:"mc",q:"A camera bought at a pharmacy on vacation is which type of product?",a:"Convenience",w:["Specialty","Shopping","Unsought"],e:"The slides’ puzzle — the same camera can be shopping or specialty for other buyers."},
+ {tp:"c8",ap:true,t:"mc",q:"Shoppers pay far more for a pair of shoes once a well-known name is on them. Which concept explains that?",a:"Brand equity",w:["Conformance quality","Line stretching","Perishability"],e:"The differential effect of knowing the brand name — the Palessi stunt."},
+ {tp:"c8",ap:true,t:"mc",q:"A coffee chain adds tumblers and brewing equipment to its coffee and food lines. Which mix dimension grows?",a:"Width",w:["Depth","Consistency","Conformance"],e:"More product lines = width."},
  {tp:"c8",t:"tf",q:"Broadly defined, products include experiences, organizations, persons, places and ideas.",a:true,e:"True."},
  {tp:"c8",t:"tf",q:"Each level of the product adds more customer value.",a:true,e:"True — core, actual, augmented."},
  {tp:"c8",t:"tf",q:"Buyers normally compare specialty products carefully before buying.",a:false,e:"False — they invest only the time needed to reach the dealer carrying the wanted product."},
@@ -1683,9 +1700,11 @@ QB = QB.concat([
  {tp:"c8",t:"tf",q:"Product mix length is the number of product lines the company carries.",a:false,e:"False — that is width; length is the total number of items."},
  {tp:"c8",t:"tf",q:"In services, the provider becomes the image of the service firm.",a:true,e:"True — it is nearly impossible to separate the person from the service."},
  {tp:"c8",t:"tf",q:"Service quality is easier to define and judge than product quality.",a:false,e:"False — it is harder."},
- {tp:"c8",t:"tf",q:"Damage to one brand’s reputation cannot affect a co-brand.",a:false,e:"False — it can tarnish the co-brand as well."},
- {tp:"c8",t:"tf",q:"80% of shoppers believe store-brand quality is equal to or better than national brands.",a:true,e:"True."},
- {tp:"c8",t:"tf",q:"Companies should think of themselves as portfolios of brands rather than portfolios of customers.",a:false,e:"False — the reverse; customer equity is the fundamental asset."}
+ {tp:"c8",off:true,t:"tf",q:"Damage to one brand’s reputation cannot affect a co-brand.",a:false,e:"False — it can tarnish the co-brand as well."},
+ {tp:"c8",off:true,t:"tf",q:"80% of shoppers believe store-brand quality is equal to or better than national brands.",a:true,e:"True."},
+ {tp:"c8",t:"tf",q:"Companies should think of themselves as portfolios of brands rather than portfolios of customers.",a:false,e:"False — the reverse; customer equity is the fundamental asset."},
+ {tp:"c8",t:"tf",q:"A brand has positive brand equity when consumers react more favorably to it than to a generic or unbranded product.",a:true,e:"True."},
+ {tp:"c8",t:"tf",q:"Brand valuation — estimating a brand’s total financial value — is easy and exact.",a:false,e:"False — measuring it is difficult, which is why Interbrand and Kantar disagree."}
 ]);
 
 /* ================================================================ helpers */
@@ -1760,7 +1779,8 @@ function fromPair(tp, idx, reverse){
   q.miss = p[0] + " — <b>" + p[1] + "</b>";
   return q;
 }
-function bankFor(tp){ var out = []; QB.forEach(function(b, i){ if(!tp || b.tp === tp) out.push({b:b, i:i}); }); return out; }
+/* Only what the study guide asks for: questions marked off:true (beyond the guide) never enter a quiz */
+function bankFor(tp){ var out = []; QB.forEach(function(b, i){ if(b.off) return; if(!tp || b.tp === tp) out.push({b:b, i:i}); }); return out; }
 
 /* A chapter quiz: mostly written questions, about a third identification */
 function topicQuestions(tp, keys, n){
@@ -1791,7 +1811,7 @@ function mockQuestions(cfg){
   var n = cfg.n || 25;
   var pool = [];
   QB.forEach(function(b, i){
-    if(tps.indexOf(b.tp) < 0) return;
+    if(b.off || tps.indexOf(b.tp) < 0) return;
     if(cfg.types === "mc" && b.t !== "mc") return;
     if(cfg.types === "tf" && b.t !== "tf") return;
     if(cfg.types === "ap" && !b.ap) return;
@@ -1830,7 +1850,7 @@ function matchRound(tp, n){
 
 /* ---- the pure parts can be tested outside a browser ---- */
 if(typeof window === "undefined"){
-  module.exports = {CH:CH, COURSE:COURSE, OBJECTIVES:OBJECTIVES, GUIDE:GUIDE, THEMES:THEMES, VERSES:VERSES, EVENTS:EVENTS, VIDEOS:VIDEOS,
+  module.exports = {CH:CH, COURSE:COURSE, GUIDE:GUIDE, THEMES:THEMES, VERSES:VERSES, EVENTS:EVENTS, VIDEOS:VIDEOS,
     QB:QB, PAIRSETS:PAIRSETS, VERDICTS:VERDICTS, CHAPTERS:CHAPTERS, TOPIC_NAMES:TOPIC_NAMES,
     fromBank:fromBank, fromPair:fromPair, topicQuestions:topicQuestions, mockQuestions:mockQuestions, questionsByKeys:questionsByKeys,
     deckFor:deckFor, matchRound:matchRound, verdictFor:verdictFor};
@@ -2030,21 +2050,24 @@ function renderGuide(){
   var done = getJSON("guide", {}), total = 0;
   GUIDE.sections.forEach(function(s){ total += s.items.length; });
   var html =
-    '<div class="gtop">'+
-      '<div class="box"><h4>The course</h4><p>'+COURSE.about+'</p></div>'+
-      '<div class="box"><h4>The four chapters</h4><ul>'+COURSE.chapters.map(function(c){ return "<li><b>"+c[0]+" · "+c[1]+"</b> — "+c[2]+"</li>"; }).join("")+'</ul></div>'+
-      '<div class="box" style="grid-column:1/-1"><h4>What the professor added</h4><ul>'+COURSE.extras.map(li).join("")+'</ul></div>'+
+    '<div class="handout card-corners">'+CORNERS+
+      '<div class="hcourse">'+COURSE.code+' &middot; '+COURSE.term+'</div>'+
+      '<h2>'+COURSE.exam+'</h2><p class="hscope">'+COURSE.scope+'</p>'+
+      '<ul class="hrules">'+COURSE.rules.map(li).join("")+'</ul>'+
     '</div>'+
+    '<p class="note">'+COURSE.about+'</p>'+
     '<div class="gprog"><span class="count" id="gCount"></span><div class="bar"><i id="gBar" style="width:0"></i></div></div>';
   GUIDE.sections.forEach(function(s){
-    html += '<div class="gsec"><h2>'+s.h+'</h2>'+divider()+'<ol class="obj">'+OBJECTIVES[s.tp].map(function(o){ return "<li>"+o.replace(/^\d\.\d\s*/, "")+"</li>"; }).join("")+'</ol>';
+    html += '<div class="gsec"><h2>'+s.h+'</h2>'+divider();
     s.items.forEach(function(it){
       html += '<div class="gitem'+(done[it.id] ? " ok" : "")+'" data-gi="'+it.id+'">'+
         '<input type="checkbox" aria-label="I can explain '+strip(it.t)+'" data-g="'+it.id+'"'+(done[it.id] ? " checked" : "")+'>'+
-        '<div><div class="gt">'+it.t+(it.know ? '<span class="nb">Know it cold</span>' : '')+'</div>'+
-          '<div class="gs">'+it.short+'</div></div>'+
+        '<div><div class="gt">'+it.t+'</div>'+
+          '<div class="gs">'+it.short+'</div>'+
+          '<div class="gsub">'+it.subs.map(function(sb){ return '<button class="btn" type="button" data-go="'+s.tp+'/notes" data-a="'+sb[1]+'">'+sb[0]+'</button>'; }).join("")+'</div></div>'+
         '<button class="btn" type="button" data-go="'+s.tp+'/notes" data-a="'+it.a+'">Study it</button></div>';
     });
+    if(s.beyond) html += '<p class="gbeyond">'+s.beyond+'</p>';
     html += '</div>';
   });
   html += '<div class="gsec"><div class="toolbar">'+
@@ -2087,7 +2110,7 @@ function goTo(path, anchor){
 function renderNotes(tp){
   var c = CH[tp];
   $("#"+tp+"Notes").innerHTML = '<div class="secnav">'+c.notes.map(function(s){ return '<a href="#'+s.id+'" data-a="'+s.id+'">'+strip(s.h).replace(/“|”/g,"").replace(/^Figure [\d.]+ · /, "")+'</a>'; }).join("")+'</div>'+
-    c.notes.map(function(s){ return '<div class="note-sec" id="'+s.id+'"><h2>'+s.h+'</h2>'+divider()+s.body+'</div>'; }).join("");
+    c.notes.map(function(s){ return '<div class="note-sec'+(s.beyond ? " beyond" : "")+'" id="'+s.id+'"><h2>'+s.h+'</h2>'+divider()+s.body+'</div>'; }).join("");
   $$("#"+tp+"Notes .secnav a").forEach(function(a){
     a.addEventListener("click", function(e){ e.preventDefault(); var el = document.getElementById(a.getAttribute("data-a")); if(el) el.scrollIntoView({behavior:"smooth", block:"start"}); });
   });

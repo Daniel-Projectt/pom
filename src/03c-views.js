@@ -17,21 +17,24 @@ function renderGuide(){
   var done = getJSON("guide", {}), total = 0;
   GUIDE.sections.forEach(function(s){ total += s.items.length; });
   var html =
-    '<div class="gtop">'+
-      '<div class="box"><h4>The course</h4><p>'+COURSE.about+'</p></div>'+
-      '<div class="box"><h4>The four chapters</h4><ul>'+COURSE.chapters.map(function(c){ return "<li><b>"+c[0]+" · "+c[1]+"</b> — "+c[2]+"</li>"; }).join("")+'</ul></div>'+
-      '<div class="box" style="grid-column:1/-1"><h4>What the professor added</h4><ul>'+COURSE.extras.map(li).join("")+'</ul></div>'+
+    '<div class="handout card-corners">'+CORNERS+
+      '<div class="hcourse">'+COURSE.code+' &middot; '+COURSE.term+'</div>'+
+      '<h2>'+COURSE.exam+'</h2><p class="hscope">'+COURSE.scope+'</p>'+
+      '<ul class="hrules">'+COURSE.rules.map(li).join("")+'</ul>'+
     '</div>'+
+    '<p class="note">'+COURSE.about+'</p>'+
     '<div class="gprog"><span class="count" id="gCount"></span><div class="bar"><i id="gBar" style="width:0"></i></div></div>';
   GUIDE.sections.forEach(function(s){
-    html += '<div class="gsec"><h2>'+s.h+'</h2>'+divider()+'<ol class="obj">'+OBJECTIVES[s.tp].map(function(o){ return "<li>"+o.replace(/^\d\.\d\s*/, "")+"</li>"; }).join("")+'</ol>';
+    html += '<div class="gsec"><h2>'+s.h+'</h2>'+divider();
     s.items.forEach(function(it){
       html += '<div class="gitem'+(done[it.id] ? " ok" : "")+'" data-gi="'+it.id+'">'+
         '<input type="checkbox" aria-label="I can explain '+strip(it.t)+'" data-g="'+it.id+'"'+(done[it.id] ? " checked" : "")+'>'+
-        '<div><div class="gt">'+it.t+(it.know ? '<span class="nb">Know it cold</span>' : '')+'</div>'+
-          '<div class="gs">'+it.short+'</div></div>'+
+        '<div><div class="gt">'+it.t+'</div>'+
+          '<div class="gs">'+it.short+'</div>'+
+          '<div class="gsub">'+it.subs.map(function(sb){ return '<button class="btn" type="button" data-go="'+s.tp+'/notes" data-a="'+sb[1]+'">'+sb[0]+'</button>'; }).join("")+'</div></div>'+
         '<button class="btn" type="button" data-go="'+s.tp+'/notes" data-a="'+it.a+'">Study it</button></div>';
     });
+    if(s.beyond) html += '<p class="gbeyond">'+s.beyond+'</p>';
     html += '</div>';
   });
   html += '<div class="gsec"><div class="toolbar">'+
@@ -74,7 +77,7 @@ function goTo(path, anchor){
 function renderNotes(tp){
   var c = CH[tp];
   $("#"+tp+"Notes").innerHTML = '<div class="secnav">'+c.notes.map(function(s){ return '<a href="#'+s.id+'" data-a="'+s.id+'">'+strip(s.h).replace(/“|”/g,"").replace(/^Figure [\d.]+ · /, "")+'</a>'; }).join("")+'</div>'+
-    c.notes.map(function(s){ return '<div class="note-sec" id="'+s.id+'"><h2>'+s.h+'</h2>'+divider()+s.body+'</div>'; }).join("");
+    c.notes.map(function(s){ return '<div class="note-sec'+(s.beyond ? " beyond" : "")+'" id="'+s.id+'"><h2>'+s.h+'</h2>'+divider()+s.body+'</div>'; }).join("");
   $$("#"+tp+"Notes .secnav a").forEach(function(a){
     a.addEventListener("click", function(e){ e.preventDefault(); var el = document.getElementById(a.getAttribute("data-a")); if(el) el.scrollIntoView({behavior:"smooth", block:"start"}); });
   });

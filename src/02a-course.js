@@ -1,104 +1,74 @@
 /* ================================================================ the course
-   From the four "enhanced" chapter decks (Pearson slides plus the professor's
-   additions). No syllabus or quizzes were in the export, so this is only what the
-   slides say.                                                                    */
+   From the "Study Guide for Exam 2" handout (MRKT 3600, Fall 2026) and the four
+   "enhanced" chapter decks (Pearson slides plus the professor's additions).      */
 var COURSE = {
- about:"Principles of Marketing at Cedarville’s School of Business. The text is Kotler, Armstrong &amp; Balasubramanian, <i>Principles of Marketing</i>, 20th edition (the chapter 5 deck is from the 19th). The slides answer one question per chapter: how do buyers decide, how do business buyers decide, whom do we serve and how, and what exactly are we selling?",
- chapters:[
-  ["5","Consumer Markets and Buyer Behavior","How final consumers decide — the black box, four factors, four buying types, five stages, adoption."],
-  ["6","Business Markets and Business Buyer Behavior","How organizations buy — derived demand, buying situations, the buying center, eight steps."],
-  ["7","Customer Value–Driven Marketing Strategy","Segmentation, targeting, differentiation, positioning — which customers, and how to serve them."],
-  ["8","Products, Services, and Brands","Three levels of a product, classifications, lines and mix, the four service characteristics, brand equity."]],
- extras:[
-  "Each deck opens with a life theme and Scripture — relationships, choices, attitude, challenges. They are on the <b>In Class</b> tab.",
-  "The professor adds current cases (Beyond Meat, Tide, Marriott, Liquid Death, Apple, Starbucks, Grainger, WPAFB) and videos. The cases are inside the chapter notes; the videos have their own list."]
+ code:"MRKT 3600 Principles of Marketing", term:"Fall 2026",
+ exam:"Study Guide for Exam 2", scope:"Chapters 5–8 of <i>Principles of Marketing</i> by Kotler and Armstrong, 20th edition",
+ rules:[
+  "The following sections contain the information you should master to be prepared for Exam 2.",
+  "Be sure to review all of the content in the subsections.",
+  "Also, master slides that I emphasized in class as “important.”",
+  "Note that you may be asked questions that involve applying some of the concepts and definitions we covered."],
+ about:"Every heading below is a heading from the handout, in its order and words. Each one has the subsections it covers, a one-breath answer, and a link into the notes. The practice exam draws only from these sections; the material the guide leaves out is kept in the notes, labeled <b>beyond the guide</b>."
 };
 
-/* Learning objectives, in the slides' own words */
-var OBJECTIVES = {
- c5:["5.1 Define the consumer market and construct a simple model of consumer buyer behavior.",
-     "5.2 Name the four major factors that influence consumer buyer behavior.",
-     "5.3 List and define the major types of buying decision behavior and the stages in the buyer decision process.",
-     "5.4 Describe the adoption and diffusion process for new products."],
- c6:["6.1 Define the business market and explain how business markets differ from consumer markets.",
-     "6.2 Identify the major factors that influence business buyer behavior.",
-     "6.3 List and define the steps in the business buying decision process.",
-     "6.4 Discuss how digital and social media have changed business-to-business marketing.",
-     "6.5 Compare the institutional and government markets and explain how institutional and government buyers make their buying decisions."],
- c7:["7.1 Define the major steps in designing a customer-driven marketing strategy: market segmentation, targeting, differentiation, and positioning.",
-     "7.2 List and discuss the major bases for segmenting consumer and business markets.",
-     "7.3 Explain how companies identify attractive market segments and choose a market-targeting strategy.",
-     "7.4 Discuss how companies differentiate and position their products for maximum competitive advantage."],
- c8:["8.1 Define product and describe the major classifications of products and services.",
-     "8.2 Describe the decisions companies make regarding their individual products and services, product lines, and product mixes.",
-     "8.3 Identify the four characteristics that affect the marketing of services and the additional marketing considerations that services require.",
-     "8.4 Discuss branding strategy — the decisions companies make in building and managing their brands."]
-};
-
-/* ================================================================ the review list
-   One item per thing the objectives and the professor's own lists ask for.
-   "a" is the note section to scroll to; "know" marks lists to know cold.      */
+/* ================================================================ the study guide
+   One item per section on the handout. "a" is the note section; "subs" are the
+   subsections inside it. "beyond" lists what the deck covered but the handout
+   does not ask for.                                                              */
 var GUIDE = {sections:[
- {h:"Chapter 5 · Consumer Markets and Buyer Behavior", tp:"c5", items:[
-  {id:"g5-model", t:"The model of buyer behavior", a:"c5-model",
-   short:"Marketing stimuli (the four Ps) and other stimuli (economic, technological, social, cultural) enter the buyer’s black box — characteristics and decision process — and come out as responses: attitudes and preferences, purchase behavior, brand engagement."},
-  {id:"g5-factors", t:"The four factors that influence consumer behavior", know:true, a:"c5-factors",
-   short:"Cultural (culture, subculture, social class) · social (groups and social networks, family, roles and status) · personal (age and life-cycle stage, occupation, economic situation, lifestyle, personality and self-concept) · psychological (motivation, perception, learning, beliefs and attitudes)."},
-  {id:"g5-cultural", t:"Cultural factors: culture, subculture, social class", a:"c5-cultural",
-   short:"Culture is learned values and behaviors; marketers watch for shifts (bottled water). Subcultures share value systems from common experience. Social classes are relatively permanent, ordered divisions with similar buying behavior — in the U.S. the lines are not fixed."},
-  {id:"g5-social", t:"Social and personal factors", a:"c5-social",
-   short:"Reference groups, word of mouth, influencers, opinion leaders; family as the most important consumer-buying organization; roles and status. Then occupation, age and life stage (PRIZM), economic situation, lifestyle (AIOs), personality and brand personality."},
-  {id:"g5-psych", t:"Psychological factors: motivation, Maslow, learning", a:"c5-psych",
-   short:"A motive is a need pressing enough to seek satisfaction; Maslow orders needs from physiological to self-actualization; learning works through drives, stimuli, cues, responses and reinforcement."},
-  {id:"g5-types", t:"The four types of buying decision behavior", know:true, a:"c5-types",
-   short:"By involvement and brand differences: complex (high, significant), dissonance-reducing (high, few), variety-seeking (low, significant), habitual (low, few)."},
-  {id:"g5-process", t:"The five stages of the buyer decision process", know:true, a:"c5-process",
-   short:"Need recognition → information search → evaluation of alternatives → purchase decision → postpurchase behavior. It starts long before the purchase and continues long after."},
-  {id:"g5-adopt", t:"Adoption, adopter categories, rate of adoption", know:true, a:"c5-newprod",
-   short:"Awareness, interest, evaluation, trial, adoption. Innovators 2.5%, early adopters 13.5%, early mainstream 34%, late mainstream 34%, lagging adopters 16%. Rate depends on relative advantage, compatibility, complexity, trialability, observability."},
-  {id:"g5-brandp", t:"Brand personality traits and the class answer key", a:"c5-social",
-   short:"Sincerity → KIA, excitement → BMW, competence → Honda, sophistication → Infiniti, ruggedness → Jeep."}]},
- {h:"Chapter 6 · Business Markets and Business Buyer Behavior", tp:"c6", items:[
-  {id:"g6-diff", t:"How business markets differ from consumer markets", know:true, a:"c6-diff",
-   short:"Fewer, larger buyers; derived, inelastic and fluctuating demand; professional buyers; complex, formal decisions; buyer and seller dependent on each other."},
-  {id:"g6-sit", t:"The three buying situations, and systems selling", a:"c6-situations",
-   short:"Straight rebuy (same envelope, year after year), modified rebuy (change the opening from side to top), new task (a clear plastic mailer). Systems selling: a complete solution from one seller."},
-  {id:"g6-center", t:"The buying center and its five roles", know:true, a:"c6-center",
-   short:"Users, influencers, buyers, deciders, gatekeepers — a set of roles, not a fixed unit. Classroom furniture: students and faculty use; the purchasing director buys and gatekeeps; the CFO decides."},
-  {id:"g6-infl", t:"Major influences on business buyers", a:"c6-influences",
-   short:"Environmental (economy, supply conditions, technology, politics, competition, culture) · organizational (objectives, strategies, structure, systems, procedures) · interpersonal (influence, expertise, authority, dynamics) · individual (age, job, motives, personality, buying style)."},
-  {id:"g6-steps", t:"The eight steps of the business buying process", know:true, a:"c6-process",
-   short:"Problem recognition → general need description → product specification → supplier search → proposal solicitation → supplier selection → order-routine specification → performance review."},
-  {id:"g6-digital", t:"E-procurement and B-to-B digital marketing", a:"c6-process",
-   short:"Reverse auctions, trading exchanges, company buying sites, extranets. Benefits: new suppliers, lower costs, faster orders. Risk: erodes relationships. Maersk’s goal: “to get closer to our customers.”"},
-  {id:"g6-inst", t:"Institutional and government markets", a:"c6-inst",
-   short:"Institutions: low budgets, captive patrons. Governments favor domestic suppliers, require bids, usually award the lowest bidder, and weigh noneconomic factors — minority firms, depressed firms, small businesses."}]},
- {h:"Chapter 7 · Customer Value–Driven Marketing Strategy", tp:"c7", items:[
-  {id:"g7-stp", t:"The four steps: segmentation, targeting, differentiation, positioning", know:true, a:"c7-stp",
-   short:"Select customers to serve (segment, target) and decide on a value proposition (differentiate, position) — to create value for targeted customers. Two questions: which customers, and how will we serve them?"},
-  {id:"g7-bases", t:"The bases for segmenting consumer markets", know:true, a:"c7-seg",
-   short:"Geographic, demographic (age and life cycle, gender, income…), psychographic (social class, lifestyle, personality), behavioral (occasions, benefits sought, user status, usage rate, loyalty status)."},
-  {id:"g7-req", t:"Requirements for effective segmentation", know:true, a:"c7-req",
-   short:"Measurable, accessible, substantial, differentiable, actionable."},
-  {id:"g7-eval", t:"Evaluating segments and the four targeting strategies", know:true, a:"c7-target",
-   short:"Size and growth, structural attractiveness, company objectives and resources. Then undifferentiated, differentiated, concentrated, micromarketing (local and individual). Choice depends on resources, product variability, life-cycle stage, market variability, competitors."},
-  {id:"g7-diff", t:"Differentiation and competitive advantage", a:"c7-diff",
-   short:"Differentiate along product, services, channels, people, image. A difference is worth it if it is important, distinctive, superior, communicable, preemptive, affordable, profitable."},
-  {id:"g7-vp", t:"Value propositions and the positioning statement", know:true, a:"c7-value",
-   short:"Winning: more for more, more for the same, the same for less, less for much less, more for less. Statement: To (target segment and need) our (brand) is (concept) that (point of difference)."}]},
- {h:"Chapter 8 · Products, Services, and Brands", tp:"c8", items:[
-  {id:"g8-levels", t:"Product, service, and the three levels of a product", know:true, a:"c8-what",
-   short:"Core customer value (what is the buyer really buying?), actual product (brand name, features, design, packaging, quality level), augmented product (delivery and credit, after-sale service, warranty, product support)."},
-  {id:"g8-class", t:"Product classifications", know:true, a:"c8-class",
-   short:"Consumer: convenience, shopping, specialty, unsought. Industrial: materials and parts, capital items, supplies and services. Plus organization, person, place and social marketing."},
-  {id:"g8-decisions", t:"Individual product decisions", a:"c8-decisions",
-   short:"Attributes (quality, features, style and design), branding, packaging, labeling, product support services."},
-  {id:"g8-mix", t:"Product lines and the product mix", know:true, a:"c8-lines",
-   short:"Line length; line stretching and line filling. Mix width (number of lines), length (total items), depth (versions of each product), consistency."},
-  {id:"g8-services", t:"The four service characteristics and the service-profit chain", know:true, a:"c8-services",
-   short:"Intangibility, inseparability, variability, perishability. Internal service quality → satisfied, productive employees → greater service value → satisfied, loyal customers → healthy profits and growth. Internal and interactive marketing."},
-  {id:"g8-brands", t:"Brand equity, brand value, sponsorship and development", know:true, a:"c8-brands",
-   short:"Equity: the differential effect of knowing the name. Value: total financial worth. Sponsorship: manufacturer’s, private, licensed, co-brand. Development: line extensions, brand extensions, multibrands, new brands."}]}
+ {h:"Chapter 5", tp:"c5", beyond:"The Beyond Meat case (the class opener) is not a study-guide section.", items:[
+  {id:"g5-model", t:"Model of Consumer Behavior", a:"c5-model",
+   short:"Consumer buyer behavior and consumer markets, defined. Figure 5.1: marketing stimuli (the four Ps) and other stimuli (economic, technological, social, cultural) enter the buyer’s black box — characteristics and decision process — and come out as responses: attitudes and preferences, purchase behavior, brand engagement.",
+   subs:[["Figure 5.1", "c5-model"]]},
+  {id:"g5-chars", t:"Characteristics Affecting Consumer Behavior", a:"c5-chars",
+   short:"The four factors of Figure 5.2. Cultural: culture, subculture, social class. Social: groups and social networks, family, roles and status. Personal: age and life-cycle stage, occupation, economic situation, lifestyle, personality and self-concept. Psychological: motivation (Maslow), perception, learning, beliefs and attitudes.",
+   subs:[["The four factors", "c5-factors"], ["Cultural", "c5-cultural"], ["Social", "c5-social"], ["Personal", "c5-personal"], ["Psychological", "c5-psych"]]},
+  {id:"g5-decide", t:"Buying Decision Behavior and The Buyer Decision Process", a:"c5-decide",
+   short:"Figure 5.4: complex, dissonance-reducing, variety-seeking and habitual buying, by involvement and brand differences. Figure 5.5: need recognition → information search → evaluation of alternatives → purchase decision → postpurchase behavior; cognitive dissonance; the customer journey.",
+   subs:[["Four types of buying behavior", "c5-types"], ["The five stages", "c5-process"]]},
+  {id:"g5-newprod", t:"The Buyer Decision Process for New Products", a:"c5-newprod",
+   short:"Adoption: awareness, interest, evaluation, trial, adoption. Adopter categories — innovators 2.5%, early adopters 13.5%, early mainstream 34%, late mainstream 34%, lagging adopters 16% — and their values. Rate of adoption: relative advantage, compatibility, complexity, trialability, observability.",
+   subs:[["The adoption process", "c5-adoption"], ["Adopter categories", "c5-adopters"], ["Rate of adoption", "c5-rate"]]}]},
+ {h:"Chapter 6", tp:"c6", beyond:"Institutional and government markets, and B-to-B digital and social media marketing (objective 6.4), are in the notes but not on the handout.", items:[
+  {id:"g6-intro", t:"Introduction", a:"c6-intro",
+   short:"Business buyer behavior: the buying behavior of organizations that buy goods and services to make other products and services that are sold, rented or supplied to others. The business buying process. Most large companies sell to other organizations, and the business market involves far more dollars and items than consumer markets.",
+   subs:[["Definitions and the numbers", "c6-intro"]]},
+  {id:"g6-markets", t:"Business Markets", a:"c6-markets",
+   short:"How business markets differ: fewer but larger buyers; derived, inelastic and fluctuating demand; a buying unit with more participants, more professional effort, more interaction and more time; more complex decisions; supplier development. The class’s consumer-vs-business table. Figure 6.1.",
+   subs:[["Structure and demand", "c6-demand"], ["The comparison table", "c6-table"], ["Figure 6.1", "c6-model"]]},
+  {id:"g6-behavior", t:"Business Buyer Behavior", a:"c6-behavior",
+   short:"Straight rebuy, modified rebuy and new task (the class’s envelope); systems selling. The buying center and its five roles — users, influencers, buyers, deciders, gatekeepers. Figure 6.2: environmental, organizational, interpersonal and individual influences.",
+   subs:[["Buying situations", "c6-situations"], ["The buying center", "c6-center"], ["Influences · Figure 6.2", "c6-influences"]]},
+  {id:"g6-process", t:"The Business Buyer Decision Process", a:"c6-process",
+   short:"The eight steps: problem recognition, general need description, product specification, supplier search, proposal solicitation, supplier selection, order-routine specification, performance review. E-procurement and online purchasing — its ways, advantages and disadvantage.",
+   subs:[["The eight steps", "c6-steps"], ["E-procurement", "c6-eproc"]]}]},
+ {h:"Chapter 7", tp:"c7", beyond:"", items:[
+  {id:"g7-strategy", t:"Marketing Strategy", a:"c7-strategy",
+   short:"Figure 7.1: segmentation and targeting select the customers to serve; differentiation and positioning decide the value proposition — to create value for targeted customers. The two questions: which customers will we serve, and how?",
+   subs:[["Figure 7.1", "c7-strategy"]]},
+  {id:"g7-seg", t:"Market Segmentation", a:"c7-seg",
+   short:"Geographic, demographic (age and life cycle, gender, income), psychographic (social class, lifestyle, personality) and behavioral bases (occasions, benefits sought, user status, usage rate, loyalty status); multiple segmentation bases; the five requirements — measurable, accessible, substantial, differentiable, actionable.",
+   subs:[["The bases", "c7-bases"], ["Requirements for effective segmentation", "c7-req"]]},
+  {id:"g7-target", t:"Market Targeting", a:"c7-target",
+   short:"Evaluating segments — size and growth, structural attractiveness, company objectives and resources. Figure 7.2, broad to narrow: undifferentiated, differentiated, concentrated, micromarketing (local and individual). The five factors in choosing a strategy.",
+   subs:[["Evaluating segments", "c7-eval"], ["Figure 7.2 strategies", "c7-strategies"], ["Choosing a strategy", "c7-choose"]]},
+  {id:"g7-position", t:"Differentiation and Positioning", a:"c7-position",
+   short:"Product position; competitive advantage; differentiating on product, services, channels, people, image; the seven criteria for a worthwhile difference; Figure 7.4 value propositions; the positioning statement; communicating and delivering the position.",
+   subs:[["Differentiation", "c7-diff"], ["Value propositions · Figure 7.4", "c7-value"], ["Positioning statement", "c7-statement"]]}]},
+ {h:"Chapter 8", tp:"c8", beyond:"Brand sponsorship and brand development (the rest of branding strategy) and Apple’s timeline (the class opener) are in the notes but not on the handout.", items:[
+  {id:"g8-what", t:"What is a Product", a:"c8-what",
+   short:"Product and service, defined. Figure 8.1: core customer value, actual product, augmented product. Consumer products — convenience, shopping, specialty, unsought (Table 8.1) — and industrial products; organizations, persons, places and ideas as products.",
+   subs:[["Three levels · Figure 8.1", "c8-levels"], ["Classifications", "c8-class"]]},
+  {id:"g8-decisions", t:"Product and Service Decisions", a:"c8-decisions",
+   short:"Product attributes — quality (level and consistency), features, style and design; branding; packaging; labeling; product support services. Product lines (length, stretching, filling) and the product mix (width, length, depth, consistency).",
+   subs:[["Individual product decisions", "c8-attributes"], ["Lines and the mix", "c8-lines"]]},
+  {id:"g8-services", t:"Services Marketing", a:"c8-services",
+   short:"The four characteristics — intangibility, inseparability, variability, perishability. The service-profit chain. Internal and interactive marketing; service differentiation, quality and productivity.",
+   subs:[["Four characteristics", "c8-four"], ["Service-profit chain", "c8-chain"], ["Three kinds of service marketing", "c8-three"]]},
+  {id:"g8-brands", t:"Branding Strategy (Brand Equity and Brand Value only)", a:"c8-brands",
+   short:"Brand equity: the differential effect that knowing the brand name has on customer response; BrandAsset Valuator’s four dimensions; the advantages of high equity; customer equity underneath. Brand value: the total financial value of a brand; the rankings.",
+   subs:[["Brand equity", "c8-equity"], ["Brand value", "c8-value"]]}]}
 ]};
 
 /* ================================================================ in class */

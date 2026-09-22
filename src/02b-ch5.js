@@ -1,11 +1,12 @@
 /* ================================================================ chapter 5
-   Consumer Markets and Buyer Behavior. From the Pearson slides and notes plus
-   the professor's additions (bottled water, social class by net worth, the
-   Honda family, the brand-personality quiz, Beyond Meat).                        */
+   Consumer Markets and Buyer Behavior. Sections follow the Exam 2 study guide;
+   content is from the Pearson slides and notes plus the professor's additions
+   (bottled water, social class by net worth, the Honda family, the brand-
+   personality quiz, Beyond Meat).                                                */
 var CH = {};
 CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
  notes:[
-  {id:"c5-model", h:"Consumer markets and the model of buyer behavior", body:
+  {id:"c5-model", h:"Model of Consumer Behavior", body:
    '<p><b>Consumer buyer behavior</b> is the buying behavior of final consumers — individuals and households that buy goods and services for personal consumption. <b>Consumer markets</b> are made up of all those individuals and households.</p>'+
    '<p>Large companies research what consumers buy, where, how, how much, when — and <i>why</i>. The whats and wheres can be measured; the whys are locked in the consumer’s mind, and often consumers themselves don’t know.</p>'+
    '<div class="quote">How do consumers respond to various marketing efforts the company might use?<small>The central question for marketers</small></div>'+
@@ -14,15 +15,16 @@ CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
    '<div class="step"><b>Buyer’s black box</b>Buyer’s characteristics; buyer’s decision process.</div>'+
    '<div class="step"><b>Buyer responses</b>Buying attitudes and preferences; purchase behavior — what, when, where, how much; brand engagements and relationships.</div></div>'+
    '<div class="exam-tip"><b>Why “black box”</b>Stimuli go in and responses come out, but you can’t see inside. Marketers spend a lot of energy and dollars trying to figure out what makes customers tick.</div>'},
-  {id:"c5-factors", h:"Figure 5.2 · The four factors that influence consumer behavior", know:true, body:
+  {id:"c5-chars", h:"Characteristics Affecting Consumer Behavior", body:
+   '<h3 class="sub" id="c5-factors">Figure 5.2 · The four factors</h3>'+
    '<p class="knowline"><span class="know">Objective 5.2 — name the four</span></p>'+
    '<p>Consumer purchases are influenced strongly by cultural, social, personal and psychological characteristics. For the most part marketers cannot control these factors, but they must take them into account.</p>'+
    '<div class="boxrow four"><div class="box"><h4>Cultural</h4><ul><li>Culture</li><li>Subculture</li><li>Social class</li></ul></div>'+
    '<div class="box"><h4>Social</h4><ul><li>Groups and social networks</li><li>Family</li><li>Roles and status</li></ul></div>'+
    '<div class="box"><h4>Personal</h4><ul><li>Age and life-cycle stage</li><li>Occupation</li><li>Economic situation</li><li>Lifestyle</li><li>Personality and self-concept</li></ul></div>'+
    '<div class="box"><h4>Psychological</h4><ul><li>Motivation</li><li>Perception</li><li>Learning</li><li>Beliefs and attitudes</li></ul></div></div>'+
-   '<p class="ask">Discussion question from the slides: what factors influenced your decision to buy the specific smartphone you have?</p>'},
-  {id:"c5-cultural", h:"Cultural factors", body:
+   '<p class="ask">Discussion question from the slides: what factors influenced your decision to buy the specific smartphone you have?</p>'+
+   '<h3 class="sub" id="c5-cultural">Cultural factors</h3>'+
    '<h3>Culture</h3>'+
    '<p><b>Culture</b> is the set of basic values, perceptions, wants and behaviors learned by a member of society from family and other important institutions. It exerts a broad and deep influence. Marketers are always trying to <b>spot cultural shifts</b> to discover new products that might be wanted — the shift toward health and fitness created a huge industry.</p>'+
    '<div class="case"><b class="t">The class’s three shifts: bottled water · working mothers · no plastic straws</b>Four causes for the shift to bottled water: (1) distrust of public water supplies, (2) increased emphasis on healthy living, (3) convenience, (4) thirst-producing medications. Annual U.S. consumption is now about <b>58 gallons a year</b>, up 38 percent since 1998. PepsiCo answers with bubly, LIFEWTR, Propel and Aquafina; Coca-Cola’s smartwater comes pH balanced, sparkling, alkaline 9+pH and antioxidant.</div>'+
@@ -38,8 +40,8 @@ CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
    '<div class="tblwrap"><table class="tbl n0"><thead><tr><th>Social class by net worth (median, 2021 census data)</th><th></th></tr></thead><tbody>'+
    '<tr><td class="head">Lower class</td><td class="num">$12,000</td></tr><tr><td class="head">Lower-middle class</td><td class="num">$61,260</td></tr><tr><td class="head">Middle class</td><td class="num">$145,200</td></tr><tr><td class="head">Upper-middle class</td><td class="num">$269,100</td></tr><tr><td class="head">Upper class</td><td class="num">$805,400</td></tr>'+
    '</tbody></table></div>'+
-   '<p>Some finance experts prefer net worth to income because it accounts for financial habits: a high income spent as fast as it comes leaves little to show. The regional slides make the same point — the salary needed to take home $100K ranges from about $134K to $155K by state, and the living wage for a family of five with one parent working runs from $68,868 (Nashville) to $112,566 (San Francisco).</p>'},
-  {id:"c5-social", h:"Social and personal factors", body:
+   '<p>Some finance experts prefer net worth to income because it accounts for financial habits: a high income spent as fast as it comes leaves little to show. The regional slides make the same point — the salary needed to take home $100K ranges from about $134K to $155K by state, and the living wage for a family of five with one parent working runs from $68,868 (Nashville) to $112,566 (San Francisco).</p>'+
+   '<h3 class="sub" id="c5-social">Social factors</h3>'+
    '<h3>Groups and social networks</h3>'+
    '<ul><li><b>Reference groups</b> serve as direct or indirect points of comparison in forming attitudes and behavior.</li>'+
    '<li><b>Word-of-mouth influence</b> — the personal words of trusted friends and other consumers are more credible than commercial sources.</li>'+
@@ -49,7 +51,7 @@ CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
    '<h3>Family, roles and status</h3>'+
    '<p><b>Family is the most important consumer-buying organization in society.</b> Marketers study the roles and influence of husband, wife and children on different purchases. The class illustrated it with one family’s Hondas — Civic, CR-V, Odyssey, HR-V, CR-V — the brand parents used becomes the brand the children buy.</p>'+
    '<p>A person belongs to many groups; the position in each is a <b>role</b> (the activities people are expected to perform) carrying a <b>status</b> (the esteem society gives it). People choose products appropriate to their roles and status — the working mother who is brand manager, wife and mother, and avid fan buys differently in each.</p>'+
-   '<h3>Personal factors</h3>'+
+   '<h3 class="sub" id="c5-personal">Personal factors</h3>'+
    '<ul><li><b>Occupation</b> affects the goods and services bought. Companies can specialize in an occupational group — FIGS sells modern, functional scrubs direct to medical professionals.</li>'+
    '<li><b>Age and life-cycle stage</b> affect tastes in food, clothes, furniture and recreation. Nielsen’s <b>PRIZM Lifestage Groups</b> system: 66 segments in 11 life-stage groups, from “Striving Singles” and “Young Achievers” to “Affluent Empty Nests” and “Sustaining Seniors,” built on demographics plus behavior and lifestyle.</li>'+
    '<li><b>Economic situation</b> — trends in spending, personal income, savings, interest rates (the 2021 real estate boom). In frugal times companies redesign, reposition and reprice; Target stressed the “Pay less” side of “Expect more. Pay less.”</li>'+
@@ -62,8 +64,8 @@ CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
    '<tr><td class="head">Competence</td><td class="sm">reliable, intelligent, successful</td><td class="sm"><b>Honda</b></td></tr>'+
    '<tr><td class="head">Sophistication</td><td class="sm">upper class, charming</td><td class="sm"><b>Infiniti</b></td></tr>'+
    '<tr><td class="head">Ruggedness</td><td class="sm">outdoorsy, tough</td><td class="sm"><b>Jeep</b></td></tr>'+
-   '</tbody></table></div>'},
-  {id:"c5-psych", h:"Psychological factors", body:
+   '</tbody></table></div>'+
+   '<h3 class="sub" id="c5-psych">Psychological factors</h3>'+
    '<h3>Motivation</h3>'+
    '<p>A <b>motive</b> (or drive) is a need that is sufficiently pressing to direct the person to seek satisfaction. <b>Motivation research</b> is qualitative research designed to probe consumers’ hidden, subconscious motivations — therapy-like interviews, describing brands as animals or cars, even hypnosis. It looks goofy to some, but many marketers use these “interpretive consumer research” approaches to dig deeper.</p>'+
    '<h3>Figure 5.3 · Maslow’s hierarchy of needs</h3>'+
@@ -79,7 +81,8 @@ CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
    '<h3>Learning</h3>'+
    '<p><b>Learning</b> is the change in behavior arising from experience. It occurs through the interplay of <b>drives, stimuli, cues, responses and reinforcement</b>. A drive is a strong internal stimulus calling for action; it becomes a motive when directed toward a stimulus object (a camera). Cues are minor stimuli that determine when, where and how the person responds (brands in a window, a sale price, a friend’s advice). If buying the Nikon is rewarding, the response is reinforced — next time the odds of buying Nikon are higher.</p>'+
    '<div class="exam-tip"><b>The practical significance for marketers</b>Build demand for a product by associating it with strong drives, using motivating cues, and providing positive reinforcement.</div>'},
-  {id:"c5-types", h:"Figure 5.4 · The four types of buying decision behavior", know:true, body:
+  {id:"c5-decide", h:"Buying Decision Behavior and The Buyer Decision Process", body:
+   '<h3 class="sub" id="c5-types">Figure 5.4 · The four types of buying decision behavior</h3>'+
    '<p class="knowline"><span class="know">Objective 5.3</span></p>'+
    '<p>Buying differs for toothpaste, a smartphone, financial services and a new car. Two variables sort it: the buyer’s <b>involvement</b> and the <b>differences between brands</b>. (Adapted from Henry Assael, <i>Consumer Behavior and Marketing Action</i>.)</p>'+
    '<div class="matrix"><div class="mx-corner"></div><div class="mx-h">Significant differences between brands</div><div class="mx-h">Few differences between brands</div>'+
@@ -88,8 +91,8 @@ CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
    '<div class="mx-c"><span class="lab">High involvement · few differences</span><h4>Dissonance-reducing buying behavior</h4>Expensive, infrequent, risky — but the buyer sees little difference among brands, so may buy fairly quickly, responding to price or convenience, and feel dissonance afterward.<i>Carpeting.</i></div>'+
    '<div class="mx-v">Low involvement</div>'+
    '<div class="mx-c"><span class="lab">Low involvement · significant differences</span><h4>Variety-seeking buying behavior</h4>Low cost, not risky, bought often; the buyer switches brands just to try something different, not out of dissatisfaction. Market leaders dominate shelf space; challengers use lower prices, free samples and advertising.<i>Cookies.</i></div>'+
-   '<div class="mx-c"><span class="lab">Low involvement · few differences</span><h4>Habitual buying behavior</h4>Low cost, frequent, not self-expressive; the buyer picks a familiar brand out of habit, not loyalty, and may respond to price or a coupon.<i>Salt — what brand of salt do you buy, and why?</i></div></div>'},
-  {id:"c5-process", h:"Figure 5.5 · The buyer decision process", know:true, body:
+   '<div class="mx-c"><span class="lab">Low involvement · few differences</span><h4>Habitual buying behavior</h4>Low cost, frequent, not self-expressive; the buyer picks a familiar brand out of habit, not loyalty, and may respond to price or a coupon.<i>Salt — what brand of salt do you buy, and why?</i></div></div>'+
+   '<h3 class="sub" id="c5-process">Figure 5.5 · The buyer decision process</h3>'+
    '<p class="knowline"><span class="know">The five stages</span></p>'+
    '<p>The buying process starts long before the actual purchase and continues long after — it may even end in a decision not to buy. Buyers may pass quickly or slowly, and in routine purchases skip or reverse stages. Marketers must focus on the entire process, not just the purchase decision.</p>'+
    '<div class="flow">'+
@@ -100,12 +103,13 @@ CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
    '<div class="step"><b>5 · Postpurchase behavior</b>Satisfaction depends on the gap between <b>expectations</b> and <b>perceived performance</b>. Marketers aim not just to meet expectations but to delight.</div></div>'+
    '<p><b>Cognitive dissonance</b> is buyer discomfort caused by postpurchase conflict. Consumers feel at least some dissonance after every major purchase — glad for the chosen brand’s benefits, uneasy about its drawbacks and the benefits of the brands not bought. Marketers should alleviate it by reinforcing the chosen brand’s benefits.</p>'+
    '<p>The <b>customer journey</b> is the sum of the ongoing experiences consumers have with a brand that affect their buying behavior, engagement and advocacy over time; understanding it lets marketers create experiences that lead to positive purchase, engagement and advocacy.</p>'},
-  {id:"c5-newprod", h:"The buyer decision process for new products", know:true, body:
+  {id:"c5-newprod", h:"The Buyer Decision Process for New Products", body:
+   '<h3 class="sub" id="c5-adoption">The adoption process</h3>'+
    '<p class="knowline"><span class="know">Objective 5.4</span></p>'+
    '<p>A <b>new product</b> is a good, service or idea perceived by some potential customers as new. The <b>adoption process</b> is the mental process an individual goes through from first learning about an innovation to final regular use.</p>'+
    '<div class="flow"><div class="step"><b>Awareness</b>Aware of the product but lacking information.</div><div class="step"><b>Interest</b>Seeks information.</div><div class="step"><b>Evaluation</b>Considers whether trying it makes sense.</div><div class="step"><b>Trial</b>Tries it on a small scale to estimate its value.</div><div class="step"><b>Adoption</b>Decides on full and regular use.</div></div>'+
    '<p>If consumers don’t perceive a need, advertising can trigger it; if they know the product but hold unfavorable attitudes, change the product or the perceptions.</p>'+
-   '<h3>Figure 5.6 · Adopter categories by time of adoption</h3>'+
+   '<h3 class="sub" id="c5-adopters">Figure 5.6 · Adopter categories by time of adoption</h3>'+
    '<div class="tblwrap"><table class="tbl"><thead><tr><th>Group</th><th>Share</th><th>Value</th><th>From the class slide</th></tr></thead><tbody>'+
    '<tr><td class="head">Innovators</td><td class="num">2.5%</td><td class="sm"><b>Venturesome</b> — try new ideas at some risk.</td><td class="sm">Risk takers, often affluent, scientifically associated with the new product.</td></tr>'+
    '<tr><td class="head">Early adopters</td><td class="num">13.5%</td><td class="sm">Guided by <b>respect</b> — opinion leaders who adopt early but carefully.</td><td class="sm">Most influential in any market space — “thought leaders,” high social status, reasonably affluent, active in social media.</td></tr>'+
@@ -115,10 +119,11 @@ CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
    '</tbody></table></div>'+
    '<p class="ask">The professor’s slide lists lagging adopters at 10%; Figure 5.6 and the arithmetic (2.5 + 13.5 + 34 + 34 + 16 = 100) say 16%. Use 16% unless he says otherwise.</p>'+
    '<p>New-product marketers target innovators and early adopters, who in turn influence later adopters.</p>'+
-   '<h3>Characteristics that affect the rate of adoption</h3>'+
+   '<h3 class="sub" id="c5-rate">Characteristics that affect the rate of adoption</h3>'+
    '<ul><li><b>Relative advantage</b> — the degree to which the innovation appears superior to existing products.</li><li><b>Compatibility</b> — how well it fits the values and experiences of potential consumers.</li><li><b>Complexity</b> — how difficult it is to understand or use.</li><li><b>Trialability</b> — whether it can be tried on a limited basis.</li><li><b>Observability</b> — whether the results can be observed or described to others.</li></ul>'+
    '<p>Also: initial and ongoing costs, risk and uncertainty, social approval.</p>'},
-  {id:"c5-cases", h:"The class case: Beyond Meat", body:
+  {id:"c5-cases", h:"Beyond the guide: the Beyond Meat case", beyond:true, body:
+   '<p class="ask">The chapter’s class opener — a case, not a study-guide section. Kept for the story; not in the quizzes.</p>'+
    '<div class="case"><b class="t">A cultural shift that ran out of buyers</b>Beyond Meat IPO’d in May 2019 at a $1.46 billion valuation; investor hype drove its all-time-high close of <b>$234.90 on July 26, 2019</b>. Its highest annual revenue was 2021, $464.7 million (gross income $113.28 million); it has never reported a full-year profit. Q2 2025 revenue fell 19.6% to $75 million with a net loss of $52.9 million; the 52-week low was $2.23 in May 2025, and the market summary on the slide showed <b>$0.79</b> in January 2026 — down 99.55% over five years.</div>'+
    '<p>The lesson the professor pairs with chapter 5: spotting a cultural shift (health, plant-based) creates the opportunity, but the buyer’s black box — taste, price, the novelty wearing off — decides whether it lasts.</p>'}
  ],
@@ -180,12 +185,11 @@ CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
    ["Median net worth, middle class (2021)","$145,200 — lower $12,000, lower-middle $61,260, upper-middle $269,100, upper $805,400"],
    ["PRIZM Lifestage Groups","Nielsen’s system: 66 segments in 11 life-stage groups"],
    ["The most important consumer-buying organization","The family"],
-   ["Beyond Meat’s all-time high","$234.90 on July 26, 2019 — a few months after the May 2019 IPO"],
    ["What determines postpurchase satisfaction","The relationship between expectations and perceived performance"]]}
  ]
 };
 
-/* ---- chapter 5 questions ---- */
+/* ---- chapter 5 questions. off:true = beyond the study guide (kept out of quizzes) ---- */
 var QB = [
  {tp:"c5",t:"mc",q:"Consumer buyer behavior refers to the buying behavior of:",a:"final consumers — individuals and households buying for personal consumption",w:["organizations buying for resale","wholesalers and retailers","governments and institutions"],e:"Final consumers. Organizations are chapter 6."},
  {tp:"c5",t:"mc",q:"In the model of buyer behavior, the “black box” contains:",a:"the buyer’s characteristics and decision process",w:["the four Ps","economic and cultural stimuli","purchase behavior and brand engagement"],e:"Stimuli enter the black box (characteristics + decision process) and produce responses."},
@@ -222,7 +226,7 @@ var QB = [
  {tp:"c5",t:"mc",q:"Which adopter group is described as “guided by respect” — opinion leaders who adopt early but carefully?",a:"Early adopters",w:["Innovators","Early mainstream","Late mainstream"],e:"Early adopters. Innovators are venturesome; the early mainstream deliberate; the late mainstream skeptical; laggards tradition bound."},
  {tp:"c5",t:"mc",q:"The degree to which an innovation may be tried on a limited basis is its:",a:"trialability",w:["observability","compatibility","relative advantage"],e:"Trialability."},
  {tp:"c5",t:"mc",q:"The degree to which an innovation fits the values and experiences of potential consumers is its:",a:"compatibility",w:["complexity","trialability","observability"],e:"Compatibility."},
- {tp:"c5",t:"mc",q:"Beyond Meat’s all-time-high closing stock price came:",a:"a few months after its May 2019 IPO",w:["in May 2025","in 2021, its best revenue year","the week of its IPO"],e:"$234.90 on July 26, 2019. By January 2026 it was $0.79."},
+ {tp:"c5",off:true,t:"mc",q:"Beyond Meat’s all-time-high closing stock price came:",a:"a few months after its May 2019 IPO",w:["in May 2025","in 2021, its best revenue year","the week of its IPO"],e:"$234.90 on July 26, 2019. By January 2026 it was $0.79."},
  {tp:"c5",ap:true,t:"mc",q:"A student researches laptops for weeks, compares specs, reads reviews and finally buys. This is:",a:"complex buying behavior",w:["habitual buying behavior","variety-seeking buying behavior","dissonance-reducing buying behavior"],e:"High involvement, significant brand differences."},
  {tp:"c5",ap:true,t:"mc",q:"A shopper grabs a different flavor of chips each week just to try something new. This is:",a:"variety-seeking buying behavior",w:["habitual buying behavior","complex buying behavior","dissonance-reducing buying behavior"],e:"Low involvement, significant differences — brand switching without dissatisfaction."},
  {tp:"c5",ap:true,t:"mc",q:"A family buys a Honda because the parents always drove Hondas. Which factor is at work?",a:"Family — a social factor",w:["Occupation — a personal factor","Learning — a psychological factor","Subculture — a cultural factor"],e:"The class’s Honda family: the brand parents used becomes the brand the children buy."},
@@ -243,5 +247,5 @@ var QB = [
  {tp:"c5",t:"tf",q:"Almost all major purchases result in some cognitive dissonance.",a:true,e:"True."},
  {tp:"c5",t:"tf",q:"Lagging adopters are the first to try a new product.",a:false,e:"False — they are last; innovators are first."},
  {tp:"c5",t:"tf",q:"New-product marketers should direct initial efforts toward innovators and early adopters.",a:true,e:"True — they influence later adopters."},
- {tp:"c5",t:"tf",q:"Beyond Meat has reported a full-year profit every year since 2021.",a:false,e:"False — it has operated at a loss since 2021 and never reported a full-year profit."}
+ {tp:"c5",off:true,t:"tf",q:"Beyond Meat has reported a full-year profit every year since 2021.",a:false,e:"False — it has operated at a loss since 2021 and never reported a full-year profit."}
 ];

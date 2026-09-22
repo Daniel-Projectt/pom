@@ -154,9 +154,11 @@ tps.forEach(tp => {
     ok(r.items.length === 6 && new Set(r.items.map(x => x.right)).size === 6 && new Set(r.items.map(x => x.left)).size === 6, tp + ' match round: six unique pairs');
   }
 });
-const lines = A.VERDICTS.flatMap(v => v.t).concat(A.REACT.ok, A.REACT.no).join(' | ');
-ok(!/sheesh|no crumbs|behind the pack|giving competent|giving guess|almost there|we outside|put on for|stay ready/i.test(lines), 'vetoed verdict lines stay out');
-ok(A.VERDICTS[0].t.some(t => /GOAT/.test(t)) && A.VERDICTS[4].t.some(t => /cheeks/.test(t)), 'GOAT on top, cheeks at the bottom');
+const lines = A.VERDICTS.flatMap(v => v.t.concat([v.a])).join(' | ');
+ok(!/cheeks|goat|bruh|cooked|twin|\bbro\b|\bchat\b|aura|npc|crack a|\bnah\b|ain.t|dawg|\bW\b|no cap|lock in|\bhim\b|\bL\b|mid\.|headlock|trenches/i.test(lines), 'no slang anywhere in the verdicts', lines);
+ok(A.VERDICTS.length === 5 && A.VERDICTS.every(v => v.t.length >= 3 && v.a.length > 20), 'five tiers, each with several gracious lines and advice');
+ok(!/function reaction\(/.test(src) && !/\bREACT\b/.test(src), 'per-answer quips are gone');
+ok(/<b>Correct\.<\/b>/.test(src) && /<b>Not this one\.<\/b>/.test(src), 'answer feedback is plain');
 [100, 90, 75, 55, 10].forEach(p => ok(!!A.verdictFor(p).t, 'verdict for ' + p));
 
 // ---------- 6. markup ----------

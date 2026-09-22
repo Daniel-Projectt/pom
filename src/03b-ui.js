@@ -1,7 +1,7 @@
 /* ---- the pure parts can be tested outside a browser ---- */
 if(typeof window === "undefined"){
   module.exports = {CH:CH, COURSE:COURSE, OBJECTIVES:OBJECTIVES, GUIDE:GUIDE, THEMES:THEMES, VERSES:VERSES, EVENTS:EVENTS, VIDEOS:VIDEOS,
-    QB:QB, PAIRSETS:PAIRSETS, VERDICTS:VERDICTS, REACT:REACT, CHAPTERS:CHAPTERS, TOPIC_NAMES:TOPIC_NAMES,
+    QB:QB, PAIRSETS:PAIRSETS, VERDICTS:VERDICTS, CHAPTERS:CHAPTERS, TOPIC_NAMES:TOPIC_NAMES,
     fromBank:fromBank, fromPair:fromPair, topicQuestions:topicQuestions, mockQuestions:mockQuestions, questionsByKeys:questionsByKeys,
     deckFor:deckFor, matchRound:matchRound, verdictFor:verdictFor};
   return;
@@ -140,8 +140,8 @@ function makeQuiz(root, gen, opts){
     answered = true;
     var q = qs[qi], body = $(".qbody", root); q.got = o.ok;
     $$(".opt", body).forEach(function(b, i){ b.disabled = true; if(q.opts[i].ok) b.classList.add("correct"); });
-    if(o.ok){ score++; $(".feedback", body).innerHTML = "<b>Correct"+reaction(true)+".</b> " + q.explain; }
-    else { node.classList.add("wrong"); missed.push(q); $(".feedback", body).innerHTML = "<b>Not this one"+reaction(false)+".</b> " + q.explain; }
+    if(o.ok){ score++; $(".feedback", body).innerHTML = "<b>Correct.</b> " + q.explain; }
+    else { node.classList.add("wrong"); missed.push(q); $(".feedback", body).innerHTML = "<b>Not this one.</b> " + q.explain; }
     dots();
     var nb = $(".next", body); nb.hidden = false; nb.textContent = (qi === qs.length-1) ? "See results" : "Next"; nb.focus();
   }

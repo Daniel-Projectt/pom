@@ -1704,31 +1704,23 @@ var CHAPTERS = ["c5","c6","c7","c8"];
 var TOPIC_NAMES = {};
 CHAPTERS.forEach(function(tp){ TOPIC_NAMES[tp] = "Ch. "+CH[tp].n+" · "+CH[tp].short; });
 
-/* ---- verdicts: the lines Daniel picked, by grade ---- */
+/* ---- verdicts by grade: warm, plain, never a joke at the reader's expense ---- */
 var VERDICTS = [
-  {min:100, a:"Nothing left here. Take the full practice exam next.",
-   t:["You’re the GOAT.","Absolute cinema.","+1000 aura.","We’re so back.","Goated, no cap.","You did that.","Built different.","Period.","Bro is the professor.","Teach the class, twin.","They not like us."]},
+  {min:100, a:"Nothing left to fix here. Try the full set of chapter quizzes next.",
+   t:["Flawless.","Perfect \u2014 every one.","Word-perfect.","Nothing to correct."]},
   {min:85,  a:"Strong. The misses below are the whole job now.",
-   t:["You’re him.","Certified.","Locked in.","Big W.","He’s him, chat.","Let him cook.","You slid.","Big dawg energy.","That’s tough.","Bro studied.","One away from disrespectful."]},
-  {min:70,  a:"Solid base, but the gaps are real. Work the misses, then retake.",
-   t:["Main character energy.","Lowkey solid.","Not bad, twin.","Run it back.","Respectable.","You’ll live.","Passing, but don’t celebrate.","B-tier. Respectfully.","Solid — don’t get comfortable."]},
-  {min:50,  a:"About half. Back to the notes and flashcards for this chapter before testing again.",
-   t:["You’re a bot.","Mid.","It’s giving NPC.","Bruh.","Crack a lackin’.","Chat, is this real?","You good?","Ain’t no way.","Get your weight up.","Who let bro cook?","Coin-flip energy."]},
-  {min:0,   a:"Start with the notes and flashcards. Testing before the material is in place mostly measures frustration.",
-   t:["You’re cheeks.","Cooked.","It’s so over.","Pack it up.","Nah bro.","Down bad.","In the trenches.","Lock in, bro.","Somebody come get him.","Bro guessed the whole thing.","That quiz would’ve had you in a headlock.","Not a single one landed, twin."]}
+   t:["Strong.","Very well done.","Nearly perfect.","Excellent work."]},
+  {min:70,  a:"A solid base, with a few real gaps. Work the misses, then take it again.",
+   t:["Good work.","A solid pass.","Coming along nicely.","Well on your way."]},
+  {min:50,  a:"About half. A pass through the notes and flashcards for this chapter before testing again will lift this quickly.",
+   t:["Halfway there.","A fair start.","Keep going.","Room to grow."]},
+  {min:0,   a:"It is easier to test once the material is in place \u2014 start with the notes and flashcards, then come back.",
+   t:["A first pass.","Early days.","Not yet \u2014 and that\u2019s all right.","Begin with the notes."]}
 ];
-var REACT = {
-  ok:["W","say less","no cap","easy","locked in","twin ❤","that’s him","period","on god","you did that","clean","too easy"],
-  no:["bruh","nah","crack a lackin’","L","not this one, twin","cooked","chat…","ain’t no way","lock in","who told you that","respectfully, no"]
-};
-VERDICTS.filter(function(v){ return v.min <= 50; }).forEach(function(v){
-  v.t.forEach(function(t){ var r = t.replace(/\.$/, ""); if(REACT.no.indexOf(r) < 0) REACT.no.push(r); });
-});
 function verdictFor(p){
   for(var i=0;i<VERDICTS.length;i++){ if(p >= VERDICTS[i].min){ var v = VERDICTS[i]; return {t:pick(v.t,1)[0], a:v.a}; } }
   var last = VERDICTS[VERDICTS.length-1]; return {t:last.t[0], a:last.a};
 }
-function reaction(right){ return Math.random() < 0.35 ? " — " + pick(right ? REACT.ok : REACT.no, 1)[0] : ""; }
 
 /* ================================================================ question building */
 /* Pair sets (term, meaning) per chapter, from every deck not marked match:false.
@@ -1839,7 +1831,7 @@ function matchRound(tp, n){
 /* ---- the pure parts can be tested outside a browser ---- */
 if(typeof window === "undefined"){
   module.exports = {CH:CH, COURSE:COURSE, OBJECTIVES:OBJECTIVES, GUIDE:GUIDE, THEMES:THEMES, VERSES:VERSES, EVENTS:EVENTS, VIDEOS:VIDEOS,
-    QB:QB, PAIRSETS:PAIRSETS, VERDICTS:VERDICTS, REACT:REACT, CHAPTERS:CHAPTERS, TOPIC_NAMES:TOPIC_NAMES,
+    QB:QB, PAIRSETS:PAIRSETS, VERDICTS:VERDICTS, CHAPTERS:CHAPTERS, TOPIC_NAMES:TOPIC_NAMES,
     fromBank:fromBank, fromPair:fromPair, topicQuestions:topicQuestions, mockQuestions:mockQuestions, questionsByKeys:questionsByKeys,
     deckFor:deckFor, matchRound:matchRound, verdictFor:verdictFor};
   return;
@@ -1978,8 +1970,8 @@ function makeQuiz(root, gen, opts){
     answered = true;
     var q = qs[qi], body = $(".qbody", root); q.got = o.ok;
     $$(".opt", body).forEach(function(b, i){ b.disabled = true; if(q.opts[i].ok) b.classList.add("correct"); });
-    if(o.ok){ score++; $(".feedback", body).innerHTML = "<b>Correct"+reaction(true)+".</b> " + q.explain; }
-    else { node.classList.add("wrong"); missed.push(q); $(".feedback", body).innerHTML = "<b>Not this one"+reaction(false)+".</b> " + q.explain; }
+    if(o.ok){ score++; $(".feedback", body).innerHTML = "<b>Correct.</b> " + q.explain; }
+    else { node.classList.add("wrong"); missed.push(q); $(".feedback", body).innerHTML = "<b>Not this one.</b> " + q.explain; }
     dots();
     var nb = $(".next", body); nb.hidden = false; nb.textContent = (qi === qs.length-1) ? "See results" : "Next"; nb.focus();
   }

@@ -1,0 +1,13 @@
+{
+  "name": "Principles of Marketing — Study Guide",
+  "short_name": "Marketing",
+  "description": "Kotler chapters 5–8: notes, flashcards, matching, quizzes and a practice exam.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f1e8",
+  "theme_color": "#f5f1e8",
+  "icons": [
+    { "src": "icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

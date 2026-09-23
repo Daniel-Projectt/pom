@@ -76,8 +76,6 @@ CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
    '<div class="lv"><b>3 · Social needs</b><span>sense of belonging, love</span></div>'+
    '<div class="lv"><b>2 · Safety needs</b><span>security, protection</span></div>'+
    '<div class="lv"><b>1 · Physiological needs</b><span>hunger, thirst</span></div></div>'+
-   '<h3>Perception, beliefs and attitudes</h3>'+
-   '<p>The deck moves from Maslow straight to learning; these two are from the book. <b>Perception</b> is the process by which people select, organize and interpret information — selective attention, selective distortion, selective retention. A <b>belief</b> is a descriptive thought a person holds about something; an <b>attitude</b> describes relatively consistent evaluations, feelings and tendencies toward an object or idea — and attitudes are hard to change.</p>'+
    '<h3>Learning</h3>'+
    '<p><b>Learning</b> is the change in behavior arising from experience. It occurs through the interplay of <b>drives, stimuli, cues, responses and reinforcement</b>. A drive is a strong internal stimulus calling for action; it becomes a motive when directed toward a stimulus object (a camera). Cues are minor stimuli that determine when, where and how the person responds (brands in a window, a sale price, a friend’s advice). If buying the Nikon is rewarding, the response is reinforced — next time the odds of buying Nikon are higher.</p>'+
    '<div class="exam-tip"><b>The practical significance for marketers</b>Build demand for a product by associating it with strong drives, using motivating cues, and providing positive reinforcement.</div>'},
@@ -144,11 +142,8 @@ CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
    ["Brand personality","The specific mix of human traits that may be attributed to a particular brand"],
    ["Motive (drive)","A need that is sufficiently pressing to direct the person to seek satisfaction"],
    ["Motivation research","Qualitative research designed to probe consumers’ hidden, subconscious motivations"],
-   ["Perception","The process by which people select, organize and interpret information to form a meaningful picture"],
    ["Learning","Changes in behavior arising from experience — through drives, stimuli, cues, responses and reinforcement"],
    ["Cue","A minor stimulus that determines when, where and how a person responds"],
-   ["Belief","A descriptive thought a person holds about something"],
-   ["Attitude","A person’s relatively consistent evaluations, feelings and tendencies toward an object or idea"],
    ["Complex buying behavior","High involvement, significant brand differences — an expensive, risky, self-expressive purchase"],
    ["Dissonance-reducing buying behavior","High involvement but few perceived brand differences"],
    ["Habitual buying behavior","Low involvement, few brand differences — a familiar brand bought out of habit"],

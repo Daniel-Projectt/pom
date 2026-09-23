@@ -8,7 +8,7 @@ CH.c6 = {n:6, title:"Business Markets and Business Buyer Behavior", short:"Busin
   {id:"c6-intro", h:"Introduction", body:
    '<p><b>Business buyer behavior</b> is the buying behavior of the organizations that buy goods and services for use in the production of other products and services that are sold, rented or supplied to others. The <b>business buying process</b> is how business buyers determine which products and services are needed, then find, evaluate and choose among alternative brands.</p>'+
    '<p>Most large companies sell to other organizations — Boeing, DuPont, IBM, Caterpillar. Even consumer-products companies first sell to intermediaries. B-to-B marketers must understand business markets and business buyer behavior, then engage business customers and build profitable relationships by creating superior customer value. The business market is huge: it involves far more dollars and items than consumer markets.</p>'+
-   '<div class="boxrow"><div class="box"><h4>The numbers on the class slides</h4><ul><li>Global B2B e-commerce: <b>$30 trillion</b> in 2024 — over five times the $6 trillion B2C market.</li><li>LinkedIn: more than 590 million business professionals in 200+ countries — the go-to B-to-B social selling platform, “market to who matters.”</li></ul></div>'+
+   '<div class="boxrow"><div class="box"><h4>The global B2B market (class slide)</h4><ul><li>Global B2B e-commerce: <b>$30 trillion</b> in 2024 — over five times the $6 trillion B2C market.</li></ul></div>'+
    '<div class="box"><h4>Small business in the U.S. (2024)</h4><ul><li><b>34.8 million</b> small businesses — 99.9% of U.S. businesses.</li><li>They employ 59 million people, 46% of the private workforce.</li><li>They contribute 44% of GDP. “Small business drives the American economy.”</li></ul></div></div>'},
   {id:"c6-markets", h:"Business Markets", body:
    '<p class="knowline"><span class="know">Objective 6.1 — how they differ</span></p>'+
@@ -129,7 +129,6 @@ CH.c6 = {n:6, title:"Business Markets and Business Buyer Behavior", short:"Busin
    ["The main disadvantage of e-procurement","It can erode relationships as buyers search for new suppliers"],
    ["Global B2B e-commerce vs B2C (2024)","$30 trillion vs $6 trillion — over five times"],
    ["Small businesses in the U.S. (2024)","34.8 million — 99.9% of businesses, 59 million employees, 46% of the private workforce, 44% of GDP"],
-   ["LinkedIn membership","More than 590 million business professionals"],
    ["Walmart’s purchasing department is called","The Supplier Development Department"],
    ["IBM and Six Flags","Systems selling — Maximo software plus the services to implement it"],
    ["The 2011 Japan tsunami illustrates","Supply conditions — an environmental influence"],
@@ -177,7 +176,6 @@ QB = QB.concat([
  {tp:"c6",ap:true,t:"mc",q:"A software vendor sells not just the program but installation, customization and training as one package. This is:",a:"systems selling",w:["a reverse auction","supplier development","a straight rebuy"],e:"A complete solution from a single seller — like IBM and Six Flags."},
  {tp:"c6",t:"mc",q:"In Figure 6.1, which of these is one of the buyer responses?",a:"Supplier choice",w:["Cultural stimuli","The buying center","Competitive stimuli"],e:"Responses: product or service choice, supplier choice, order quantities, delivery terms and times, service terms, payment."},
  {tp:"c6",t:"mc",q:"Supplier development is:",a:"the systematic development of networks of supplier-partners to ensure a dependable supply",w:["training a supplier’s sales force","buying from whichever supplier is cheapest today","a reverse auction among suppliers"],e:"Walmart’s Supplier Development Department, not a purchasing department."},
- {tp:"c6",t:"mc",q:"Per the class slide, LinkedIn’s membership is more than:",a:"590 million business professionals",w:["59 million","5.9 billion","34.8 million"],e:"590 million, in more than 200 countries — the go-to B-to-B social selling platform."},
  {tp:"c6",t:"tf",q:"E-procurement gives buyers access to new suppliers and lowers purchasing costs.",a:true,e:"True — and it speeds order processing and delivery."},
  {tp:"c6",t:"tf",q:"Business markets involve far more dollars and items than consumer markets.",a:true,e:"True."},
  {tp:"c6",t:"tf",q:"The buying center is a fixed, formally identified unit within the organization.",a:false,e:"False — it is a set of roles assumed by different people for different purchases."},

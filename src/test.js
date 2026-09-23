@@ -76,7 +76,7 @@ ok(new Set(subIds.concat(noteIds)).size === subIds.length + noteIds.length, 'sub
 ok(/lists lagging adopters at 10%/.test(body('c5')), 'the 10% vs 16% discrepancy is flagged, not silently fixed');
 ['$12,000', '$61,260', '$145,200', '$269,100', '$805,400'].forEach(v => ok(body('c5').includes(v), 'ch. 5 net worth figure: ' + v));
 ok(/KIA<\/b>/.test(body('c5')) && /Jeep<\/b>/.test(body('c5')), 'ch. 5 brand-personality answer key');
-ok(/these two are from the book/.test(body('c5')), 'perception and attitudes are marked as from the book, not the deck');
+ok(!/from the book|the book says|Kotler’s worked example|Kotler’s figures|Evernote|Starbucks Experience|third place|LinkedIn|competing with itself/i.test(allBodies), 'nothing filled in from outside the class decks, and no chapter openers');
 // chapter 6
 ['Straight rebuy', 'Modified rebuy', 'New task'].forEach(v => ok(body('c6').includes(v), 'ch. 6 buying situation: ' + v));
 ['Users', 'Influencers', 'Buyers', 'Deciders', 'Gatekeepers'].forEach(v => ok(body('c6').includes('<td class="head">' + v + '</td>'), 'ch. 6 buying-center role: ' + v));
@@ -90,7 +90,8 @@ ok(!/Beyond Meat/.test(body('c5')) && !/Line extensions|Kroger|Apple’s comebac
 ['Undifferentiated (mass)', 'Differentiated (segmented)', 'Concentrated (niche)', 'Micromarketing'].forEach(v => ok(body('c7').includes(v), 'ch. 7 targeting strategy: ' + v));
 ['More for more', 'More for the same', 'More for less', 'The same for less', 'Less for much less'].forEach(v => ok(body('c7').includes('<div class="cell win">' + v), 'ch. 7 winning proposition: ' + v));
 ok((body('c7').match(/class="cell lose"/g) || []).length === 3 && (body('c7').match(/class="cell meh"/g) || []).length === 1, 'three losing and one marginal cell');
-ok(/Evernote/.test(body('c7')) && /Aveeno/.test(body('c7')), 'positioning statement: Kotler’s worked example and the class’s Aveeno');
+ok(/Aveeno/.test(body('c7')) && /If it fits, it ships/.test(body('c7')), 'positioning statement: the form, the class’s Aveeno, and the deck’s USPS example');
+ok(/Tide, from the class slide/.test(A.CH.c7.notes[2].body) && !/Tide/.test(A.CH.c7.notes[0].body), 'the Tide slide sits under Market Targeting, not as a chapter opener');
 // chapter 8
 ['Core customer value', 'Actual product', 'Augmented product'].forEach(v => ok(body('c8').includes(v), 'ch. 8 level: ' + v));
 ['Convenience', 'Shopping', 'Specialty', 'Unsought'].forEach(v => ok(body('c8').includes('<th>' + v + '</th>'), 'ch. 8 consumer product column: ' + v));
@@ -108,7 +109,7 @@ tps.forEach(tp => {
 });
 const off = A.QB.filter(q => q.off);
 ok(off.length === 0, 'no question is marked outside the guide — there is nothing outside it', off.length);
-const OUT = /co-brand|licens|brand extension|multibrand|store-brand quality|Kroger|Great Value|institutional market|lowest bidder|Grainger|Wright-Patterson|Beyond Meat|Apple became|Apple’s timeline|Maersk/i;
+const OUT = /co-brand|licens|brand extension|multibrand|store-brand quality|Kroger|Great Value|institutional market|lowest bidder|Grainger|Wright-Patterson|Beyond Meat|Apple became|Apple’s timeline|Maersk|LinkedIn|third place|Evernote/i;
 ok(!A.QB.some(q => OUT.test(q.q)), 'no question touches a topic the handout leaves out', A.QB.filter(q => OUT.test(q.q)).map(q => q.q).join(' || '));
 A.QB.forEach((q, i) => {
   ok(tps.includes(q.tp), 'known chapter #' + i);

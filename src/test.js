@@ -99,6 +99,21 @@ ok(/Tide, from the class slide/.test(A.CH.c7.notes[2].body) && !/Tide/.test(A.CH
 ['Width', 'Length', 'Depth', 'Consistency'].forEach(v => ok(body('c8').includes('<td class="head">' + v + '</td>'), 'ch. 8 mix dimension: ' + v));
 ok(/differentiation, relevance, knowledge, esteem/.test(A.CH.c8.notes[3].body) && /\$470\.9B/.test(A.CH.c8.notes[3].body), 'brand equity and value are in the branding section');
 
+// ---------- 3b. every question and card belongs to a study-guide section ----------
+head('every question and card belongs to a study-guide section');
+const SEC = A.SEC_CHAPTER;
+ok(Object.keys(SEC).length === 16 && Object.keys(A.SEC_TITLES).length === 16, 'sixteen sections known to the engine');
+for (let i = 0; i < A.QB.length; i++) ok(A.QB[i] && typeof A.QB[i] === 'object', 'no empty slot in the question list (a stray double comma) at #' + i);
+A.QB.forEach((q, i) => ok(q.sec && SEC[q.sec] === q.tp, 'question #' + i + ' is tagged with a section of its own chapter', q.sec + ' / ' + q.q.slice(0, 60)));
+tps.forEach(tp => A.CH[tp].decks.forEach(d => d.cards.forEach(c => ok(c[2] && SEC[c[2]] === tp, 'card is tagged with a section of its chapter: ' + c[0], c[2]))));
+Object.keys(SEC).forEach(id => {
+  const n = A.QB.filter(q => q.sec === id).length;
+  ok(n >= 4, 'at least four written questions for “' + A.SEC_TITLES[id] + '”', n);
+  ok(A.CH[SEC[id]].decks.some(d => d.cards.some(c => c[2] === id)), 'at least one flashcard for “' + A.SEC_TITLES[id] + '”');
+});
+ok(A.PAIRSETS.c5.pairs.every(p => p[2] && SEC[p[2]] === 'c5'), 'match pairs carry their section');
+console.log('  questions per section: ' + Object.keys(SEC).map(id => id.replace(/^g/, '') + '=' + A.QB.filter(q => q.sec === id).length).join(' '));
+
 // ---------- 4. question bank ----------
 head('question bank');
 tps.forEach(tp => {
@@ -131,6 +146,7 @@ for (let run = 0; run < 100; run++) {
     ok(qs.length === 10, tp + ': ten questions', qs.length);
     ok(new Set(qs.map(q => q.key.replace(/r$/, ''))).size === qs.length, tp + ': no repeated question', qs.map(q => q.key).join(','));
     ok(qs.every(q => !offKeys.has(q.key)), tp + ': no beyond-the-guide question in a quiz');
+    ok(qs.every(q => q.sec && SEC[q.sec] === tp), tp + ': every quiz question, generated ones included, names its study-guide section', qs.map(q => q.sec).join(','));
     qs.forEach(q => {
       ok(q.opts.filter(o => o.ok).length === 1, tp + ': exactly one right answer', q.text);
       ok(new Set(q.opts.map(o => o.html)).size === q.opts.length, tp + ': options distinct', q.opts.map(o => o.html).join(' | '));
@@ -145,6 +161,7 @@ for (let run = 0; run < 100; run++) {
     tps.forEach(tp => ok(mx.some(q => q.tp === tp), 'practice exam of ' + n + ' covers ' + tp));
     ok(new Set(mx.map(q => q.key)).size === mx.length, 'practice exam has no repeats');
     ok(mx.every(q => !offKeys.has(q.key)), 'practice exam stays on the guide');
+    ok(mx.every(q => q.sec && SEC[q.sec] === q.tp), 'every practice-exam question names its study-guide section');
   });
   ok(A.mockQuestions({ n: 25, types: 'tf', topics: [] }).every(q => q.kind === 'tf'), 'true/false-only exam');
   ok(A.mockQuestions({ n: 25, types: 'ap', topics: [] }).every(q => q.ap), 'application-only exam');

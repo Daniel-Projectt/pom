@@ -10,7 +10,9 @@ sections. Only what the handout asks for is on the page. Same look as the Greek 
 ## Tabs
 - Guide - the Study Guide for Exam 2, section by section, with check-offs and links to each subsection
 - Chapters 5-8 - the handout's four sections per chapter as notes, two flashcard decks each, match, quiz
-- Practice Exam - questions from all four chapters, by type and chapter
+- Practice Exam - questions from all four chapters, by type and chapter; results broken down by study-guide section
+
+Every quiz question and every flashcard is tagged with the study-guide section it belongs to (the section is shown on the question card and on the back of the card), and the tests refuse a question or card that is not.
 
 ## Install on a phone
 Open the link, then "Add to Home Screen". It keeps an offline copy (manifest + service worker).

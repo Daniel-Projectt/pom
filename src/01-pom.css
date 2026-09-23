@@ -73,11 +73,14 @@
 .opt.tf{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase}
 .opts.two{grid-template-columns:1fr 1fr}
 .qtag{display:inline-block;font-family:var(--sans);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold-soft);border-radius:2px;padding:2px 7px;margin:0 2px 8px}
+.qtag.sec{font-family:var(--serif);font-size:13px;letter-spacing:0;text-transform:none;color:var(--ink-soft);border-color:var(--line-strong);font-style:italic}
+.secch{display:block;font-family:var(--sans);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
 .setup{max-width:600px;margin:0 auto;text-align:center}
 .setup .row{margin:12px 0}
 .misslist .g{font-family:var(--serif);font-size:15px;min-width:0;flex:1;letter-spacing:0}
 .misslist > div{flex-direction:column;gap:4px}
 .misslist .t{font-style:normal}
+.misslist .t b{display:inline;font-family:inherit;font-size:inherit;letter-spacing:0;text-transform:none;font-weight:600;color:var(--ink)}
 
 /* text tiles for Match */
 .tiles.text{grid-template-columns:1fr;gap:8px}

@@ -99,6 +99,7 @@ tps.forEach(t => {
   const p = panel(t + '/cards'), c = p.querySelector('.counter');
   ok(/^1 of \d+$/.test(c.textContent), t + ': counter starts at 1', c.textContent);
   click(p.querySelector('.flip')); ok(p.querySelector('.flash').classList.contains('flipped'), t + ': flips');
+  ok(/Study guide · /.test(p.querySelector('.face.back').textContent), t + ': the card back names its study-guide section');
   click(p.querySelector('.next')); ok(/^2 of /.test(c.textContent) && !p.querySelector('.flash').classList.contains('flipped'), t + ': next card, unflipped');
   key('ArrowLeft'); ok(/^1 of /.test(c.textContent), t + ': arrow key goes back');
   const decks = Array.from(p.querySelectorAll('[data-deck]'));
@@ -125,6 +126,7 @@ tps.forEach(t => {
   topic(t); mode(t, 'quiz');
   const root = $('#' + t + 'Quiz');
   ok(root.querySelectorAll('.dots i').length === 10, t + ': ten dots');
+  ok(root.querySelector('.qtag.sec') && root.querySelector('.qtag.sec').textContent.length > 8, t + ': the question card names its study-guide section', root.querySelector('.qtag.sec') && root.querySelector('.qtag.sec').textContent);
   const res = answerQuiz(root, t);
   ok(!!res, t + ': results screen');
   ok(res && res.querySelector('h3') && res.querySelector('h3').textContent.length > 3, t + ': verdict line shown');
@@ -149,7 +151,7 @@ click($('#mxN button[data-n="15"]')); click($('#mxT button[data-t="all"]')); cli
 click($('#mxStart'));
 ok($$('#mockExam .dots i').length === 15, 'fifteen-question exam', $$('#mockExam .dots i').length);
 const mres = answerQuiz($('#mockExam'), 'exam');
-ok(mres && mres.querySelectorAll('.tbl tr').length === 4, 'results break down by chapter');
+ok(mres && mres.querySelectorAll('.tbl tr').length >= 4 && mres.querySelectorAll('.tbl tr').length <= 16 && mres.querySelectorAll('.tbl .secch').length === mres.querySelectorAll('.tbl tr').length, 'results break down by study-guide section', mres && mres.querySelectorAll('.tbl tr').length);
 click(mres.querySelector('.setupbtn')); ok(!!$('#mxStart'), 'change settings returns to setup');
 click($('#mxT button[data-t="ap"]')); click($('#mxN button[data-n="25"]')); click($('#mxStart'));
 ok($$('#mockExam .dots i').length === 25 && $('#mockExam .qtag').textContent === 'Application', 'application-only exam');

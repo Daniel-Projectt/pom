@@ -13,6 +13,9 @@ var CORNERS = ['tl','tr','bl','br'].map(function(c){ return '<svg class="c '+c+'
 var CHAPTERS = ["c5","c6","c7","c8"];
 var TOPIC_NAMES = {};
 CHAPTERS.forEach(function(tp){ TOPIC_NAMES[tp] = "Ch. "+CH[tp].n+" · "+CH[tp].short; });
+/* Every question and card carries the id of the study-guide section it belongs to */
+var SEC_TITLES = {}, SEC_CHAPTER = {};
+GUIDE.sections.forEach(function(s){ s.items.forEach(function(it){ SEC_TITLES[it.id] = it.t; SEC_CHAPTER[it.id] = s.tp; }); });
 
 /* ---- verdicts by grade: warm, plain, never a joke at the reader's expense ---- */
 var VERDICTS = [
@@ -38,13 +41,13 @@ function verdictFor(p){
 var PAIRSETS = {};
 CHAPTERS.forEach(function(tp){
   var pairs = [];
-  CH[tp].decks.forEach(function(d){ if(d.match === false) return; d.cards.forEach(function(c){ pairs.push([c[0], c[1]]); }); });
+  CH[tp].decks.forEach(function(d){ if(d.match === false) return; d.cards.forEach(function(c){ pairs.push([c[0], c[1], c[2]]); }); });
   pairs = uniqBy(uniqBy(pairs, function(p){ return p[1]; }), function(p){ return p[0]; });
   PAIRSETS[tp] = {left:"Term", right:"Meaning", pairs:pairs};
 });
 
 function fromBank(b, i){
-  var q = {key:b.tp+":"+i, tp:b.tp, ap:!!b.ap, kind:b.t, text:b.q, explain:b.e};
+  var q = {key:b.tp+":"+i, tp:b.tp, sec:b.sec, ap:!!b.ap, kind:b.t, text:b.q, explain:b.e};
   if(b.t === "tf"){
     q.opts = [{html:"True", ok:b.a === true, cls:"tf"}, {html:"False", ok:b.a === false, cls:"tf"}];
     q.miss = strip(b.q) + " — <b>" + (b.a ? "True" : "False") + "</b>";
@@ -58,7 +61,7 @@ function fromBank(b, i){
 function fromPair(tp, idx, reverse){
   var set = PAIRSETS[tp], p = set.pairs[idx];
   var others = pick(set.pairs.filter(function(o, j){ return j !== idx; }), 3);
-  var q = {key:tp+":p"+idx+(reverse?"r":""), tp:tp, ap:false, kind:"id"};
+  var q = {key:tp+":p"+idx+(reverse?"r":""), tp:tp, sec:p[2], ap:false, kind:"id"};
   if(reverse){
     q.text = "Which meaning fits <b>" + p[0] + "</b>?";
     q.opts = shuffle([{html:p[1], ok:true}].concat(others.map(function(o){ return {html:o[1], ok:false}; })));
@@ -130,7 +133,7 @@ function deckFor(tp, id){
   var d = CH[tp].decks.filter(function(x){ return x.id === id; })[0] || CH[tp].decks[0];
   return shuffle(d.cards).map(function(c){
     return {front:'<div class="mid" style="font-family:var(--serif);letter-spacing:.01em;text-transform:none;font-size:clamp(19px,4.2vw,26px);line-height:1.35">'+c[0]+'</div>',
-            back:'<div class="bname">'+c[0]+'</div><div class="bsound" style="margin-top:12px">'+c[1]+'</div>'+(c[2] ? '<div class="btr" style="margin-top:10px">'+c[2]+'</div>' : '')};
+            back:'<div class="bname">'+c[0]+'</div><div class="bsound" style="margin-top:12px">'+c[1]+'</div>'+(SEC_TITLES[c[2]] ? '<div class="btr" style="margin-top:12px">Study guide · '+SEC_TITLES[c[2]]+'</div>' : '')};
   });
 }
 function matchRound(tp, n){

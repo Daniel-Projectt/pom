@@ -12,7 +12,7 @@ sections. Only what the handout asks for is on the page. Same look as the Greek 
 - Chapters 5-8 - the handout's four sections per chapter as notes, two flashcard decks each, match, quiz
 - Practice Exam - questions from all four chapters, by type and chapter; results broken down by study-guide section
 
-Every quiz question and every flashcard is tagged with the study-guide section it belongs to (the section is shown on the question card and on the back of the card), and the tests refuse a question or card that is not.
+Every quiz question and every flashcard is tagged with the study-guide section it belongs to (the section is shown on the question card and on the back of the card), and the tests refuse a question or card that is not. The questions test the concepts under the sixteen headings and how to apply them; the numbers and anecdotes from the slides are not quizzed, and the tests keep them out.
 
 ## Install on a phone
 Open the link, then "Add to Home Screen". It keeps an offline copy (manifest + service worker).

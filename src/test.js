@@ -46,7 +46,7 @@ const items = A.GUIDE.sections.flatMap(s => s.items);
 ok(items.length === 16 && new Set(items.map(i => i.id)).size === 16, 'sixteen items, unique ids');
 ok(A.GUIDE.sections.every(s => !('beyond' in s)) && !('THEMES' in A) && !('VIDEOS' in A) && !('VERSES' in A) && !('EVENTS' in A), 'nothing outside the handout: no beyond notes, no class extras');
 ok(!/youtube\.com|Ecclesiastes|Philippians|Joshua 1|Scott Walker|Impact 2026/.test(html), 'the openers, Scripture, videos and announcements are gone from the page');
-ok(!/institutional and government|how brands are built|Beyond the guide|beyond the guide/i.test(html), 'no wording left over from the wider version');
+ok(!/institutional and government|how brands are built|Beyond the guide|beyond the guide|Lists &amp; numbers|Lists & numbers/i.test(html), 'no wording left over from the wider versions');
 
 // ---------- 3. chapters ----------
 head('chapters');
@@ -74,14 +74,15 @@ ok(new Set(subIds.concat(noteIds)).size === subIds.length + noteIds.length, 'sub
 ['Need recognition', 'Information search', 'Evaluation of alternatives', 'Purchase decision', 'Postpurchase behavior'].forEach(v => ok(body('c5').includes(v), 'ch. 5 stage: ' + v));
 ['2.5%', '13.5%', '34%', '16%'].forEach(v => ok(body('c5').includes(v), 'ch. 5 adopter share: ' + v));
 ok(/lists lagging adopters at 10%/.test(body('c5')), 'the 10% vs 16% discrepancy is flagged, not silently fixed');
-['$12,000', '$61,260', '$145,200', '$269,100', '$805,400'].forEach(v => ok(body('c5').includes(v), 'ch. 5 net worth figure: ' + v));
-ok(/KIA<\/b>/.test(body('c5')) && /Jeep<\/b>/.test(body('c5')), 'ch. 5 brand-personality answer key');
+['Sincerity', 'Excitement', 'Competence', 'Sophistication', 'Ruggedness'].forEach(v => ok(body('c5').includes('<td class="head">' + v + '</td>'), 'ch. 5 brand-personality trait: ' + v));
+['<h3>Perception</h3>', '<h3>Beliefs and attitudes</h3>', 'selective attention', 'selective distortion', 'selective retention'].forEach(v => ok(body('c5').includes(v), 'ch. 5 psychological factor explained: ' + v));
 ok(!/from the book|the book says|Kotler’s worked example|Kotler’s figures|Evernote|Starbucks Experience|third place|LinkedIn|competing with itself/i.test(allBodies), 'nothing filled in from outside the class decks, and no chapter openers');
 // chapter 6
 ['Straight rebuy', 'Modified rebuy', 'New task'].forEach(v => ok(body('c6').includes(v), 'ch. 6 buying situation: ' + v));
 ['Users', 'Influencers', 'Buyers', 'Deciders', 'Gatekeepers'].forEach(v => ok(body('c6').includes('<td class="head">' + v + '</td>'), 'ch. 6 buying-center role: ' + v));
 ['Problem recognition', 'General need description', 'Product specification', 'Supplier search', 'Proposal solicitation', 'Supplier selection', 'Order-routine specification', 'Performance review'].forEach((v, i) => ok(body('c6').includes((i + 1) + ' · ' + v), 'ch. 6 step ' + (i + 1) + ': ' + v));
-['$30 trillion', '34.8 million', '99.9%', '9" × 12"'].forEach(v => ok(body('c6').includes(v), 'ch. 6 class figure: ' + v));
+['Derived demand', 'Professional buyer = buyer', 'Buyer and seller are dependent'].forEach(v => ok(body('c6').includes(v), 'ch. 6 comparison row: ' + v));
+['Environmental', 'Organizational', 'Interpersonal', 'Individual'].forEach(v => ok(body('c6').includes('<h4>' + v + '</h4>'), 'ch. 6 influence group: ' + v));
 ok(!/Maersk|c6-digital|Wright-Patterson|Grainger|Institutional markets/.test(body('c6')), 'ch. 6 has no digital/social, institutional or government material');
 ok(!/Beyond Meat/.test(body('c5')) && !/Line extensions|Kroger|Apple’s comeback|Sculley/.test(body('c8')), 'ch. 5 and 8 carry nothing outside the handout');
 // chapter 7
@@ -90,14 +91,33 @@ ok(!/Beyond Meat/.test(body('c5')) && !/Line extensions|Kroger|Apple’s comebac
 ['Undifferentiated (mass)', 'Differentiated (segmented)', 'Concentrated (niche)', 'Micromarketing'].forEach(v => ok(body('c7').includes(v), 'ch. 7 targeting strategy: ' + v));
 ['More for more', 'More for the same', 'More for less', 'The same for less', 'Less for much less'].forEach(v => ok(body('c7').includes('<div class="cell win">' + v), 'ch. 7 winning proposition: ' + v));
 ok((body('c7').match(/class="cell lose"/g) || []).length === 3 && (body('c7').match(/class="cell meh"/g) || []).length === 1, 'three losing and one marginal cell');
-ok(/Aveeno/.test(body('c7')) && /If it fits, it ships/.test(body('c7')), 'positioning statement: the form, the class’s Aveeno, and the deck’s USPS example');
-ok(/Tide, from the class slide/.test(A.CH.c7.notes[2].body) && !/Tide/.test(A.CH.c7.notes[0].body), 'the Tide slide sits under Market Targeting, not as a chapter opener');
+ok(/To \(target segment and need\)/.test(body('c7')) && /Campus Fresh/.test(body('c7')) && /If it fits, it ships/.test(body('c7')), 'positioning statement: the form, a worked example, and the points-of-difference example');
+ok(!/Tide|Marriott|Liquid Death/.test(allBodies), 'the brand anecdotes from the slides are gone from ch. 7');
 // chapter 8
 ['Core customer value', 'Actual product', 'Augmented product'].forEach(v => ok(body('c8').includes(v), 'ch. 8 level: ' + v));
 ['Convenience', 'Shopping', 'Specialty', 'Unsought'].forEach(v => ok(body('c8').includes('<th>' + v + '</th>'), 'ch. 8 consumer product column: ' + v));
 ['Intangibility', 'Inseparability', 'Variability', 'Perishability'].forEach(v => ok(body('c8').includes('<h4>' + v + '</h4>'), 'ch. 8 service characteristic: ' + v));
 ['Width', 'Length', 'Depth', 'Consistency'].forEach(v => ok(body('c8').includes('<td class="head">' + v + '</td>'), 'ch. 8 mix dimension: ' + v));
-ok(/differentiation, relevance, knowledge, esteem/.test(A.CH.c8.notes[3].body) && /\$470\.9B/.test(A.CH.c8.notes[3].body), 'brand equity and value are in the branding section');
+ok(/<b>differentiation<\/b>/.test(A.CH.c8.notes[3].body) && /<b>esteem<\/b>/.test(A.CH.c8.notes[3].body) && /Equity versus value/.test(A.CH.c8.notes[3].body), 'brand equity and value are explained, and told apart, in the branding section');
+
+// ---------- 3a. the page teaches the sixteen points; it does not quiz the slides ----------
+head('the page teaches the sixteen points, not the slides');
+tps.forEach(tp => A.CH[tp].notes.forEach(n => {
+  ok(n.body.indexOf('<div class="point"><b>The point</b>') === 0, 'section opens with “The point”: ' + n.h);
+  ok(/<p class="able"><b>Be able to<\/b>/.test(n.body), 'section says what to be able to do: ' + n.h);
+}));
+const TRIVIA = /\$145,200|\$805,400|58 gallons|53%|\$30 trillion|34\.8 million|99\.9%|59 million|Palessi|\$645|\$470\.9|\$1\.48|\$388\.5|Mosaic|PRIZM|Personicx|66 segments|71 lifestyle|\b1949\b|40% of the detergent|58% more|64% of|Six Flags|tsunami|interior designer|Supplier Development Department|Liquid Death|\$1\.75|Starkey|Resonate|62% of|42,000|20# paper|9-by-12|9" × 12"|answer key|Pew slides|\$5–7 billion|twice the nearest/i;
+const everyText = allBodies + ' ' + A.QB.map(q => [q.q, q.a, q.e].concat(q.w || []).join(' ')).join(' ') + ' ' + tps.map(tp => A.CH[tp].decks.map(d => d.cards.map(c => c[0] + ' ' + c[1]).join(' ')).join(' ')).join(' ');
+ok(!TRIVIA.test(everyText), 'no slide trivia anywhere — notes, questions or cards', (everyText.match(TRIVIA) || []).join(' | '));
+const CITES = /class slide|class’s|class table|the slides|from class|on the slide|per the slide|according to the slide/i;
+A.QB.forEach((q, i) => ok(!CITES.test(q.q), 'question #' + i + ' asks about the concept, not about what a slide said', q.q));
+ok(!CITES.test(tps.map(tp => A.CH[tp].decks.map(d => d.cards.map(c => c[0]).join(' ')).join(' ')).join(' ')), 'no card front cites the slides');
+Object.keys(A.SEC_CHAPTER).forEach(id => {
+  const mine = A.QB.filter(q => q.sec === id);
+  ok(mine.length >= 8, 'at least eight written questions for “' + A.SEC_TITLES[id] + '”', mine.length);
+  ok(mine.filter(q => q.ap).length >= 1, 'at least one application question for “' + A.SEC_TITLES[id] + '”', mine.filter(q => q.ap).length);
+  ok(mine.filter(q => q.t === 'tf').length >= 1, 'at least one true/false for “' + A.SEC_TITLES[id] + '”');
+});
 
 // ---------- 3b. every question and card belongs to a study-guide section ----------
 head('every question and card belongs to a study-guide section');

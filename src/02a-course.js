@@ -9,7 +9,7 @@ var COURSE = {
   "Be sure to review all of the content in the subsections.",
   "Also, master slides that I emphasized in class as “important.”",
   "Note that you may be asked questions that involve applying some of the concepts and definitions we covered."],
- about:"Every heading below is a heading from the handout, in its order and words. Each one has the subsections it covers, a one-breath answer, and a link into the notes. Only what the handout asks for is on this page — the notes, the flashcards, the quizzes and the practice exam all stay inside it."
+ about:"Every heading below is a heading from the handout, in its order and words. Each one has the subsections it covers, a one-breath answer, and a link into the notes. The notes explain the concepts under each heading; the flashcards, quizzes and practice exam test those concepts and how to apply them — not the numbers on the slides."
 };
 
 /* One item per section on the handout. "a" is the note section; "subs" are the
@@ -30,13 +30,13 @@ var GUIDE = {sections:[
    subs:[["The adoption process", "c5-adoption"], ["Adopter categories", "c5-adopters"], ["Rate of adoption", "c5-rate"]]}]},
  {h:"Chapter 6", tp:"c6", items:[
   {id:"g6-intro", t:"Introduction", a:"c6-intro",
-   short:"Business buyer behavior: the buying behavior of organizations that buy goods and services to make other products and services that are sold, rented or supplied to others. The business buying process. Most large companies sell to other organizations, and the business market involves far more dollars and items than consumer markets.",
-   subs:[["Definitions and the numbers", "c6-intro"]]},
+   short:"Business buyer behavior: the buying behavior of organizations that buy goods and services to make other products and services that are sold, rented or supplied to others — or to resell. The business buying process. Most large companies sell to other organizations, and the business market involves far more dollars and items than consumer markets.",
+   subs:[["Definitions", "c6-intro"]]},
   {id:"g6-markets", t:"Business Markets", a:"c6-markets",
-   short:"How business markets differ: fewer but larger buyers; derived, inelastic and fluctuating demand; a buying unit with more participants, more professional effort, more interaction and more time; more complex decisions; supplier development. The class’s consumer-vs-business table. Figure 6.1.",
+   short:"How business markets differ: fewer but larger buyers; derived, inelastic and fluctuating demand; a buying unit with more participants, more professional effort, more interaction and more time; more complex decisions; supplier development. The consumer-vs-business comparison. Figure 6.1.",
    subs:[["Structure and demand", "c6-demand"], ["The comparison table", "c6-table"], ["Figure 6.1", "c6-model"]]},
   {id:"g6-behavior", t:"Business Buyer Behavior", a:"c6-behavior",
-   short:"Straight rebuy, modified rebuy and new task (the class’s envelope); systems selling. The buying center and its five roles — users, influencers, buyers, deciders, gatekeepers. Figure 6.2: environmental, organizational, interpersonal and individual influences.",
+   short:"Straight rebuy, modified rebuy and new task; systems selling. The buying center and its five roles — users, influencers, buyers, deciders, gatekeepers. Figure 6.2: environmental, organizational, interpersonal and individual influences.",
    subs:[["Buying situations", "c6-situations"], ["The buying center", "c6-center"], ["Influences · Figure 6.2", "c6-influences"]]},
   {id:"g6-process", t:"The Business Buyer Decision Process", a:"c6-process",
    short:"The eight steps: problem recognition, general need description, product specification, supplier search, proposal solicitation, supplier selection, order-routine specification, performance review. E-procurement and online purchasing — its ways, advantages and disadvantage.",
@@ -65,6 +65,6 @@ var GUIDE = {sections:[
    short:"The four characteristics — intangibility, inseparability, variability, perishability. The service-profit chain. Internal and interactive marketing; service differentiation, quality and productivity.",
    subs:[["Four characteristics", "c8-four"], ["Service-profit chain", "c8-chain"], ["Three kinds of service marketing", "c8-three"]]},
   {id:"g8-brands", t:"Branding Strategy (Brand Equity and Brand Value only)", a:"c8-brands",
-   short:"Brand equity: the differential effect that knowing the brand name has on customer response; BrandAsset Valuator’s four dimensions; the advantages of high equity; customer equity underneath. Brand value: the total financial value of a brand; the rankings.",
+   short:"Brand equity: the differential effect that knowing the brand name has on customer response; BrandAsset Valuator’s four dimensions; the advantages of high equity; customer equity underneath. Brand value: the total financial value of a brand, and why it is hard to measure.",
    subs:[["Brand equity", "c8-equity"], ["Brand value", "c8-value"]]}]}
 ]};

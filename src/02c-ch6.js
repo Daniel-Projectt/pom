@@ -86,7 +86,11 @@ CH.c6 = {n:6, title:"Business Markets and Business Buyer Behavior", short:"Busin
    '<h3 class="sub" id="c6-eproc">E-procurement and online purchasing</h3>'+
    '<p><b>E-procurement</b> — purchasing through electronic connections between buyers and sellers, usually online — is standard procedure today. Companies do it through <b>reverse auctions</b> (post purchasing requests and invite suppliers to bid), <b>trading exchanges</b>, their own <b>company buying sites</b>, and <b>extranet</b> links with key suppliers.</p>'+
    '<div class="boxrow"><div class="box"><h4>Advantages</h4><ul><li>Access to new suppliers</li><li>Lowers costs</li><li>Speeds order processing and delivery</li><li>Enhances information sharing</li><li>Improves sales</li><li>Facilitates service and support</li><li>Frees buyers to focus on strategic issues</li></ul></div>'+
-   '<div class="box"><h4>Disadvantages</h4><ul><li>Can erode relationships as buyers search for new suppliers</li><li>Buyers use the internet to pit suppliers against one another, purchase by purchase</li></ul></div></div>'}
+   '<div class="box"><h4>Disadvantages</h4><ul><li>Can erode relationships as buyers search for new suppliers</li><li>Buyers use the internet to pit suppliers against one another, purchase by purchase</li></ul></div></div>'+
+   '<h3 class="sub" id="c6-instgov">Institutional and government markets</h3>'+
+   '<div class="exam-tip"><b>Not on the study guide — but it was in class</b>The handout&rsquo;s four chapter 6 headings leave this out, yet it is in the class notes and in both Quizlet sets. It is short, so learn it rather than gamble.</div>'+
+   '<ul><li><b>Institutional markets</b> consist of schools, hospitals, nursing homes and prisons that provide goods and services to the people in their care. They are often characterised by low budgets and captive patrons, and institutions differ in their sponsors and objectives, so each has its own buying needs.</li>'+
+   '<li><b>Government markets</b> tend to <b>favour domestic suppliers</b>, <b>require suppliers to submit bids</b>, and normally <b>award the contract to the lowest bidder</b>. They are affected by environmental factors and watched closely by the public, and they weigh <b>non-economic factors</b> too — favouring minority-owned firms, depressed firms and small businesses.</li></ul>'}
  ],
  decks:[
   {id:"terms", label:"Key terms", cards:[
@@ -134,7 +138,9 @@ CH.c6 = {n:6, title:"Business Markets and Business Buyer Behavior", short:"Busin
    ["The eight steps","Problem recognition, general need description, product specification, supplier search, proposal solicitation, supplier selection, order-routine specification, performance review","g6-process"],
    ["Internal vs external stimuli for problem recognition","Internal: a breakdown, an unhappy manager. External: a trade show, an ad, a better price","g6-process"],
    ["Four ways to do e-procurement","Reverse auctions, trading exchanges, company buying sites, extranet links","g6-process"],
-   ["The main disadvantage of e-procurement","It can erode relationships as buyers search for new suppliers","g6-process"]]}
+   ["The main disadvantage of e-procurement","It can erode relationships as buyers search for new suppliers","g6-process"],
+   ["Institutional markets","Schools, hospitals, nursing homes and prisons that provide goods and services to the people in their care","g6-process"],
+   ["Government markets","Favour domestic suppliers, require bids, normally award to the lowest bidder — and weigh non-economic factors","g6-process"]]}
  ]
 };
 
@@ -214,5 +220,10 @@ QB = QB.concat([
  {tp:"c6",sec:"g6-process",t:"tf",q:"E-procurement gives buyers access to new suppliers and lowers purchasing costs.",a:true,e:"True — and it speeds order processing and delivery."},
  {tp:"c6",sec:"g6-process",t:"tf",q:"E-procurement frees buyers’ time to focus on strategic issues.",a:true,e:"True."},
  {tp:"c6",sec:"g6-process",t:"tf",q:"The consumer decision process has more steps than the business buying process.",a:false,e:"False — five vs eight."},
- {tp:"c6",sec:"g6-process",t:"tf",q:"Business marketers can help start the buying process by alerting customers to problems and showing the solution.",a:true,e:"True — problem recognition can come from an external stimulus such as an ad."}
+ {tp:"c6",sec:"g6-process",t:"tf",q:"Business marketers can help start the buying process by alerting customers to problems and showing the solution.",a:true,e:"True — problem recognition can come from an external stimulus such as an ad."},
+ {tp:"c6",sec:"g6-process",t:"mc",q:"Institutional markets consist of:",a:"schools, hospitals, nursing homes and prisons that provide goods and services to the people in their care",w:["federal, state and local government agencies","retailers and wholesalers that resell goods","factories that buy parts for production"],e:"Often low budgets and captive patrons. In the class notes, not on the study guide."},
+ {tp:"c6",sec:"g6-process",t:"mc",q:"Government markets normally award the contract to:",a:"the lowest bidder",w:["the supplier with the best reputation","the fastest supplier","whichever supplier bids first"],e:"They favour domestic suppliers, require bids, and normally take the lowest bidder."},
+ {tp:"c6",sec:"g6-process",t:"mc",q:"Besides price, which non-economic factors do government buyers weigh?",a:"Favouring minority-owned firms, depressed firms and small businesses",w:["The supplier’s advertising budget","The buyer’s personal preferences","The supplier’s stock price"],e:"Government buying is watched by the public and carries social goals."},
+ {tp:"c6",sec:"g6-process",t:"tf",q:"Government buyers usually require suppliers to submit bids and favour domestic suppliers.",a:true,e:"True — bids, domestic preference, and normally the lowest bidder."},
+ {tp:"c6",sec:"g6-process",ap:true,t:"mc",q:"A state prison system buys food and bedding for the people in its care. Which market is that?",a:"The institutional market",w:["The government market","The consumer market","The reseller market"],e:"Schools, hospitals, nursing homes and prisons that serve people in their care."}
 ]);

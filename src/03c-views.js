@@ -88,6 +88,11 @@ function startMock(keys){
   engines.mock = makeQuiz($("#mockExam"), mockGen, {showTopic:true, showTier:true, againLabel:"New practice exam", onSetup:renderMockSetup});
   engines.mock.start(keys || null);
 }
+/* the one-button exam: 50 questions, all sixteen study-guide sections covered */
+function startFifty(){
+  engines.mock = makeQuiz($("#mockExam"), function(){ return finalFifty(50); }, {showTopic:true, showTier:true, againLabel:"Another fifty", onSetup:renderMockSetup});
+  engines.mock.start(null);
+}
 function renderMockSetup(){
   var root = $("#mockExam");
   function seg(id, attr, val, list){
@@ -95,7 +100,10 @@ function renderMockSetup(){
   }
   root.innerHTML = '<div class="quizWrap"><div class="qcard card-corners">'+CORNERS+
     '<div class="qnum">Practice exam</div><p class="qtext">Set it up, then answer across the chapters. Each run is drawn fresh.</p>'+
+    '<div class="fifty"><button class="btn primary" type="button" id="mxFifty">The 50 &mdash; every section of the guide</button>'+
+      '<p>Fifty questions, three from each of the study guide&rsquo;s sixteen sections, leaning on what both Quizlet sets confirm without dropping what neither covers. Drawn fresh each time.</p></div>'+
     '<div class="setup">'+
+      '<p class="orline">or set one up yourself</p>'+
       '<div class="row"><span class="label">Length</span><br>'+seg("mxN","data-n",mockCfg.n,[[15,"15"],[25,"25"],[40,"40"],[60,"60"]])+'</div>'+
       '<div class="row"><span class="label">Question types</span><br>'+seg("mxT","data-t",mockCfg.types,[["all","Everything"],["mc","Multiple choice"],["tf","True / false"],["ap","Application"]])+'</div>'+
       '<div class="row"><span class="label">Chapters</span><br>'+seg("mxP","data-p",mockCfg.topic,[["all","All four"]].concat(CHAPTERS.map(function(tp){ return [tp, "Ch. "+CH[tp].n]; })))+'</div>'+
@@ -108,6 +116,7 @@ function renderMockSetup(){
   segWire("#mxP","data-p",function(v){ mockCfg.topic = v; store.set("mockcfg", JSON.stringify(mockCfg)); });
   segWire("#mxF","data-f",function(v){ mockCfg.focus = v; store.set("mockcfg", JSON.stringify(mockCfg)); });
   $("#mxStart").addEventListener("click", function(){ startMock(null); });
+  $("#mxFifty").addEventListener("click", startFifty);
   engines.mock = null;
 }
 

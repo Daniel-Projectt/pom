@@ -188,6 +188,20 @@ ok(/On neither Quizlet/.test(gapRes.textContent), 'the tier breakdown names the 
 click(gapRes.querySelector('.setupbtn')); click($('#mxF button[data-f="both"]')); click($('#mxStart'));
 ok(Array.from($('#mockExam').querySelectorAll('.qtag.tier')).every(t => /both/i.test(t.textContent)), 'switching the focus switches the draw');
 
+head('the 50 for the exam');
+// that last draw is still in progress — finish it to get back to the setup
+const bothRes = answerQuiz($('#mockExam'), 'both-Quizlets draw');
+click(bothRes.querySelector('.setupbtn'));
+ok(!!$('#mxFifty'), 'the setup offers the one-button fifty');
+click($('#mxFifty'));
+const fifty = $('#mockExam');
+ok(fifty.querySelectorAll('.dots i').length === 50, 'fifty questions', fifty.querySelectorAll('.dots i').length);
+const fRes = answerQuiz(fifty, 'the fifty');
+ok(!!fRes, 'the fifty reaches results');
+const fSec = fRes.querySelectorAll('.tbl')[0];
+ok(fSec && fSec.querySelectorAll('tr').length === 16, 'the results list all sixteen study-guide sections', fSec && fSec.querySelectorAll('tr').length);
+ok(Array.from(fSec.querySelectorAll('.num')).every(td => parseInt(td.textContent.split('/')[1], 10) >= 3), 'every section got at least three questions');
+
 head('errors');
 ok(errors.length === 0, 'no runtime errors anywhere', errors.join(' || '));
 console.log('\n' + (fails === 0 ? 'ALL ' + checks + ' DOM CHECKS PASSED' : fails + ' FAILURES out of ' + checks + ' DOM checks'));

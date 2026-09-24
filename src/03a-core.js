@@ -90,14 +90,50 @@ function fromPair(tp, idx, reverse){
 /* A question marked off:true never enters a quiz (none is, now that the page holds only the study guide) */
 function bankFor(tp){ var out = []; QB.forEach(function(b, i){ if(b.off) return; if(!tp || b.tp === tp) out.push({b:b, i:i}); }); return out; }
 
+/* Two questions "are the same" when the thing being asked and the right answer
+   are mostly the same words — a written question and the identification question
+   generated from the matching flashcard, for instance. One quiz never shows both. */
+var STOPWORDS = {};
+"the a an of to in is are was were for on by with which that this these those it its as and or not be what who whom whose how why when where does do did can may might one more most than then from at into".split(" ").forEach(function(w){ STOPWORDS[w] = 1; });
+function meaningOf(q){
+  var right = "";
+  (q.opts || []).forEach(function(o){ if(o.ok) right = o.html; });
+  if(q.kind === "tf") right = "";            /* true/false: the statement is the meaning */
+  var words = strip(q.text + " " + right).toLowerCase().replace(/[^a-z0-9 ]/g, " ").split(/\s+/);
+  var set = {}, n = 0;
+  words.forEach(function(w){ if(w.length > 2 && !STOPWORDS[w] && !set[w]){ set[w] = 1; n++; } });
+  return {set:set, n:n};
+}
+function sameThing(a, b){
+  if(!a.n || !b.n) return false;
+  var shared = 0;
+  Object.keys(a.set).forEach(function(w){ if(b.set[w]) shared++; });
+  return shared / (a.n + b.n - shared) >= 0.6;
+}
+/* Draw up to n questions from pool, never two that ask the same thing.
+   Pool order decides which of a pair survives — written questions come first.  */
+function drawDistinct(pool, n){
+  var out = [], seen = [];
+  for(var i = 0; i < pool.length && out.length < n; i++){
+    var mean = meaningOf(pool[i]), dup = false;
+    for(var j = 0; j < seen.length && !dup; j++) dup = sameThing(mean, seen[j]);
+    if(!dup){ out.push(pool[i]); seen.push(mean); }
+  }
+  return out;
+}
+
 /* A chapter quiz: mostly written questions, about a third identification */
 function topicQuestions(tp, keys, n){
   n = n || 10;
   if(keys && keys.length) return shuffle(questionsByKeys(keys)).slice(0, n);
-  var bank = bankFor(tp).map(function(x){ return fromBank(x.b, x.i); });
-  var gen = PAIRSETS[tp].pairs.map(function(p, i){ return fromPair(tp, i, Math.random() < 0.5); });
+  var bank = shuffle(bankFor(tp).map(function(x){ return fromBank(x.b, x.i); }));
+  var gen = shuffle(PAIRSETS[tp].pairs.map(function(p, i){ return fromPair(tp, i, Math.random() < 0.5); }));
   var nGen = Math.min(gen.length, Math.floor(n/3));
-  return shuffle(pick(bank, n - nGen).concat(pick(gen, nGen)));
+  /* written questions lead, so a written one always outranks the card it echoes */
+  var out = drawDistinct(bank.concat(gen), n - nGen).concat(drawDistinct(gen, nGen));
+  out = drawDistinct(out, n);
+  if(out.length < n) out = drawDistinct(out.concat(bank, gen), n);
+  return shuffle(out);
 }
 /* Rebuild exact questions from their keys ("tp:i" bank, "tp:pN" / "tp:pNr" pairs); anything malformed is dropped */
 function questionsByKeys(keys){
@@ -138,15 +174,50 @@ function mockQuestions(cfg){
       });
     });
   }
-  /* spread across chapters */
+  /* spread across chapters, and never two questions asking the same thing */
   var byTp = {}; tps.forEach(function(t){ byTp[t] = shuffle(pool.filter(function(q){ return q.tp === t; })); });
-  var out = [], k = 0;
+  var out = [], seen = [], k = 0;
   while(out.length < n){
     var t = tps[k % tps.length], list = byTp[t];
-    if(list.length) out.push(list.shift());
+    if(list.length){
+      var q = list.shift(), mean = meaningOf(q), dup = false;
+      for(var j = 0; j < seen.length && !dup; j++) dup = sameThing(mean, seen[j]);
+      if(!dup){ out.push(q); seen.push(mean); }
+    }
     if(tps.every(function(x){ return !byTp[x].length; })) break;
     k++;
   }
+  return shuffle(out);
+}
+
+/* The 50 for the exam. The study guide is the key, so every one of its sixteen
+   sections is represented — three questions each, then two spare. Inside a
+   section the draw leans towards what the two Quizlet sets confirm, without ever
+   shutting out the material neither of them covers.                            */
+function finalFifty(n){
+  n = n || 50;
+  var secs = [], bySec = {};
+  GUIDE.sections.forEach(function(s){ s.items.forEach(function(it){ secs.push(it.id); bySec[it.id] = []; }); });
+  QB.forEach(function(b, i){ if(!b.off && bySec[b.sec]) bySec[b.sec].push(fromBank(b, i)); });
+  secs.forEach(function(id){
+    bySec[id] = bySec[id].map(function(q){ return {q:q, r:(q.hot || 0) + Math.random()*1.8}; })
+                         .sort(function(a, c){ return c.r - a.r; })
+                         .map(function(x){ return x.q; });
+  });
+  var out = [], seen = [];
+  function take(id){
+    var list = bySec[id];
+    while(list.length){
+      var q = list.shift(), mean = meaningOf(q), dup = false;
+      for(var j = 0; j < seen.length && !dup; j++) dup = sameThing(mean, seen[j]);
+      if(!dup){ out.push(q); seen.push(mean); return true; }
+    }
+    return false;
+  }
+  var per = Math.floor(n / secs.length);
+  for(var r = 0; r < per; r++) secs.forEach(function(id){ if(out.length < n) take(id); });
+  var k = 0;
+  while(out.length < n && k < secs.length * 8){ if(out.length < n) take(secs[k % secs.length]); k++; }
   return shuffle(out);
 }
 

@@ -46,7 +46,7 @@ const items = A.GUIDE.sections.flatMap(s => s.items);
 ok(items.length === 16 && new Set(items.map(i => i.id)).size === 16, 'sixteen items, unique ids');
 ok(A.GUIDE.sections.every(s => !('beyond' in s)) && !('THEMES' in A) && !('VIDEOS' in A) && !('VERSES' in A) && !('EVENTS' in A), 'nothing outside the handout: no beyond notes, no class extras');
 ok(!/youtube\.com|Ecclesiastes|Philippians|Joshua 1|Scott Walker|Impact 2026/.test(html), 'the openers, Scripture, videos and announcements are gone from the page');
-ok(!/institutional and government|how brands are built|Beyond the guide|beyond the guide|Lists &amp; numbers|Lists & numbers/i.test(html), 'no wording left over from the wider versions');
+ok(!/how brands are built|Beyond the guide|beyond the guide|Lists &amp; numbers|Lists & numbers/i.test(html), 'no wording left over from the wider versions');
 
 // ---------- 3. chapters ----------
 head('chapters');
@@ -83,7 +83,10 @@ ok(!/from the book|the book says|Kotler’s worked example|Kotler’s figures|Ev
 ['Problem recognition', 'General need description', 'Product specification', 'Supplier search', 'Proposal solicitation', 'Supplier selection', 'Order-routine specification', 'Performance review'].forEach((v, i) => ok(body('c6').includes((i + 1) + ' · ' + v), 'ch. 6 step ' + (i + 1) + ': ' + v));
 ['Derived demand', 'Professional buyer = buyer', 'Buyer and seller are dependent'].forEach(v => ok(body('c6').includes(v), 'ch. 6 comparison row: ' + v));
 ['Environmental', 'Organizational', 'Interpersonal', 'Individual'].forEach(v => ok(body('c6').includes('<h4>' + v + '</h4>'), 'ch. 6 influence group: ' + v));
-ok(!/Maersk|c6-digital|Wright-Patterson|Grainger|Institutional markets/.test(body('c6')), 'ch. 6 has no digital/social, institutional or government material');
+ok(!/Maersk|c6-digital|Wright-Patterson|Grainger/.test(body('c6')), 'ch. 6 has no digital/social material');
+// institutional and government markets: off the handout, but in the class notes and both Quizlets, so kept and flagged
+ok(/Institutional markets<\/b>/.test(body('c6')) && /lowest bidder<\/b>/.test(body('c6')) && /Not on the study guide/.test(body('c6')), 'institutional and government markets are present and flagged as off the handout');
+ok(/divisibility/i.test(body('c5')) && /communicability/i.test(body('c5')) && /Early majority/.test(body('c5')), 'the class notes’ alternative names are on the page');
 ok(!/Beyond Meat/.test(body('c5')) && !/Line extensions|Kroger|Apple’s comeback|Sculley/.test(body('c8')), 'ch. 5 and 8 carry nothing outside the handout');
 // chapter 7
 ['Geographic', 'Demographic', 'Psychographic', 'Behavioral'].forEach(v => ok(body('c7').includes('<h3>' + v + '</h3>'), 'ch. 7 segmentation base: ' + v));
@@ -175,6 +178,31 @@ for (let r = 0; r < 60; r++) {
   ok(A.mockQuestions({ n: n, types: 'tf', focus: 'both' }).every(q => q.kind === 'tf' && q.hot === 2), 'the filters combine: true/false that both sets cover');
 }
 ok(seenTiers.size === 3, 'unfiltered exams draw on all three tiers', [...seenTiers].join(','));
+// the one-button fifty
+const allSecs = A.GUIDE.sections.flatMap(s => s.items.map(i => i.id));
+for (let r = 0; r < 40; r++) {
+  const f = A.finalFifty(50);
+  ok(f.length === 50, 'the fifty is fifty questions', f.length);
+  ok(new Set(f.map(q => q.key)).size === 50, 'no repeated question in the fifty');
+  const covered = new Set(f.map(q => q.sec));
+  ok(covered.size === 16 && allSecs.every(s => covered.has(s)), 'the fifty covers every study-guide section', covered.size);
+  allSecs.forEach(s => ok(f.filter(q => q.sec === s).length >= 3, 'at least three questions on ' + A.SEC_TITLES[s], f.filter(q => q.sec === s).length));
+  ok(new Set(f.map(q => q.tp)).size === 4, 'the fifty spans all four chapters');
+  ok(f.every(q => q.text && q.explain && q.opts.some(o => o.ok)), 'every question in the fifty is answerable and explained');
+  // no two questions in one sitting ask the same thing
+  const means = f.map(q => A.meaningOf(q));
+  let clash = 0;
+  for (let x = 0; x < means.length; x++) for (let y = x + 1; y < means.length; y++) if (A.sameThing(means[x], means[y])) clash++;
+  ok(clash === 0, 'no two questions in the fifty ask the same thing', clash);
+}
+// and the same de-duplication holds for the ordinary draws
+for (let r = 0; r < 40; r++) {
+  const list = r % 2 ? A.mockQuestions({ n: 40, types: 'all', focus: 'all' }) : A.topicQuestions(tps[r % 4], null, 10);
+  const mn = list.map(q => A.meaningOf(q));
+  let clash = 0;
+  for (let x = 0; x < mn.length; x++) for (let y = x + 1; y < mn.length; y++) if (A.sameThing(mn[x], mn[y])) clash++;
+  ok(clash === 0, 'no duplicate meanings in a generated quiz', clash);
+}
 console.log('  tiers: both=' + byTier[2].length + ' one=' + byTier[1].length + ' neither=' + byTier[0].length);
 
 // ---------- 4. question bank ----------
@@ -187,7 +215,7 @@ tps.forEach(tp => {
 });
 const off = A.QB.filter(q => q.off);
 ok(off.length === 0, 'no question is marked outside the guide — there is nothing outside it', off.length);
-const OUT = /co-brand|licens|brand extension|multibrand|store-brand quality|Kroger|Great Value|institutional market|lowest bidder|Grainger|Wright-Patterson|Beyond Meat|Apple became|Apple’s timeline|Maersk|LinkedIn|third place|Evernote/i;
+const OUT = /co-brand|licens|brand extension|multibrand|store-brand quality|Kroger|Great Value|Grainger|Wright-Patterson|Beyond Meat|Apple became|Apple’s timeline|Maersk|LinkedIn|third place|Evernote/i;
 ok(!A.QB.some(q => OUT.test(q.q)), 'no question touches a topic the handout leaves out', A.QB.filter(q => OUT.test(q.q)).map(q => q.q).join(' || '));
 A.QB.forEach((q, i) => {
   ok(tps.includes(q.tp), 'known chapter #' + i);

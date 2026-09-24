@@ -160,7 +160,26 @@ ok(/"types":"ap"/.test(w.localStorage.getItem('pom.mockcfg') || ''), 'exam setti
 head('remembers where you were');
 topic('c7'); mode('c7', 'cards');
 ok(w.localStorage.getItem('pom.topic') === 'c7' && w.localStorage.getItem('pom.mode.c7') === 'cards', 'topic and mode saved');
-ok(!$('.topic-btn[data-topic="extra"]') && $$('.topic-btn').length === 6, 'six tabs and no In Class tab');
+ok(!$('.topic-btn[data-topic="extra"]') && $$('.topic-btn').length === 7, 'seven tabs including the review test');
+
+head('review test');
+topic('review');
+ok(visible(panel('review/test')) && !!$('#rvStart'), 'the review tab opens its setup');
+ok(/Quizlet/.test(panel('review/test').textContent), 'the setup explains where the questions come from');
+click($('#rvN button[data-n="20"]')); click($('#rvF button[data-f="all"]')); click($('#rvStart'));
+const rv = $('#reviewTest');
+ok(rv.querySelectorAll('.dots i').length === 20, 'twenty questions', rv.querySelectorAll('.dots i').length);
+ok(!!rv.querySelector('.qtag.tier'), 'the question card is labelled with its Quizlet tier', rv.querySelector('.qtag.tier') && rv.querySelector('.qtag.tier').textContent);
+const rvRes = answerQuiz(rv, 'review');
+ok(!!rvRes, 'the review test reaches results');
+ok(rvRes.querySelectorAll('.tbl').length === 2, 'results break down by section and by tier', rvRes.querySelectorAll('.tbl').length);
+ok(/On both Quizlets|On one Quizlet|On neither Quizlet/.test(rvRes.textContent), 'the tier breakdown names the tiers');
+click(rvRes.querySelector('.setupbtn')); click($('#rvF button[data-f="gaps"]')); click($('#rvStart'));
+ok(Array.from($('#reviewTest').querySelectorAll('.qtag.tier')).every(t => /neither/i.test(t.textContent)), 'the blind-spot draw shows only blind-spot questions');
+ok(/"focus":"gaps"/.test(w.localStorage.getItem('pom.reviewcfg') || ''), 'review settings remembered');
+topic('guide');
+click($('#guideRoot [data-go="review/test"]'));
+ok(visible(panel('review/test')), 'the guide’s review-test button opens the review test');
 
 head('errors');
 ok(errors.length === 0, 'no runtime errors anywhere', errors.join(' || '));

@@ -2,6 +2,7 @@
 if(typeof window === "undefined"){
   module.exports = {CH:CH, COURSE:COURSE, GUIDE:GUIDE,
     QB:QB, PAIRSETS:PAIRSETS, VERDICTS:VERDICTS, CHAPTERS:CHAPTERS, TOPIC_NAMES:TOPIC_NAMES, SEC_TITLES:SEC_TITLES, SEC_CHAPTER:SEC_CHAPTER,
+    CONFIRMED:CONFIRMED, TIERS:TIERS, TIER_TITLES:TIER_TITLES, REVIEW_NOTE:REVIEW_NOTE, hotOf:hotOf, reviewQuestions:reviewQuestions,
     fromBank:fromBank, fromPair:fromPair, topicQuestions:topicQuestions, mockQuestions:mockQuestions, questionsByKeys:questionsByKeys,
     deckFor:deckFor, matchRound:matchRound, verdictFor:verdictFor};
   return;
@@ -111,7 +112,8 @@ function makeQuiz(root, gen, opts){
   }
   function tagFor(q){
     var t = q.ap ? "Application" : (q.kind === "tf" ? "True or false" : (q.kind === "id" ? "Identification" : "Multiple choice"));
-    return '<span class="qtag">'+t+'</span>' + (SEC_TITLES[q.sec] ? '<span class="qtag sec">'+SEC_TITLES[q.sec]+'</span>' : '');
+    return '<span class="qtag">'+t+'</span>' + (SEC_TITLES[q.sec] ? '<span class="qtag sec">'+SEC_TITLES[q.sec]+'</span>' : '')
+      + (opts.showTier ? '<span class="qtag tier t'+(q.hot||0)+'">'+TIER_TITLES[q.hot||0]+'</span>' : '');
   }
   function render(){
     var body = shell(); dots();
@@ -159,6 +161,15 @@ function makeQuiz(root, gen, opts){
         rows += '<tr><td class="sm"><span class="secch">'+s.h+'</span>'+it.t+'</td><td class="num">'+ok+' / '+mine.length+'</td></tr>';
       }); });
       html += '<div class="tblwrap" style="max-width:600px;margin:22px auto 0"><table class="tbl n0"><tbody>'+rows+'</tbody></table></div>';
+    }
+    if(opts.showTier){
+      /* how she did against the Quizlets: the last row is the one that matters */
+      var trows = TIERS.map(function(t){
+        var mine = qs.filter(function(q){ return (q.hot||0) === t.w; }); if(!mine.length) return "";
+        var ok = mine.filter(function(q){ return q.got; }).length;
+        return '<tr><td class="sm"><b>'+t.t+'</b><span class="tsub">'+t.s+'</span></td><td class="num">'+ok+' / '+mine.length+'</td></tr>';
+      }).join("");
+      html += '<div class="tblwrap" style="max-width:600px;margin:22px auto 0"><table class="tbl n0"><tbody>'+trows+'</tbody></table></div>';
     }
     /* an identification miss already reads "term — meaning", so it gets no second line */
     if(missed.length){ html += '<div class="misslist">' + missed.map(function(q){ return '<div><span class="g">'+q.miss+'</span>'+(q.kind === "id" ? '' : '<span class="t">'+q.explain+'</span>')+'</div>'; }).join("") + '</div>'; }

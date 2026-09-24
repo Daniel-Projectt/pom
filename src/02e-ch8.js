@@ -190,6 +190,7 @@ QB = QB.concat([
  {tp:"c8",sec:"g8-what",t:"tf",q:"Most major new innovations are unsought until advertising makes consumers aware of them.",a:true,e:"True."},
  {tp:"c8",sec:"g8-what",t:"tf",q:"Whether a product is a consumer or an industrial product depends on what it is, not on why it is bought.",a:false,e:"False — the purpose decides: the same mower can be either."},
 
+ {tp:"c8",sec:"g8-decisions",t:"mc",q:"Product quality refers to:",a:"the characteristics of a product or service that bear on its ability to satisfy stated or implied customer needs",w:["the price a company can charge for it","how many versions of it a company offers","how widely it is distributed"],e:"Narrowly it means freedom from defects; most marketers define it by customer value and satisfaction."},
  {tp:"c8",sec:"g8-decisions",t:"mc",q:"A product’s ability to perform its functions is its:",a:"performance quality",w:["conformance quality","return on quality","style"],e:"Performance quality = level; conformance quality = consistency."},
  {tp:"c8",sec:"g8-decisions",t:"mc",q:"Freedom from defects and consistency in delivering a targeted level of performance is:",a:"conformance quality",w:["performance quality","total quality management","design"],e:"Conformance quality — all companies should strive for it."},
  {tp:"c8",sec:"g8-decisions",t:"mc",q:"Viewing quality as an investment and holding quality efforts accountable for results is:",a:"a return-on-quality approach",w:["total quality management","conformance quality","line filling"],e:"Return on quality."},

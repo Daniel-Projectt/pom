@@ -17,6 +17,20 @@ CHAPTERS.forEach(function(tp){ TOPIC_NAMES[tp] = "Ch. "+CH[tp].n+" · "+CH[tp].s
 var SEC_TITLES = {}, SEC_CHAPTER = {};
 GUIDE.sections.forEach(function(s){ s.items.forEach(function(it){ SEC_TITLES[it.id] = it.t; SEC_CHAPTER[it.id] = s.tp; }); });
 
+/* How much Quizlet agreement each question has: 2 = both sets, 1 = one, 0 = neither.
+   Worked out once, from the concept map in CONFIRMED, and carried on the question. */
+var TIER_TITLES = {}, TIER_BLURBS = {};
+TIERS.forEach(function(t){ TIER_TITLES[t.w] = t.t; TIER_BLURBS[t.w] = t.s; });
+function hotOf(sec, text){
+  var best = 0;
+  CONFIRMED.forEach(function(c){ if(c.sec === sec && c.w > best && c.k.test(text)) best = c.w; });
+  return best;
+}
+QB.forEach(function(b){
+  var ans = (b.a === true) ? "true" : (b.a === false) ? "false" : b.a;
+  b.hot = hotOf(b.sec, [b.q, ans, b.e].concat(b.w || []).join(" "));
+});
+
 /* ---- verdicts by grade: warm, plain, never a joke at the reader's expense ---- */
 var VERDICTS = [
   {min:100, a:"Nothing left to fix here. Try the full set of chapter quizzes next.",
@@ -47,7 +61,7 @@ CHAPTERS.forEach(function(tp){
 });
 
 function fromBank(b, i){
-  var q = {key:b.tp+":"+i, tp:b.tp, sec:b.sec, ap:!!b.ap, kind:b.t, text:b.q, explain:b.e};
+  var q = {key:b.tp+":"+i, tp:b.tp, sec:b.sec, hot:b.hot || 0, ap:!!b.ap, kind:b.t, text:b.q, explain:b.e};
   if(b.t === "tf"){
     q.opts = [{html:"True", ok:b.a === true, cls:"tf"}, {html:"False", ok:b.a === false, cls:"tf"}];
     q.miss = strip(b.q) + " — <b>" + (b.a ? "True" : "False") + "</b>";
@@ -61,7 +75,7 @@ function fromBank(b, i){
 function fromPair(tp, idx, reverse){
   var set = PAIRSETS[tp], p = set.pairs[idx];
   var others = pick(set.pairs.filter(function(o, j){ return j !== idx; }), 3);
-  var q = {key:tp+":p"+idx+(reverse?"r":""), tp:tp, sec:p[2], ap:false, kind:"id"};
+  var q = {key:tp+":p"+idx+(reverse?"r":""), tp:tp, sec:p[2], hot:hotOf(p[2], p[0]+" "+p[1]), ap:false, kind:"id"};
   if(reverse){
     q.text = "Which meaning fits <b>" + p[0] + "</b>?";
     q.opts = shuffle([{html:p[1], ok:true}].concat(others.map(function(o){ return {html:o[1], ok:false}; })));
@@ -125,6 +139,37 @@ function mockQuestions(cfg){
     if(tps.every(function(x){ return !byTp[x].length; })) break;
     k++;
   }
+  return shuffle(out);
+}
+
+/* The review test: built from the Quizlet overlap rather than from the chapters.
+   "all" mixes the three tiers — most weight on what both sets confirm, but always
+   a fifth of the test on what neither set covers, because that is the blind spot.
+   Within a tier the draw round-robins the study-guide sections so it stays spread. */
+function reviewQuestions(cfg){
+  cfg = cfg || {};
+  var n = cfg.n || 40, focus = cfg.focus || "all";
+  var want = {};
+  if(focus === "both")      want = {2:n, 1:0, 0:0};
+  else if(focus === "one")  want = {2:0, 1:n, 0:0};
+  else if(focus === "gaps") want = {2:0, 1:0, 0:n};
+  else { want[2] = Math.round(n*0.55); want[1] = Math.round(n*0.25); want[0] = n - want[2] - want[1]; }
+  var pool = {0:[], 1:[], 2:[]};
+  QB.forEach(function(b, i){ if(b.off) return; pool[b.hot || 0].push(fromBank(b, i)); });
+  var out = [];
+  [2,1,0].forEach(function(t){
+    if(!want[t]) return;
+    var bySec = {}, secs = [];
+    shuffle(pool[t]).forEach(function(q){ if(!bySec[q.sec]){ bySec[q.sec] = []; secs.push(q.sec); } bySec[q.sec].push(q); });
+    secs = shuffle(secs);
+    var k = 0, taken = 0;
+    while(taken < want[t] && secs.length){
+      var list = bySec[secs[k % secs.length]];
+      if(list.length){ out.push(list.shift()); taken++; }
+      if(secs.every(function(s){ return !bySec[s].length; })) break;
+      k++;
+    }
+  });
   return shuffle(out);
 }
 

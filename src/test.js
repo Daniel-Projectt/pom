@@ -134,6 +134,40 @@ Object.keys(SEC).forEach(id => {
 ok(A.PAIRSETS.c5.pairs.every(p => p[2] && SEC[p[2]] === 'c5'), 'match pairs carry their section');
 console.log('  questions per section: ' + Object.keys(SEC).map(id => id.replace(/^g/, '') + '=' + A.QB.filter(q => q.sec === id).length).join(' '));
 
+// ---------- 3c. the review test: the Quizlet overlap ----------
+head('the review test');
+ok(A.CONFIRMED.length >= 60, 'the concept map covers the two sets', A.CONFIRMED.length);
+// the question text hotOf() actually searches — question, answer, wrong answers, explanation
+const qText = q => [q.q, q.a === true ? 'true' : q.a === false ? 'false' : q.a, q.e].concat(q.w || []).join(' ');
+A.CONFIRMED.forEach((c, i) => {
+  ok(A.SEC_CHAPTER[c.sec], 'concept #' + i + ' names a real study-guide section', c.sec);
+  ok(c.w === 1 || c.w === 2, 'concept #' + i + ' is weighted 1 or 2', c.w);
+  ok(c.k && typeof c.k.test === 'function' && c.k.source, 'concept #' + i + ' carries a matcher');
+  ok(A.QB.some(q => q.sec === c.sec && c.k.test(qText(q))), 'concept #' + i + ' actually matches a question', c.sec + ' ' + c.k);
+});
+ok(A.TIERS.length === 3 && A.TIERS.map(t => t.w).join() === '2,1,0', 'three tiers, strongest first');
+const byTier = { 0: A.QB.filter(q => (q.hot || 0) === 0), 1: A.QB.filter(q => q.hot === 1), 2: A.QB.filter(q => q.hot === 2) };
+[0, 1, 2].forEach(t => ok(byTier[t].length >= 25, 'tier ' + t + ' has enough questions to draw on', byTier[t].length));
+ok(A.QB.every(q => [0, 1, 2].includes(q.hot || 0)), 'every question carries a tier');
+// the sections neither set covers must really be uncovered, not just unmatched by a typo
+ok(byTier[2].filter(q => q.sec === 'g5-decide').length >= 8, 'the four buying behaviours and five stages count as confirmed twice');
+ok(byTier[2].filter(q => q.sec === 'g6-behavior').length >= 8, 'the three buying situations and the buying center count as confirmed twice');
+ok(A.QB.filter(q => q.sec === 'g7-strategy').every(q => (q.hot || 0) === 0), 'Marketing Strategy is a genuine blind spot — neither set touches it');
+for (let r = 0; r < 60; r++) {
+  const n = [20, 40, 60][r % 3];
+  const all = A.reviewQuestions({ n: n, focus: 'all' });
+  ok(all.length === n, 'review test returns the asked-for length', all.length + ' vs ' + n);
+  ok(new Set(all.map(q => q.key)).size === all.length, 'no repeats inside one review test');
+  ok(all.every(q => q.sec && A.SEC_CHAPTER[q.sec] === q.tp), 'every review question names its section');
+  ok(all.filter(q => (q.hot || 0) === 0).length >= Math.floor(n * 0.15), 'a real share of the blind spots every run', all.filter(q => !q.hot).length + '/' + n);
+  ok(all.filter(q => q.hot === 2).length >= Math.floor(n * 0.45), 'most weight on what both sets confirm', all.filter(q => q.hot === 2).length + '/' + n);
+  ok(new Set(all.map(q => q.sec)).size >= Math.min(10, n), 'a review test spreads across the guide', new Set(all.map(q => q.sec)).size);
+  ok(A.reviewQuestions({ n: 20, focus: 'both' }).every(q => q.hot === 2), 'the “both agree” draw is pure');
+  ok(A.reviewQuestions({ n: 20, focus: 'one' }).every(q => q.hot === 1), 'the “one covers it” draw is pure');
+  ok(A.reviewQuestions({ n: 20, focus: 'gaps' }).every(q => (q.hot || 0) === 0), 'the “neither covers it” draw is pure');
+}
+console.log('  tiers: both=' + byTier[2].length + ' one=' + byTier[1].length + ' neither=' + byTier[0].length);
+
 // ---------- 4. question bank ----------
 head('question bank');
 tps.forEach(tp => {
@@ -225,7 +259,7 @@ panels.forEach(pn => {
 ['guide', 'c5', 'c6', 'c7', 'c8', 'exam'].forEach(t => {
   ok(html.includes('data-topic="' + t + '"') && html.includes('id="topic-' + t + '"'), 'topic ' + t + ' has a tab and a section');
 });
-ok(!html.includes('data-topic="extra"') && (html.match(/class="topic-btn"/g) || []).length === 6, 'six tabs, no In Class tab');
+ok(!html.includes('data-topic="extra"') && (html.match(/class="topic-btn"/g) || []).length === 7, 'seven tabs, including the review test');
 ok(/data-topic="guide"\s+aria-selected="true"/.test(html), 'Guide is the first, default tab');
 ok((html.match(/<script>/g) || []).length === 1, 'a single script block');
 ['div', 'section', 'button', 'nav', 'main', 'header', 'footer', 'svg', 'symbol', 'table', 'g', 'ol', 'ul', 'h3'].forEach(t => {

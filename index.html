@@ -366,6 +366,11 @@ kbd{font-family:var(--sans);font-size:10px;border:1px solid var(--line-strong);b
 .qtag{display:inline-block;font-family:var(--sans);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold-soft);border-radius:2px;padding:2px 7px;margin:0 2px 8px}
 .qtag.sec{font-family:var(--serif);font-size:13px;letter-spacing:0;text-transform:none;color:var(--ink-soft);border-color:var(--line-strong);font-style:italic}
 .secch{display:block;font-family:var(--sans);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.qtag.tier{font-family:var(--sans);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;font-style:normal}
+.qtag.tier.t2{color:var(--ink);border-color:var(--gold);background:var(--surface-2)}
+.qtag.tier.t1{color:var(--muted);border-color:var(--line-strong)}
+.qtag.tier.t0{color:var(--ink);border-style:dashed;border-color:var(--gold)}
+.tsub{display:block;font-family:var(--serif);font-style:italic;font-size:13.5px;color:var(--muted);margin-top:2px;line-height:1.45}
 .setup{max-width:600px;margin:0 auto;text-align:center}
 .setup .row{margin:12px 0}
 .misslist .g{font-family:var(--serif);font-size:15px;min-width:0;flex:1;letter-spacing:0}
@@ -488,6 +493,7 @@ kbd{font-family:var(--sans);font-size:10px;border:1px solid var(--line-strong);b
     <button class="topic-btn" role="tab" data-topic="c6"    aria-selected="false">6 &middot; Business</button>
     <button class="topic-btn" role="tab" data-topic="c7"    aria-selected="false">7 &middot; Strategy</button>
     <button class="topic-btn" role="tab" data-topic="c8"    aria-selected="false">8 &middot; Products</button>
+    <button class="topic-btn" role="tab" data-topic="review" aria-selected="false">Review Test</button>
     <button class="topic-btn" role="tab" data-topic="exam"  aria-selected="false">Practice Exam</button>
   </nav>
 
@@ -573,6 +579,15 @@ kbd{font-family:var(--sans);font-size:10px;border:1px solid var(--line-strong);b
       </div>
       <div class="panel" data-panel="c8/match" hidden><div id="c8Match"></div></div>
       <div class="panel" data-panel="c8/quiz" hidden><div id="c8Quiz"></div></div>
+    </section>
+
+    <!-- ================= REVIEW TEST ================= -->
+    <section class="topic" id="topic-review" hidden>
+      <p class="intro">Two Quizlet sets for this exam, mapped onto the study guide&rsquo;s sixteen sections. Every question here is labelled by how much the two sets agree on it &mdash; and a fifth of the test is drawn from what <i>neither</i> set covers, which is where studying only the Quizlets would leave a hole.</p>
+      <div class="modes"><div class="seg" data-modes="review">
+        <button type="button" data-mode="test" aria-pressed="true">Review test</button>
+      </div></div>
+      <div class="panel" data-panel="review/test"><div id="reviewTest"></div></div>
     </section>
 
     <!-- ================= PRACTICE EXAM ================= -->
@@ -853,6 +868,7 @@ CH.c5 = {n:5, title:"Consumer Markets and Buyer Behavior", short:"Consumers",
 /* ---- chapter 5 questions: the concepts under each heading, and how to apply them ---- */
 var QB = [
  {tp:"c5",sec:"g5-model",t:"mc",q:"Consumer buyer behavior refers to the buying behavior of:",a:"final consumers — individuals and households buying for personal consumption",w:["organizations buying for resale","wholesalers and retailers","governments and institutions"],e:"Final consumers. Organizations are chapter 6."},
+ {tp:"c5",sec:"g5-model",t:"mc",q:"Consumer markets consist of:",a:"all the individuals and households that buy goods and services for personal consumption",w:["all the organizations that buy goods to resell","all the retailers in a country","everyone who could possibly be reached by advertising"],e:"Consumer markets — the people whose buying behavior chapter 5 is about."},
  {tp:"c5",sec:"g5-model",t:"mc",q:"In the model of buyer behavior, the “black box” contains:",a:"the buyer’s characteristics and decision process",w:["the four Ps","economic and cultural stimuli","purchase behavior and brand engagement"],e:"Stimuli enter the black box (characteristics + decision process) and produce responses."},
  {tp:"c5",sec:"g5-model",t:"mc",q:"Why does the model call the buyer’s mind a “black box”?",a:"Stimuli and responses can be observed, but what happens inside the buyer cannot",w:["Consumers refuse to answer surveys","It applies only to online buying","Marketers are not allowed to study it"],e:"Marketers can measure what goes in and what comes out; the characteristics and decision process in between have to be inferred."},
  {tp:"c5",sec:"g5-model",t:"mc",q:"In Figure 5.1, which of these is a marketing stimulus?",a:"Promotion",w:["Economic conditions","Technology","Culture"],e:"Marketing stimuli are the four Ps — product, price, place, promotion; economic, technological, social and cultural forces are the other stimuli."},
@@ -1343,6 +1359,7 @@ QB = QB.concat([
  {tp:"c7",sec:"g7-seg",t:"tf",q:"People in the same demographic group can have very different psychographic characteristics.",a:true,e:"True."},
  {tp:"c7",sec:"g7-seg",t:"tf",q:"Segments defined by behavior or benefits still need demographics to estimate their size and reach them.",a:true,e:"True — which is one reason demographics are the most popular base."},
 
+ {tp:"c7",sec:"g7-target",t:"mc",q:"A target market is:",a:"a set of buyers who share common needs or characteristics that the company decides to serve",w:["everyone who could afford the product","the segment with the fastest growth","the buyers a competitor has ignored"],e:"Targeting evaluates the segments; the target market is the one (or ones) chosen."},
  {tp:"c7",sec:"g7-target",t:"mc",q:"Which is NOT one of the three things a company evaluates in a segment?",a:"The segment’s brand personality",w:["Size and growth","Structural attractiveness","Company objectives and resources"],e:"Size and growth; structural attractiveness; objectives and resources."},
  {tp:"c7",sec:"g7-target",t:"mc",q:"Which of these makes a segment LESS structurally attractive?",a:"Many substitute products that limit the prices the segment will pay",w:["High barriers to entry","Weak, passive competitors","Buyers with little bargaining power"],e:"Strong competitors, easy entry, substitutes, powerful buyers and powerful suppliers all reduce attractiveness."},
  {tp:"c7",sec:"g7-target",t:"mc",q:"Targeting the whole market with one offer, focusing on common needs, is:",a:"undifferentiated (mass) marketing",w:["differentiated marketing","concentrated marketing","micromarketing"],e:"Undifferentiated — most modern marketers doubt it."},
@@ -1589,6 +1606,7 @@ QB = QB.concat([
  {tp:"c8",sec:"g8-what",t:"tf",q:"Most major new innovations are unsought until advertising makes consumers aware of them.",a:true,e:"True."},
  {tp:"c8",sec:"g8-what",t:"tf",q:"Whether a product is a consumer or an industrial product depends on what it is, not on why it is bought.",a:false,e:"False — the purpose decides: the same mower can be either."},
 
+ {tp:"c8",sec:"g8-decisions",t:"mc",q:"Product quality refers to:",a:"the characteristics of a product or service that bear on its ability to satisfy stated or implied customer needs",w:["the price a company can charge for it","how many versions of it a company offers","how widely it is distributed"],e:"Narrowly it means freedom from defects; most marketers define it by customer value and satisfaction."},
  {tp:"c8",sec:"g8-decisions",t:"mc",q:"A product’s ability to perform its functions is its:",a:"performance quality",w:["conformance quality","return on quality","style"],e:"Performance quality = level; conformance quality = consistency."},
  {tp:"c8",sec:"g8-decisions",t:"mc",q:"Freedom from defects and consistency in delivering a targeted level of performance is:",a:"conformance quality",w:["performance quality","total quality management","design"],e:"Conformance quality — all companies should strive for it."},
  {tp:"c8",sec:"g8-decisions",t:"mc",q:"Viewing quality as an investment and holding quality efforts accountable for results is:",a:"a return-on-quality approach",w:["total quality management","conformance quality","line filling"],e:"Return on quality."},
@@ -1657,6 +1675,123 @@ QB = QB.concat([
  {tp:"c8",sec:"g8-brands",t:"tf",q:"Brands exist in the minds of consumers, not just on packages.",a:true,e:"True — they represent consumers’ perceptions and feelings about the product."}
 ]);
 
+/* ================================================================ the review test
+   What two Quizlet sets for this exam (80 cards and 83 cards) cover, mapped onto
+   the study guide's sixteen sections. Each entry says: inside THIS section, a
+   question about THIS concept is one the Quizlets also test.
+     w:2  both sets test it   — the safest bet on the exam
+     w:1  one set tests it
+   Anything on the study guide that matches nothing here is w:0 — a concept the
+   handout asks for that NEITHER set covers, which is exactly where someone who
+   studied only the Quizlets would get caught. The review test mixes all three.  */
+var REVIEW_NOTE = "Two Quizlet sets for this exam — 80 cards and 83 cards — were mapped onto the study guide's sixteen sections. Questions here are labelled by how much agreement there is: the ones both sets test, the ones one set tests, and the ones on the handout that neither set covers. That last group is the dangerous one.";
+
+var CONFIRMED = [
+ /* ---- chapter 5 ---- */
+ {sec:"g5-model",  w:2, k:/consumer buyer behavior|consumer market/i},
+ {sec:"g5-model",  w:1, k:/black box|marketing stimulus|buyer response|stimulus rather than/i},
+
+ {sec:"g5-chars",  w:2, k:/subculture/i},
+ {sec:"g5-chars",  w:2, k:/social class/i},
+ {sec:"g5-chars",  w:2, k:/\bfamily\b/i},
+ {sec:"g5-chars",  w:1, k:/four major factors|cultural, social, personal|four factors/i},
+ {sec:"g5-chars",  w:1, k:/\bculture\b|cultural shift/i},
+ {sec:"g5-chars",  w:1, k:/opinion leader/i},
+ {sec:"g5-chars",  w:1, k:/brand personality|ruggedness|sincerity|outdoorsy/i},
+ {sec:"g5-chars",  w:1, k:/occupation/i},
+ {sec:"g5-chars",  w:1, k:/economic situation|frugal|downturn/i},
+ {sec:"g5-chars",  w:1, k:/lifestyle|psychographic|AIO/i},
+ {sec:"g5-chars",  w:1, k:/perception|selective attention|selective distortion|selective retention/i},
+ {sec:"g5-chars",  w:1, k:/\bmotive\b|sufficiently pressing/i},
+ {sec:"g5-chars",  w:1, k:/Maslow|physiological/i},
+ {sec:"g5-chars",  w:1, k:/learning|\bcue\b|\bcues\b|reinforce/i},
+
+ {sec:"g5-decide", w:2, k:/complex buying/i},
+ {sec:"g5-decide", w:2, k:/dissonance-reducing/i},
+ {sec:"g5-decide", w:2, k:/habitual/i},
+ {sec:"g5-decide", w:2, k:/variety-seeking|variety seeking/i},
+ {sec:"g5-decide", w:2, k:/need recognition|information search|evaluation of alternatives|purchase decision|postpurchase|five stages|stage of the buyer|buying process/i},
+ {sec:"g5-decide", w:2, k:/dissonance/i},
+
+ {sec:"g5-newprod", w:2, k:/relative advantage|compatibilit|complexit|trialabilit|observabilit|rate of adoption/i},
+ {sec:"g5-newprod", w:1, k:/innovator|early adopter|mainstream|lagging|adopter|adoption process|awareness, interest/i},
+
+ /* ---- chapter 6 ---- */
+ {sec:"g6-intro",  w:2, k:/business buyer behavior/i},
+ {sec:"g6-intro",  w:1, k:/business buying process/i},
+
+ {sec:"g6-markets", w:2, k:/derived/i},
+ {sec:"g6-markets", w:2, k:/inelastic/i},
+ {sec:"g6-markets", w:1, k:/supplier development/i},
+ {sec:"g6-markets", w:1, k:/complex|formal decision/i},
+
+ {sec:"g6-behavior", w:2, k:/straight rebuy/i},
+ {sec:"g6-behavior", w:2, k:/modified rebuy/i},
+ {sec:"g6-behavior", w:2, k:/new task/i},
+ {sec:"g6-behavior", w:2, k:/systems selling|complete solution/i},
+ {sec:"g6-behavior", w:2, k:/buying center/i},
+ {sec:"g6-behavior", w:1, k:/gatekeeper|decider|influencer|buying-center role/i},
+ {sec:"g6-behavior", w:1, k:/organizational|procedure/i},
+ {sec:"g6-behavior", w:1, k:/environmental|supply condition/i},
+
+ {sec:"g6-process", w:1, k:/problem recognition|internal stimul|external stimul/i},
+ {sec:"g6-process", w:1, k:/e-procurement|reverse auction|extranet/i},
+
+ /* ---- chapter 7 ----
+    Nothing in either set touches Marketing Strategy (Figure 7.1), so every
+    question in that section stays w:0 on purpose.                             */
+ {sec:"g7-seg",    w:2, k:/market segmentation|dividing a market|segment a market|smaller segments/i},
+ {sec:"g7-seg",    w:2, k:/geographic/i},
+ {sec:"g7-seg",    w:2, k:/benefit/i},
+ {sec:"g7-seg",    w:2, k:/loyal/i},
+ {sec:"g7-seg",    w:2, k:/measurable|accessible|substantial|differentiable|actionable|requirement/i},
+ {sec:"g7-seg",    w:1, k:/demographic/i},
+ {sec:"g7-seg",    w:1, k:/psychographic/i},
+ {sec:"g7-seg",    w:1, k:/usage rate|heavy user/i},
+
+ {sec:"g7-target", w:2, k:/undifferentiated|mass marketing/i},
+ {sec:"g7-target", w:2, k:/differentiated/i},
+ {sec:"g7-target", w:2, k:/concentrated|niche/i},
+ {sec:"g7-target", w:2, k:/micromarketing|local marketing|individual marketing/i},
+ {sec:"g7-target", w:1, k:/target market/i},
+ {sec:"g7-target", w:1, k:/company resources|limited resources/i},
+
+ {sec:"g7-position", w:2, k:/product position|place it occupies|minds of consumers|defined by consumers/i},
+ {sec:"g7-position", w:2, k:/competitive advantage|preemptive|distinctive|worth establishing|greater value/i},
+ {sec:"g7-position", w:1, k:/value proposition/i},
+ {sec:"g7-position", w:1, k:/positioning statement|point of difference/i},
+ {sec:"g7-position", w:1, k:/abrupt|gradually|implementing it/i},
+
+ /* ---- chapter 8 ---- */
+ {sec:"g8-what",   w:2, k:/convenience/i},
+ {sec:"g8-what",   w:2, k:/specialty/i},
+ {sec:"g8-what",   w:1, k:/anything that can be offered|a product is/i},
+ {sec:"g8-what",   w:1, k:/a service is|ownership of anything|intangible/i},
+ {sec:"g8-what",   w:1, k:/shopping product/i},
+ {sec:"g8-what",   w:1, k:/unsought/i},
+ {sec:"g8-what",   w:1, k:/industrial product|capital item|materials and parts|supplies and services/i},
+ {sec:"g8-what",   w:1, k:/person marketing|place marketing|social marketing|organization marketing/i},
+
+ {sec:"g8-decisions", w:1, k:/product quality|satisfy stated or implied/i},
+ {sec:"g8-decisions", w:1, k:/good design|\bstyle\b/i},
+ {sec:"g8-decisions", w:1, k:/support service/i},
+
+ {sec:"g8-services", w:1, k:/intangibilit|inseparabilit|variabilit|perishabilit|four service|sampled before/i},
+ {sec:"g8-services", w:1, k:/service-profit chain|internal service quality/i},
+ {sec:"g8-services", w:1, k:/internal marketing|precede/i},
+ {sec:"g8-services", w:1, k:/interactive marketing|buyer.seller interaction/i},
+
+ {sec:"g8-brands", w:2, k:/brand equity/i},
+ {sec:"g8-brands", w:2, k:/brand value|financial value/i}
+];
+
+/* The three labels a review-test question can carry. */
+var TIERS = [
+ {w:2, t:"On both Quizlets",   s:"Both sets test this. The safest bet on the exam."},
+ {w:1, t:"On one Quizlet",     s:"One of the two sets tests this."},
+ {w:0, t:"On neither Quizlet", s:"On your study guide, but neither Quizlet covers it \u2014 the gap to watch."}
+];
+
 /* ================================================================ helpers */
 function $(s,r){ return (r||document).querySelector(s); }
 function $$(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); }
@@ -1675,6 +1810,20 @@ CHAPTERS.forEach(function(tp){ TOPIC_NAMES[tp] = "Ch. "+CH[tp].n+" · "+CH[tp].s
 /* Every question and card carries the id of the study-guide section it belongs to */
 var SEC_TITLES = {}, SEC_CHAPTER = {};
 GUIDE.sections.forEach(function(s){ s.items.forEach(function(it){ SEC_TITLES[it.id] = it.t; SEC_CHAPTER[it.id] = s.tp; }); });
+
+/* How much Quizlet agreement each question has: 2 = both sets, 1 = one, 0 = neither.
+   Worked out once, from the concept map in CONFIRMED, and carried on the question. */
+var TIER_TITLES = {}, TIER_BLURBS = {};
+TIERS.forEach(function(t){ TIER_TITLES[t.w] = t.t; TIER_BLURBS[t.w] = t.s; });
+function hotOf(sec, text){
+  var best = 0;
+  CONFIRMED.forEach(function(c){ if(c.sec === sec && c.w > best && c.k.test(text)) best = c.w; });
+  return best;
+}
+QB.forEach(function(b){
+  var ans = (b.a === true) ? "true" : (b.a === false) ? "false" : b.a;
+  b.hot = hotOf(b.sec, [b.q, ans, b.e].concat(b.w || []).join(" "));
+});
 
 /* ---- verdicts by grade: warm, plain, never a joke at the reader's expense ---- */
 var VERDICTS = [
@@ -1706,7 +1855,7 @@ CHAPTERS.forEach(function(tp){
 });
 
 function fromBank(b, i){
-  var q = {key:b.tp+":"+i, tp:b.tp, sec:b.sec, ap:!!b.ap, kind:b.t, text:b.q, explain:b.e};
+  var q = {key:b.tp+":"+i, tp:b.tp, sec:b.sec, hot:b.hot || 0, ap:!!b.ap, kind:b.t, text:b.q, explain:b.e};
   if(b.t === "tf"){
     q.opts = [{html:"True", ok:b.a === true, cls:"tf"}, {html:"False", ok:b.a === false, cls:"tf"}];
     q.miss = strip(b.q) + " — <b>" + (b.a ? "True" : "False") + "</b>";
@@ -1720,7 +1869,7 @@ function fromBank(b, i){
 function fromPair(tp, idx, reverse){
   var set = PAIRSETS[tp], p = set.pairs[idx];
   var others = pick(set.pairs.filter(function(o, j){ return j !== idx; }), 3);
-  var q = {key:tp+":p"+idx+(reverse?"r":""), tp:tp, sec:p[2], ap:false, kind:"id"};
+  var q = {key:tp+":p"+idx+(reverse?"r":""), tp:tp, sec:p[2], hot:hotOf(p[2], p[0]+" "+p[1]), ap:false, kind:"id"};
   if(reverse){
     q.text = "Which meaning fits <b>" + p[0] + "</b>?";
     q.opts = shuffle([{html:p[1], ok:true}].concat(others.map(function(o){ return {html:o[1], ok:false}; })));
@@ -1787,6 +1936,37 @@ function mockQuestions(cfg){
   return shuffle(out);
 }
 
+/* The review test: built from the Quizlet overlap rather than from the chapters.
+   "all" mixes the three tiers — most weight on what both sets confirm, but always
+   a fifth of the test on what neither set covers, because that is the blind spot.
+   Within a tier the draw round-robins the study-guide sections so it stays spread. */
+function reviewQuestions(cfg){
+  cfg = cfg || {};
+  var n = cfg.n || 40, focus = cfg.focus || "all";
+  var want = {};
+  if(focus === "both")      want = {2:n, 1:0, 0:0};
+  else if(focus === "one")  want = {2:0, 1:n, 0:0};
+  else if(focus === "gaps") want = {2:0, 1:0, 0:n};
+  else { want[2] = Math.round(n*0.55); want[1] = Math.round(n*0.25); want[0] = n - want[2] - want[1]; }
+  var pool = {0:[], 1:[], 2:[]};
+  QB.forEach(function(b, i){ if(b.off) return; pool[b.hot || 0].push(fromBank(b, i)); });
+  var out = [];
+  [2,1,0].forEach(function(t){
+    if(!want[t]) return;
+    var bySec = {}, secs = [];
+    shuffle(pool[t]).forEach(function(q){ if(!bySec[q.sec]){ bySec[q.sec] = []; secs.push(q.sec); } bySec[q.sec].push(q); });
+    secs = shuffle(secs);
+    var k = 0, taken = 0;
+    while(taken < want[t] && secs.length){
+      var list = bySec[secs[k % secs.length]];
+      if(list.length){ out.push(list.shift()); taken++; }
+      if(secs.every(function(s){ return !bySec[s].length; })) break;
+      k++;
+    }
+  });
+  return shuffle(out);
+}
+
 /* ================================================================ decks and match */
 function deckFor(tp, id){
   var d = CH[tp].decks.filter(function(x){ return x.id === id; })[0] || CH[tp].decks[0];
@@ -1805,6 +1985,7 @@ function matchRound(tp, n){
 if(typeof window === "undefined"){
   module.exports = {CH:CH, COURSE:COURSE, GUIDE:GUIDE,
     QB:QB, PAIRSETS:PAIRSETS, VERDICTS:VERDICTS, CHAPTERS:CHAPTERS, TOPIC_NAMES:TOPIC_NAMES, SEC_TITLES:SEC_TITLES, SEC_CHAPTER:SEC_CHAPTER,
+    CONFIRMED:CONFIRMED, TIERS:TIERS, TIER_TITLES:TIER_TITLES, REVIEW_NOTE:REVIEW_NOTE, hotOf:hotOf, reviewQuestions:reviewQuestions,
     fromBank:fromBank, fromPair:fromPair, topicQuestions:topicQuestions, mockQuestions:mockQuestions, questionsByKeys:questionsByKeys,
     deckFor:deckFor, matchRound:matchRound, verdictFor:verdictFor};
   return;
@@ -1914,7 +2095,8 @@ function makeQuiz(root, gen, opts){
   }
   function tagFor(q){
     var t = q.ap ? "Application" : (q.kind === "tf" ? "True or false" : (q.kind === "id" ? "Identification" : "Multiple choice"));
-    return '<span class="qtag">'+t+'</span>' + (SEC_TITLES[q.sec] ? '<span class="qtag sec">'+SEC_TITLES[q.sec]+'</span>' : '');
+    return '<span class="qtag">'+t+'</span>' + (SEC_TITLES[q.sec] ? '<span class="qtag sec">'+SEC_TITLES[q.sec]+'</span>' : '')
+      + (opts.showTier ? '<span class="qtag tier t'+(q.hot||0)+'">'+TIER_TITLES[q.hot||0]+'</span>' : '');
   }
   function render(){
     var body = shell(); dots();
@@ -1962,6 +2144,15 @@ function makeQuiz(root, gen, opts){
         rows += '<tr><td class="sm"><span class="secch">'+s.h+'</span>'+it.t+'</td><td class="num">'+ok+' / '+mine.length+'</td></tr>';
       }); });
       html += '<div class="tblwrap" style="max-width:600px;margin:22px auto 0"><table class="tbl n0"><tbody>'+rows+'</tbody></table></div>';
+    }
+    if(opts.showTier){
+      /* how she did against the Quizlets: the last row is the one that matters */
+      var trows = TIERS.map(function(t){
+        var mine = qs.filter(function(q){ return (q.hot||0) === t.w; }); if(!mine.length) return "";
+        var ok = mine.filter(function(q){ return q.got; }).length;
+        return '<tr><td class="sm"><b>'+t.t+'</b><span class="tsub">'+t.s+'</span></td><td class="num">'+ok+' / '+mine.length+'</td></tr>';
+      }).join("");
+      html += '<div class="tblwrap" style="max-width:600px;margin:22px auto 0"><table class="tbl n0"><tbody>'+trows+'</tbody></table></div>';
     }
     /* an identification miss already reads "term — meaning", so it gets no second line */
     if(missed.length){ html += '<div class="misslist">' + missed.map(function(q){ return '<div><span class="g">'+q.miss+'</span>'+(q.kind === "id" ? '' : '<span class="t">'+q.explain+'</span>')+'</div>'; }).join("") + '</div>'; }
@@ -2026,7 +2217,8 @@ function renderGuide(){
     html += '</div>';
   });
   html += '<div class="gsec"><div class="toolbar">'+
-      '<button class="btn primary" type="button" data-go="exam/mock">Practice exam</button>'+
+      '<button class="btn primary" type="button" data-go="review/test">Review test</button>'+
+      '<button class="btn" type="button" data-go="exam/mock">Practice exam</button>'+
       '<button class="btn" type="button" id="gPrint">Print this list</button>'+
     '</div></div>';
   $("#guideRoot").innerHTML = html;
@@ -2097,6 +2289,31 @@ function renderMockSetup(){
   engines.mock = null;
 }
 
+/* ================================================================ review test */
+var reviewCfg = getJSON("reviewcfg", {n:40, focus:"all"});
+function reviewGen(){ return reviewQuestions({n:reviewCfg.n, focus:reviewCfg.focus}); }
+function startReview(keys){
+  engines.review = makeQuiz($("#reviewTest"), reviewGen, {showTopic:true, showTier:true, againLabel:"New review test", onSetup:renderReviewSetup});
+  engines.review.start(keys || null);
+}
+function renderReviewSetup(){
+  var root = $("#reviewTest");
+  function seg(id, attr, val, list){
+    return '<div class="seg" id="'+id+'">'+list.map(function(o){ return '<button type="button" '+attr+'="'+o[0]+'" aria-pressed="'+(String(o[0]) === String(val))+'">'+o[1]+'</button>'; }).join("")+'</div>';
+  }
+  root.innerHTML = '<div class="quizWrap"><div class="qcard card-corners">'+CORNERS+
+    '<div class="qnum">Review test</div><p class="qtext" style="font-size:16.5px;line-height:1.6">'+REVIEW_NOTE+'</p>'+
+    '<div class="setup">'+
+      '<div class="row"><span class="label">Length</span><br>'+seg("rvN","data-n",reviewCfg.n,[[20,"20"],[40,"40"],[60,"60"]])+'</div>'+
+      '<div class="row"><span class="label">What to draw from</span><br>'+seg("rvF","data-f",reviewCfg.focus,[["all","The weighted mix"],["both","Both Quizlets agree"],["one","Only one covers it"],["gaps","Neither covers it"]])+'</div>'+
+      '<div class="row" style="margin-top:22px"><button class="btn primary" type="button" id="rvStart">Start</button></div>'+
+    '</div></div></div>';
+  segWire("#rvN","data-n",function(v){ reviewCfg.n = parseInt(v,10); store.set("reviewcfg", JSON.stringify(reviewCfg)); });
+  segWire("#rvF","data-f",function(v){ reviewCfg.focus = v; store.set("reviewcfg", JSON.stringify(reviewCfg)); });
+  $("#rvStart").addEventListener("click", function(){ startReview(null); });
+  engines.review = null;
+}
+
 /* ================================================================ wiring */
 var engines = {};
 CHAPTERS.forEach(function(tp){
@@ -2111,16 +2328,22 @@ CHAPTERS.forEach(function(tp){
 });
 renderGuide();
 
-var ON_SHOW = {"exam/mock":function(){ if(!engines.mock) renderMockSetup(); }};
-var KEYS = {"exam/mock":function(e){ return engines.mock ? engines.mock.keys(e) : false; }};
+var ON_SHOW = {
+  "exam/mock":function(){ if(!engines.mock) renderMockSetup(); },
+  "review/test":function(){ if(!engines.review) renderReviewSetup(); }
+};
+var KEYS = {
+  "exam/mock":function(e){ return engines.mock ? engines.mock.keys(e) : false; },
+  "review/test":function(e){ return engines.review ? engines.review.keys(e) : false; }
+};
 CHAPTERS.forEach(function(tp){
   ON_SHOW[tp+"/match"] = function(){ engines[tp+"Match"].ensure(); };
   ON_SHOW[tp+"/quiz"]  = function(){ engines[tp+"Quiz"].ensure(); };
   KEYS[tp+"/cards"] = function(e){ return engines[tp+"Cards"].keys(e); };
   KEYS[tp+"/quiz"]  = function(e){ return engines[tp+"Quiz"].keys(e); };
 });
-var TOPICS = ["guide","c5","c6","c7","c8","exam"];
-var currentTopic = "guide", currentMode = {guide:"overview", c5:"notes", c6:"notes", c7:"notes", c8:"notes", exam:"mock"};
+var TOPICS = ["guide","c5","c6","c7","c8","review","exam"];
+var currentTopic = "guide", currentMode = {guide:"overview", c5:"notes", c6:"notes", c7:"notes", c8:"notes", review:"test", exam:"mock"};
 function showMode(topic, mode){
   currentMode[topic] = mode;
   $$('.seg[data-modes="'+topic+'"] button').forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-mode") === mode)); });

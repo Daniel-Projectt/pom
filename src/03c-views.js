@@ -37,7 +37,8 @@ function renderGuide(){
     html += '</div>';
   });
   html += '<div class="gsec"><div class="toolbar">'+
-      '<button class="btn primary" type="button" data-go="exam/mock">Practice exam</button>'+
+      '<button class="btn primary" type="button" data-go="review/test">Review test</button>'+
+      '<button class="btn" type="button" data-go="exam/mock">Practice exam</button>'+
       '<button class="btn" type="button" id="gPrint">Print this list</button>'+
     '</div></div>';
   $("#guideRoot").innerHTML = html;
@@ -108,6 +109,31 @@ function renderMockSetup(){
   engines.mock = null;
 }
 
+/* ================================================================ review test */
+var reviewCfg = getJSON("reviewcfg", {n:40, focus:"all"});
+function reviewGen(){ return reviewQuestions({n:reviewCfg.n, focus:reviewCfg.focus}); }
+function startReview(keys){
+  engines.review = makeQuiz($("#reviewTest"), reviewGen, {showTopic:true, showTier:true, againLabel:"New review test", onSetup:renderReviewSetup});
+  engines.review.start(keys || null);
+}
+function renderReviewSetup(){
+  var root = $("#reviewTest");
+  function seg(id, attr, val, list){
+    return '<div class="seg" id="'+id+'">'+list.map(function(o){ return '<button type="button" '+attr+'="'+o[0]+'" aria-pressed="'+(String(o[0]) === String(val))+'">'+o[1]+'</button>'; }).join("")+'</div>';
+  }
+  root.innerHTML = '<div class="quizWrap"><div class="qcard card-corners">'+CORNERS+
+    '<div class="qnum">Review test</div><p class="qtext" style="font-size:16.5px;line-height:1.6">'+REVIEW_NOTE+'</p>'+
+    '<div class="setup">'+
+      '<div class="row"><span class="label">Length</span><br>'+seg("rvN","data-n",reviewCfg.n,[[20,"20"],[40,"40"],[60,"60"]])+'</div>'+
+      '<div class="row"><span class="label">What to draw from</span><br>'+seg("rvF","data-f",reviewCfg.focus,[["all","The weighted mix"],["both","Both Quizlets agree"],["one","Only one covers it"],["gaps","Neither covers it"]])+'</div>'+
+      '<div class="row" style="margin-top:22px"><button class="btn primary" type="button" id="rvStart">Start</button></div>'+
+    '</div></div></div>';
+  segWire("#rvN","data-n",function(v){ reviewCfg.n = parseInt(v,10); store.set("reviewcfg", JSON.stringify(reviewCfg)); });
+  segWire("#rvF","data-f",function(v){ reviewCfg.focus = v; store.set("reviewcfg", JSON.stringify(reviewCfg)); });
+  $("#rvStart").addEventListener("click", function(){ startReview(null); });
+  engines.review = null;
+}
+
 /* ================================================================ wiring */
 var engines = {};
 CHAPTERS.forEach(function(tp){
@@ -122,16 +148,22 @@ CHAPTERS.forEach(function(tp){
 });
 renderGuide();
 
-var ON_SHOW = {"exam/mock":function(){ if(!engines.mock) renderMockSetup(); }};
-var KEYS = {"exam/mock":function(e){ return engines.mock ? engines.mock.keys(e) : false; }};
+var ON_SHOW = {
+  "exam/mock":function(){ if(!engines.mock) renderMockSetup(); },
+  "review/test":function(){ if(!engines.review) renderReviewSetup(); }
+};
+var KEYS = {
+  "exam/mock":function(e){ return engines.mock ? engines.mock.keys(e) : false; },
+  "review/test":function(e){ return engines.review ? engines.review.keys(e) : false; }
+};
 CHAPTERS.forEach(function(tp){
   ON_SHOW[tp+"/match"] = function(){ engines[tp+"Match"].ensure(); };
   ON_SHOW[tp+"/quiz"]  = function(){ engines[tp+"Quiz"].ensure(); };
   KEYS[tp+"/cards"] = function(e){ return engines[tp+"Cards"].keys(e); };
   KEYS[tp+"/quiz"]  = function(e){ return engines[tp+"Quiz"].keys(e); };
 });
-var TOPICS = ["guide","c5","c6","c7","c8","exam"];
-var currentTopic = "guide", currentMode = {guide:"overview", c5:"notes", c6:"notes", c7:"notes", c8:"notes", exam:"mock"};
+var TOPICS = ["guide","c5","c6","c7","c8","review","exam"];
+var currentTopic = "guide", currentMode = {guide:"overview", c5:"notes", c6:"notes", c7:"notes", c8:"notes", review:"test", exam:"mock"};
 function showMode(topic, mode){
   currentMode[topic] = mode;
   $$('.seg[data-modes="'+topic+'"] button').forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-mode") === mode)); });

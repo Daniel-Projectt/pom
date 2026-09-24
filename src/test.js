@@ -121,6 +121,16 @@ A.QB.forEach((q, i) => {
   ok(!EARLIER.test(q.q), 'question #' + i + ' does not ask chapter 1–4 material', q.q);
   if (q.sec === 'g5-model') ok(!/^(product|price|place|promotion)$/i.test(String(q.a).trim()), 'question #' + i + ' does not answer with one of the four Ps', q.q);
 });
+// no question about the page's own footnotes, and no true/false that states its own answer
+const META = /means the same thing|which pair of names|is another name for|are the same thing|two namings/i;
+A.QB.forEach((q, i) => ok(!META.test(q.q), 'question #' + i + ' asks about marketing, not about the page’s own wording', q.q));
+A.QB.filter(q => q.t === 'tf').forEach((q, i) => {
+  const rest = String(q.e).replace(/^(True|False)\s*[—-]\s*/, '');
+  const stem = new Set(q.q.toLowerCase().replace(/[^a-z ]/g, ' ').split(/\s+/).filter(x => x.length > 4));
+  const said = rest.toLowerCase().replace(/[^a-z ]/g, ' ').split(/\s+/).filter(x => x.length > 4);
+  const echo = said.length ? said.filter(x => stem.has(x)).length / said.length : 0;
+  ok(echo < 0.75, 'true/false #' + i + ' is not answered by its own wording', q.q + ' || ' + q.e);
+});
 ok(!CITES.test(tps.map(tp => A.CH[tp].decks.map(d => d.cards.map(c => c[0]).join(' ')).join(' ')).join(' ')), 'no card front cites the slides');
 Object.keys(A.SEC_CHAPTER).forEach(id => {
   const mine = A.QB.filter(q => q.sec === id);

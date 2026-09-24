@@ -113,21 +113,29 @@ function questionsByKeys(keys){
     return (QB[j] && QB[j].tp === b[1]) ? fromBank(QB[j], j) : null;
   }).filter(Boolean);
 }
-/* The practice exam: every chapter, reshuffled; types all / mc / tf / ap */
+/* The practice exam: every chapter, reshuffled.
+   types  — all / mc / tf / ap
+   focus  — all, or one Quizlet tier: both / one / gaps (see CONFIRMED)         */
+var FOCUS_HOT = {both:2, one:1, gaps:0};
 function mockQuestions(cfg){
   var tps = cfg.topics && cfg.topics.length ? cfg.topics : CHAPTERS.slice();
   var n = cfg.n || 25;
+  var hot = (cfg.focus && cfg.focus !== "all") ? FOCUS_HOT[cfg.focus] : null;
   var pool = [];
   QB.forEach(function(b, i){
     if(b.off || tps.indexOf(b.tp) < 0) return;
     if(cfg.types === "mc" && b.t !== "mc") return;
     if(cfg.types === "tf" && b.t !== "tf") return;
     if(cfg.types === "ap" && !b.ap) return;
+    if(hot !== null && (b.hot || 0) !== hot) return;
     pool.push(fromBank(b, i));
   });
   if(cfg.types === "all" || cfg.types === "mc" || !cfg.types){
     tps.forEach(function(tp){
-      pick(PAIRSETS[tp].pairs.map(function(p, i){ return i; }), 3).forEach(function(i){ pool.push(fromPair(tp, i, Math.random() < 0.5)); });
+      pick(PAIRSETS[tp].pairs.map(function(p, i){ return i; }), 3).forEach(function(i){
+        var q = fromPair(tp, i, Math.random() < 0.5);
+        if(hot === null || (q.hot || 0) === hot) pool.push(q);
+      });
     });
   }
   /* spread across chapters */
@@ -139,37 +147,6 @@ function mockQuestions(cfg){
     if(tps.every(function(x){ return !byTp[x].length; })) break;
     k++;
   }
-  return shuffle(out);
-}
-
-/* The review test: built from the Quizlet overlap rather than from the chapters.
-   "all" mixes the three tiers — most weight on what both sets confirm, but always
-   a fifth of the test on what neither set covers, because that is the blind spot.
-   Within a tier the draw round-robins the study-guide sections so it stays spread. */
-function reviewQuestions(cfg){
-  cfg = cfg || {};
-  var n = cfg.n || 40, focus = cfg.focus || "all";
-  var want = {};
-  if(focus === "both")      want = {2:n, 1:0, 0:0};
-  else if(focus === "one")  want = {2:0, 1:n, 0:0};
-  else if(focus === "gaps") want = {2:0, 1:0, 0:n};
-  else { want[2] = Math.round(n*0.55); want[1] = Math.round(n*0.25); want[0] = n - want[2] - want[1]; }
-  var pool = {0:[], 1:[], 2:[]};
-  QB.forEach(function(b, i){ if(b.off) return; pool[b.hot || 0].push(fromBank(b, i)); });
-  var out = [];
-  [2,1,0].forEach(function(t){
-    if(!want[t]) return;
-    var bySec = {}, secs = [];
-    shuffle(pool[t]).forEach(function(q){ if(!bySec[q.sec]){ bySec[q.sec] = []; secs.push(q.sec); } bySec[q.sec].push(q); });
-    secs = shuffle(secs);
-    var k = 0, taken = 0;
-    while(taken < want[t] && secs.length){
-      var list = bySec[secs[k % secs.length]];
-      if(list.length){ out.push(list.shift()); taken++; }
-      if(secs.every(function(s){ return !bySec[s].length; })) break;
-      k++;
-    }
-  });
   return shuffle(out);
 }
 

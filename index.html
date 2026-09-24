@@ -371,6 +371,7 @@ kbd{font-family:var(--sans);font-size:10px;border:1px solid var(--line-strong);b
 .qtag.tier.t1{color:var(--muted);border-color:var(--line-strong)}
 .qtag.tier.t0{color:var(--ink);border-style:dashed;border-color:var(--gold)}
 .tsub{display:block;font-family:var(--serif);font-style:italic;font-size:13.5px;color:var(--muted);margin-top:2px;line-height:1.45}
+.setnote{max-width:560px;margin:18px auto 0;font-size:14px;line-height:1.55;color:var(--muted);font-style:italic;text-align:center}
 .setup{max-width:600px;margin:0 auto;text-align:center}
 .setup .row{margin:12px 0}
 .misslist .g{font-family:var(--serif);font-size:15px;min-width:0;flex:1;letter-spacing:0}
@@ -493,7 +494,6 @@ kbd{font-family:var(--sans);font-size:10px;border:1px solid var(--line-strong);b
     <button class="topic-btn" role="tab" data-topic="c6"    aria-selected="false">6 &middot; Business</button>
     <button class="topic-btn" role="tab" data-topic="c7"    aria-selected="false">7 &middot; Strategy</button>
     <button class="topic-btn" role="tab" data-topic="c8"    aria-selected="false">8 &middot; Products</button>
-    <button class="topic-btn" role="tab" data-topic="review" aria-selected="false">Review Test</button>
     <button class="topic-btn" role="tab" data-topic="exam"  aria-selected="false">Practice Exam</button>
   </nav>
 
@@ -581,18 +581,9 @@ kbd{font-family:var(--sans);font-size:10px;border:1px solid var(--line-strong);b
       <div class="panel" data-panel="c8/quiz" hidden><div id="c8Quiz"></div></div>
     </section>
 
-    <!-- ================= REVIEW TEST ================= -->
-    <section class="topic" id="topic-review" hidden>
-      <p class="intro">Two Quizlet sets for this exam, mapped onto the study guide&rsquo;s sixteen sections. Every question here is labelled by how much the two sets agree on it &mdash; and a fifth of the test is drawn from what <i>neither</i> set covers, which is where studying only the Quizlets would leave a hole.</p>
-      <div class="modes"><div class="seg" data-modes="review">
-        <button type="button" data-mode="test" aria-pressed="true">Review test</button>
-      </div></div>
-      <div class="panel" data-panel="review/test"><div id="reviewTest"></div></div>
-    </section>
-
     <!-- ================= PRACTICE EXAM ================= -->
     <section class="topic" id="topic-exam" hidden>
-      <p class="intro">Questions from all four chapters, on the study guide&rsquo;s sections only. Application questions included, since the handout says to expect them. Reshuffled each run, with the reason behind every answer.</p>
+      <p class="intro">Questions from all four chapters, on the study guide&rsquo;s sections only. Application questions included, since the handout says to expect them. Every question is also labelled by how much the two Quizlet sets for this exam agree on it, so <b>Neither Quizlet</b> drills exactly the material studying those sets would miss.</p>
       <div class="modes"><div class="seg" data-modes="exam">
         <button type="button" data-mode="mock" aria-pressed="true">Practice exam</button>
       </div></div>
@@ -1907,21 +1898,29 @@ function questionsByKeys(keys){
     return (QB[j] && QB[j].tp === b[1]) ? fromBank(QB[j], j) : null;
   }).filter(Boolean);
 }
-/* The practice exam: every chapter, reshuffled; types all / mc / tf / ap */
+/* The practice exam: every chapter, reshuffled.
+   types  — all / mc / tf / ap
+   focus  — all, or one Quizlet tier: both / one / gaps (see CONFIRMED)         */
+var FOCUS_HOT = {both:2, one:1, gaps:0};
 function mockQuestions(cfg){
   var tps = cfg.topics && cfg.topics.length ? cfg.topics : CHAPTERS.slice();
   var n = cfg.n || 25;
+  var hot = (cfg.focus && cfg.focus !== "all") ? FOCUS_HOT[cfg.focus] : null;
   var pool = [];
   QB.forEach(function(b, i){
     if(b.off || tps.indexOf(b.tp) < 0) return;
     if(cfg.types === "mc" && b.t !== "mc") return;
     if(cfg.types === "tf" && b.t !== "tf") return;
     if(cfg.types === "ap" && !b.ap) return;
+    if(hot !== null && (b.hot || 0) !== hot) return;
     pool.push(fromBank(b, i));
   });
   if(cfg.types === "all" || cfg.types === "mc" || !cfg.types){
     tps.forEach(function(tp){
-      pick(PAIRSETS[tp].pairs.map(function(p, i){ return i; }), 3).forEach(function(i){ pool.push(fromPair(tp, i, Math.random() < 0.5)); });
+      pick(PAIRSETS[tp].pairs.map(function(p, i){ return i; }), 3).forEach(function(i){
+        var q = fromPair(tp, i, Math.random() < 0.5);
+        if(hot === null || (q.hot || 0) === hot) pool.push(q);
+      });
     });
   }
   /* spread across chapters */
@@ -1933,37 +1932,6 @@ function mockQuestions(cfg){
     if(tps.every(function(x){ return !byTp[x].length; })) break;
     k++;
   }
-  return shuffle(out);
-}
-
-/* The review test: built from the Quizlet overlap rather than from the chapters.
-   "all" mixes the three tiers — most weight on what both sets confirm, but always
-   a fifth of the test on what neither set covers, because that is the blind spot.
-   Within a tier the draw round-robins the study-guide sections so it stays spread. */
-function reviewQuestions(cfg){
-  cfg = cfg || {};
-  var n = cfg.n || 40, focus = cfg.focus || "all";
-  var want = {};
-  if(focus === "both")      want = {2:n, 1:0, 0:0};
-  else if(focus === "one")  want = {2:0, 1:n, 0:0};
-  else if(focus === "gaps") want = {2:0, 1:0, 0:n};
-  else { want[2] = Math.round(n*0.55); want[1] = Math.round(n*0.25); want[0] = n - want[2] - want[1]; }
-  var pool = {0:[], 1:[], 2:[]};
-  QB.forEach(function(b, i){ if(b.off) return; pool[b.hot || 0].push(fromBank(b, i)); });
-  var out = [];
-  [2,1,0].forEach(function(t){
-    if(!want[t]) return;
-    var bySec = {}, secs = [];
-    shuffle(pool[t]).forEach(function(q){ if(!bySec[q.sec]){ bySec[q.sec] = []; secs.push(q.sec); } bySec[q.sec].push(q); });
-    secs = shuffle(secs);
-    var k = 0, taken = 0;
-    while(taken < want[t] && secs.length){
-      var list = bySec[secs[k % secs.length]];
-      if(list.length){ out.push(list.shift()); taken++; }
-      if(secs.every(function(s){ return !bySec[s].length; })) break;
-      k++;
-    }
-  });
   return shuffle(out);
 }
 
@@ -1985,7 +1953,7 @@ function matchRound(tp, n){
 if(typeof window === "undefined"){
   module.exports = {CH:CH, COURSE:COURSE, GUIDE:GUIDE,
     QB:QB, PAIRSETS:PAIRSETS, VERDICTS:VERDICTS, CHAPTERS:CHAPTERS, TOPIC_NAMES:TOPIC_NAMES, SEC_TITLES:SEC_TITLES, SEC_CHAPTER:SEC_CHAPTER,
-    CONFIRMED:CONFIRMED, TIERS:TIERS, TIER_TITLES:TIER_TITLES, REVIEW_NOTE:REVIEW_NOTE, hotOf:hotOf, reviewQuestions:reviewQuestions,
+    CONFIRMED:CONFIRMED, TIERS:TIERS, TIER_TITLES:TIER_TITLES, REVIEW_NOTE:REVIEW_NOTE, hotOf:hotOf,
     fromBank:fromBank, fromPair:fromPair, topicQuestions:topicQuestions, mockQuestions:mockQuestions, questionsByKeys:questionsByKeys,
     deckFor:deckFor, matchRound:matchRound, verdictFor:verdictFor};
   return;
@@ -2132,7 +2100,15 @@ function makeQuiz(root, gen, opts){
   }
   function results(){
     var body = $(".qbody", root);
-    var pct = qs.length ? Math.round(score / qs.length * 100) : 0, v = verdictFor(pct);
+    /* a narrow combination of settings can match nothing — say so rather than showing 0/0 */
+    if(!qs.length){
+      body.innerHTML = '<div class="result card-corners">'+CORNERS+
+        '<p class="qtext" style="margin:10px 0 0">No questions match those settings. Try a wider combination.</p>'+
+        (opts.onSetup ? '<div class="toolbar" style="margin:26px 0 0"><button class="btn primary setupbtn" type="button">Change settings</button></div>' : '')+'</div>';
+      if($(".setupbtn", body)) $(".setupbtn", body).addEventListener("click", opts.onSetup);
+      return;
+    }
+    var pct = Math.round(score / qs.length * 100), v = verdictFor(pct);
     var html = '<div class="result card-corners">'+CORNERS+'<div class="big">'+score+'/'+qs.length+'</div><div class="rsub">'+pct+' percent</div>'+
       '<h3 style="font-family:var(--serif);font-weight:400;font-size:26px;margin:16px 0 0">'+v.t+'</h3><p class="verdict">'+v.a+'</p>';
     if(opts.showTopic){
@@ -2217,8 +2193,7 @@ function renderGuide(){
     html += '</div>';
   });
   html += '<div class="gsec"><div class="toolbar">'+
-      '<button class="btn primary" type="button" data-go="review/test">Review test</button>'+
-      '<button class="btn" type="button" data-go="exam/mock">Practice exam</button>'+
+      '<button class="btn primary" type="button" data-go="exam/mock">Practice exam</button>'+
       '<button class="btn" type="button" id="gPrint">Print this list</button>'+
     '</div></div>';
   $("#guideRoot").innerHTML = html;
@@ -2263,10 +2238,10 @@ function renderNotes(tp){
 }
 
 /* ================================================================ practice exam */
-var mockCfg = getJSON("mockcfg", {n:25, types:"all", topic:"all"});
-function mockGen(){ return mockQuestions({n:mockCfg.n, types:mockCfg.types, topics:mockCfg.topic === "all" ? [] : [mockCfg.topic]}); }
+var mockCfg = getJSON("mockcfg", {n:25, types:"all", topic:"all", focus:"all"});
+function mockGen(){ return mockQuestions({n:mockCfg.n, types:mockCfg.types, focus:mockCfg.focus, topics:mockCfg.topic === "all" ? [] : [mockCfg.topic]}); }
 function startMock(keys){
-  engines.mock = makeQuiz($("#mockExam"), mockGen, {showTopic:true, againLabel:"New practice exam", onSetup:renderMockSetup});
+  engines.mock = makeQuiz($("#mockExam"), mockGen, {showTopic:true, showTier:true, againLabel:"New practice exam", onSetup:renderMockSetup});
   engines.mock.start(keys || null);
 }
 function renderMockSetup(){
@@ -2280,38 +2255,16 @@ function renderMockSetup(){
       '<div class="row"><span class="label">Length</span><br>'+seg("mxN","data-n",mockCfg.n,[[15,"15"],[25,"25"],[40,"40"],[60,"60"]])+'</div>'+
       '<div class="row"><span class="label">Question types</span><br>'+seg("mxT","data-t",mockCfg.types,[["all","Everything"],["mc","Multiple choice"],["tf","True / false"],["ap","Application"]])+'</div>'+
       '<div class="row"><span class="label">Chapters</span><br>'+seg("mxP","data-p",mockCfg.topic,[["all","All four"]].concat(CHAPTERS.map(function(tp){ return [tp, "Ch. "+CH[tp].n]; })))+'</div>'+
+      '<div class="row"><span class="label">Against the Quizlets</span><br>'+seg("mxF","data-f",mockCfg.focus,[["all","Everything"],["both","Both cover it"],["one","One covers it"],["gaps","Neither covers it"]])+'</div>'+
+      '<p class="setnote">'+REVIEW_NOTE+'</p>'+
       '<div class="row" style="margin-top:22px"><button class="btn primary" type="button" id="mxStart">Start</button></div>'+
     '</div></div></div>';
   segWire("#mxN","data-n",function(v){ mockCfg.n = parseInt(v,10); store.set("mockcfg", JSON.stringify(mockCfg)); });
   segWire("#mxT","data-t",function(v){ mockCfg.types = v; store.set("mockcfg", JSON.stringify(mockCfg)); });
   segWire("#mxP","data-p",function(v){ mockCfg.topic = v; store.set("mockcfg", JSON.stringify(mockCfg)); });
+  segWire("#mxF","data-f",function(v){ mockCfg.focus = v; store.set("mockcfg", JSON.stringify(mockCfg)); });
   $("#mxStart").addEventListener("click", function(){ startMock(null); });
   engines.mock = null;
-}
-
-/* ================================================================ review test */
-var reviewCfg = getJSON("reviewcfg", {n:40, focus:"all"});
-function reviewGen(){ return reviewQuestions({n:reviewCfg.n, focus:reviewCfg.focus}); }
-function startReview(keys){
-  engines.review = makeQuiz($("#reviewTest"), reviewGen, {showTopic:true, showTier:true, againLabel:"New review test", onSetup:renderReviewSetup});
-  engines.review.start(keys || null);
-}
-function renderReviewSetup(){
-  var root = $("#reviewTest");
-  function seg(id, attr, val, list){
-    return '<div class="seg" id="'+id+'">'+list.map(function(o){ return '<button type="button" '+attr+'="'+o[0]+'" aria-pressed="'+(String(o[0]) === String(val))+'">'+o[1]+'</button>'; }).join("")+'</div>';
-  }
-  root.innerHTML = '<div class="quizWrap"><div class="qcard card-corners">'+CORNERS+
-    '<div class="qnum">Review test</div><p class="qtext" style="font-size:16.5px;line-height:1.6">'+REVIEW_NOTE+'</p>'+
-    '<div class="setup">'+
-      '<div class="row"><span class="label">Length</span><br>'+seg("rvN","data-n",reviewCfg.n,[[20,"20"],[40,"40"],[60,"60"]])+'</div>'+
-      '<div class="row"><span class="label">What to draw from</span><br>'+seg("rvF","data-f",reviewCfg.focus,[["all","The weighted mix"],["both","Both Quizlets agree"],["one","Only one covers it"],["gaps","Neither covers it"]])+'</div>'+
-      '<div class="row" style="margin-top:22px"><button class="btn primary" type="button" id="rvStart">Start</button></div>'+
-    '</div></div></div>';
-  segWire("#rvN","data-n",function(v){ reviewCfg.n = parseInt(v,10); store.set("reviewcfg", JSON.stringify(reviewCfg)); });
-  segWire("#rvF","data-f",function(v){ reviewCfg.focus = v; store.set("reviewcfg", JSON.stringify(reviewCfg)); });
-  $("#rvStart").addEventListener("click", function(){ startReview(null); });
-  engines.review = null;
 }
 
 /* ================================================================ wiring */
@@ -2328,22 +2281,16 @@ CHAPTERS.forEach(function(tp){
 });
 renderGuide();
 
-var ON_SHOW = {
-  "exam/mock":function(){ if(!engines.mock) renderMockSetup(); },
-  "review/test":function(){ if(!engines.review) renderReviewSetup(); }
-};
-var KEYS = {
-  "exam/mock":function(e){ return engines.mock ? engines.mock.keys(e) : false; },
-  "review/test":function(e){ return engines.review ? engines.review.keys(e) : false; }
-};
+var ON_SHOW = {"exam/mock":function(){ if(!engines.mock) renderMockSetup(); }};
+var KEYS = {"exam/mock":function(e){ return engines.mock ? engines.mock.keys(e) : false; }};
 CHAPTERS.forEach(function(tp){
   ON_SHOW[tp+"/match"] = function(){ engines[tp+"Match"].ensure(); };
   ON_SHOW[tp+"/quiz"]  = function(){ engines[tp+"Quiz"].ensure(); };
   KEYS[tp+"/cards"] = function(e){ return engines[tp+"Cards"].keys(e); };
   KEYS[tp+"/quiz"]  = function(e){ return engines[tp+"Quiz"].keys(e); };
 });
-var TOPICS = ["guide","c5","c6","c7","c8","review","exam"];
-var currentTopic = "guide", currentMode = {guide:"overview", c5:"notes", c6:"notes", c7:"notes", c8:"notes", review:"test", exam:"mock"};
+var TOPICS = ["guide","c5","c6","c7","c8","exam"];
+var currentTopic = "guide", currentMode = {guide:"overview", c5:"notes", c6:"notes", c7:"notes", c8:"notes", exam:"mock"};
 function showMode(topic, mode){
   currentMode[topic] = mode;
   $$('.seg[data-modes="'+topic+'"] button').forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-mode") === mode)); });

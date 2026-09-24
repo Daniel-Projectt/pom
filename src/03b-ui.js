@@ -2,7 +2,7 @@
 if(typeof window === "undefined"){
   module.exports = {CH:CH, COURSE:COURSE, GUIDE:GUIDE,
     QB:QB, PAIRSETS:PAIRSETS, VERDICTS:VERDICTS, CHAPTERS:CHAPTERS, TOPIC_NAMES:TOPIC_NAMES, SEC_TITLES:SEC_TITLES, SEC_CHAPTER:SEC_CHAPTER,
-    CONFIRMED:CONFIRMED, TIERS:TIERS, TIER_TITLES:TIER_TITLES, REVIEW_NOTE:REVIEW_NOTE, hotOf:hotOf, reviewQuestions:reviewQuestions,
+    CONFIRMED:CONFIRMED, TIERS:TIERS, TIER_TITLES:TIER_TITLES, REVIEW_NOTE:REVIEW_NOTE, hotOf:hotOf,
     fromBank:fromBank, fromPair:fromPair, topicQuestions:topicQuestions, mockQuestions:mockQuestions, questionsByKeys:questionsByKeys,
     deckFor:deckFor, matchRound:matchRound, verdictFor:verdictFor};
   return;
@@ -149,7 +149,15 @@ function makeQuiz(root, gen, opts){
   }
   function results(){
     var body = $(".qbody", root);
-    var pct = qs.length ? Math.round(score / qs.length * 100) : 0, v = verdictFor(pct);
+    /* a narrow combination of settings can match nothing — say so rather than showing 0/0 */
+    if(!qs.length){
+      body.innerHTML = '<div class="result card-corners">'+CORNERS+
+        '<p class="qtext" style="margin:10px 0 0">No questions match those settings. Try a wider combination.</p>'+
+        (opts.onSetup ? '<div class="toolbar" style="margin:26px 0 0"><button class="btn primary setupbtn" type="button">Change settings</button></div>' : '')+'</div>';
+      if($(".setupbtn", body)) $(".setupbtn", body).addEventListener("click", opts.onSetup);
+      return;
+    }
+    var pct = Math.round(score / qs.length * 100), v = verdictFor(pct);
     var html = '<div class="result card-corners">'+CORNERS+'<div class="big">'+score+'/'+qs.length+'</div><div class="rsub">'+pct+' percent</div>'+
       '<h3 style="font-family:var(--serif);font-weight:400;font-size:26px;margin:16px 0 0">'+v.t+'</h3><p class="verdict">'+v.a+'</p>';
     if(opts.showTopic){

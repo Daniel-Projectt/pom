@@ -151,7 +151,9 @@ click($('#mxN button[data-n="15"]')); click($('#mxT button[data-t="all"]')); cli
 click($('#mxStart'));
 ok($$('#mockExam .dots i').length === 15, 'fifteen-question exam', $$('#mockExam .dots i').length);
 const mres = answerQuiz($('#mockExam'), 'exam');
-ok(mres && mres.querySelectorAll('.tbl tr').length >= 4 && mres.querySelectorAll('.tbl tr').length <= 16 && mres.querySelectorAll('.tbl .secch').length === mres.querySelectorAll('.tbl tr').length, 'results break down by study-guide section', mres && mres.querySelectorAll('.tbl tr').length);
+const secTbl = mres && mres.querySelectorAll('.tbl')[0], tierTbl = mres && mres.querySelectorAll('.tbl')[1];
+ok(secTbl && secTbl.querySelectorAll('tr').length >= 4 && secTbl.querySelectorAll('tr').length <= 16 && secTbl.querySelectorAll('.secch').length === secTbl.querySelectorAll('tr').length, 'results break down by study-guide section', secTbl && secTbl.querySelectorAll('tr').length);
+ok(tierTbl && tierTbl.querySelectorAll('tr').length >= 1 && tierTbl.querySelectorAll('tr').length <= 3 && /Quizlet/.test(tierTbl.textContent), 'and by how the Quizlets cover it', tierTbl && tierTbl.querySelectorAll('tr').length);
 click(mres.querySelector('.setupbtn')); ok(!!$('#mxStart'), 'change settings returns to setup');
 click($('#mxT button[data-t="ap"]')); click($('#mxN button[data-n="25"]')); click($('#mxStart'));
 ok($$('#mockExam .dots i').length === 25 && $('#mockExam .qtag').textContent === 'Application', 'application-only exam');
@@ -160,26 +162,31 @@ ok(/"types":"ap"/.test(w.localStorage.getItem('pom.mockcfg') || ''), 'exam setti
 head('remembers where you were');
 topic('c7'); mode('c7', 'cards');
 ok(w.localStorage.getItem('pom.topic') === 'c7' && w.localStorage.getItem('pom.mode.c7') === 'cards', 'topic and mode saved');
-ok(!$('.topic-btn[data-topic="extra"]') && $$('.topic-btn').length === 7, 'seven tabs including the review test');
+ok(!$('.topic-btn[data-topic="extra"]') && $$('.topic-btn').length === 6, 'six tabs — the review test lives inside the practice exam');
+ok(!$('.topic-btn[data-topic="review"]'), 'no separate review tab');
 
-head('review test');
-topic('review');
-ok(visible(panel('review/test')) && !!$('#rvStart'), 'the review tab opens its setup');
-ok(/Quizlet/.test(panel('review/test').textContent), 'the setup explains where the questions come from');
-click($('#rvN button[data-n="20"]')); click($('#rvF button[data-f="all"]')); click($('#rvStart'));
-const rv = $('#reviewTest');
-ok(rv.querySelectorAll('.dots i').length === 20, 'twenty questions', rv.querySelectorAll('.dots i').length);
-ok(!!rv.querySelector('.qtag.tier'), 'the question card is labelled with its Quizlet tier', rv.querySelector('.qtag.tier') && rv.querySelector('.qtag.tier').textContent);
-const rvRes = answerQuiz(rv, 'review');
-ok(!!rvRes, 'the review test reaches results');
-ok(rvRes.querySelectorAll('.tbl').length === 2, 'results break down by section and by tier', rvRes.querySelectorAll('.tbl').length);
-ok(/On both Quizlets|On one Quizlet|On neither Quizlet/.test(rvRes.textContent), 'the tier breakdown names the tiers');
-click(rvRes.querySelector('.setupbtn')); click($('#rvF button[data-f="gaps"]')); click($('#rvStart'));
-ok(Array.from($('#reviewTest').querySelectorAll('.qtag.tier')).every(t => /neither/i.test(t.textContent)), 'the blind-spot draw shows only blind-spot questions');
-ok(/"focus":"gaps"/.test(w.localStorage.getItem('pom.reviewcfg') || ''), 'review settings remembered');
-topic('guide');
-click($('#guideRoot [data-go="review/test"]'));
-ok(visible(panel('review/test')), 'the guide’s review-test button opens the review test');
+head('the exam’s Quizlet filter');
+topic('exam');
+// the earlier block left an exam in progress; finish it to reach the setup again
+if (!$('#mxStart')) {
+  const fin = answerQuiz($('#mockExam'), 'exam in progress');
+  ok(!!(fin && fin.querySelector('.setupbtn')), 'an exam in progress can be finished and reset');
+  click(fin.querySelector('.setupbtn'));
+}
+ok(!!$('#mxF'), 'the exam setup has a Quizlet-focus row');
+ok(/Quizlet/.test(panel('exam/mock').textContent), 'the setup explains where the tiers come from');
+click($('#mxN button[data-n="15"]')); click($('#mxT button[data-t="all"]'));
+click($('#mxP button[data-p="all"]')); click($('#mxF button[data-f="gaps"]')); click($('#mxStart'));
+const gap = $('#mockExam');
+ok(gap.querySelectorAll('.dots i').length === 15, 'fifteen blind-spot questions', gap.querySelectorAll('.dots i').length);
+ok(Array.from(gap.querySelectorAll('.qtag.tier')).every(t => /neither/i.test(t.textContent)), 'the blind-spot draw shows only blind-spot questions', gap.querySelector('.qtag.tier') && gap.querySelector('.qtag.tier').textContent);
+ok(/"focus":"gaps"/.test(w.localStorage.getItem('pom.mockcfg') || ''), 'the Quizlet focus is remembered');
+const gapRes = answerQuiz(gap, 'blind spots');
+ok(!!gapRes, 'the filtered exam reaches results');
+ok(gapRes.querySelectorAll('.tbl').length === 2, 'results break down by section and by tier', gapRes.querySelectorAll('.tbl').length);
+ok(/On neither Quizlet/.test(gapRes.textContent), 'the tier breakdown names the tier drawn');
+click(gapRes.querySelector('.setupbtn')); click($('#mxF button[data-f="both"]')); click($('#mxStart'));
+ok(Array.from($('#mockExam').querySelectorAll('.qtag.tier')).every(t => /both/i.test(t.textContent)), 'switching the focus switches the draw');
 
 head('errors');
 ok(errors.length === 0, 'no runtime errors anywhere', errors.join(' || '));

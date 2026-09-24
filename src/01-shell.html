@@ -14,7 +14,6 @@
     <button class="topic-btn" role="tab" data-topic="c6"    aria-selected="false">6 &middot; Business</button>
     <button class="topic-btn" role="tab" data-topic="c7"    aria-selected="false">7 &middot; Strategy</button>
     <button class="topic-btn" role="tab" data-topic="c8"    aria-selected="false">8 &middot; Products</button>
-    <button class="topic-btn" role="tab" data-topic="review" aria-selected="false">Review Test</button>
     <button class="topic-btn" role="tab" data-topic="exam"  aria-selected="false">Practice Exam</button>
   </nav>
 
@@ -102,18 +101,9 @@
       <div class="panel" data-panel="c8/quiz" hidden><div id="c8Quiz"></div></div>
     </section>
 
-    <!-- ================= REVIEW TEST ================= -->
-    <section class="topic" id="topic-review" hidden>
-      <p class="intro">Two Quizlet sets for this exam, mapped onto the study guide&rsquo;s sixteen sections. Every question here is labelled by how much the two sets agree on it &mdash; and a fifth of the test is drawn from what <i>neither</i> set covers, which is where studying only the Quizlets would leave a hole.</p>
-      <div class="modes"><div class="seg" data-modes="review">
-        <button type="button" data-mode="test" aria-pressed="true">Review test</button>
-      </div></div>
-      <div class="panel" data-panel="review/test"><div id="reviewTest"></div></div>
-    </section>
-
     <!-- ================= PRACTICE EXAM ================= -->
     <section class="topic" id="topic-exam" hidden>
-      <p class="intro">Questions from all four chapters, on the study guide&rsquo;s sections only. Application questions included, since the handout says to expect them. Reshuffled each run, with the reason behind every answer.</p>
+      <p class="intro">Questions from all four chapters, on the study guide&rsquo;s sections only. Application questions included, since the handout says to expect them. Every question is also labelled by how much the two Quizlet sets for this exam agree on it, so <b>Neither Quizlet</b> drills exactly the material studying those sets would miss.</p>
       <div class="modes"><div class="seg" data-modes="exam">
         <button type="button" data-mode="mock" aria-pressed="true">Practice exam</button>
       </div></div>

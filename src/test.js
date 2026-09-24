@@ -114,6 +114,13 @@ const everyText = allBodies + ' ' + A.QB.map(q => [q.q, q.a, q.e].concat(q.w || 
 ok(!TRIVIA.test(everyText), 'no slide trivia anywhere — notes, questions or cards', (everyText.match(TRIVIA) || []).join(' | '));
 const CITES = /class slide|class’s|class table|the slides|from class|on the slide|per the slide|according to the slide/i;
 A.QB.forEach((q, i) => ok(!CITES.test(q.q), 'question #' + i + ' asks about the concept, not about what a slide said', q.q));
+// chapters 1–4 were the first exam: naming the four Ps, or the chapter-1 vocabulary, is not this exam's material.
+// The four Ps may still appear inside an explanation as the content of a figure — it is being *asked* that is wrong.
+const EARLIER = /which of these is a marketing stimulus|marketing myopia|needs, wants and demands|share of customer|customer perceived value/i;
+A.QB.forEach((q, i) => {
+  ok(!EARLIER.test(q.q), 'question #' + i + ' does not ask chapter 1–4 material', q.q);
+  if (q.sec === 'g5-model') ok(!/^(product|price|place|promotion)$/i.test(String(q.a).trim()), 'question #' + i + ' does not answer with one of the four Ps', q.q);
+});
 ok(!CITES.test(tps.map(tp => A.CH[tp].decks.map(d => d.cards.map(c => c[0]).join(' ')).join(' ')).join(' ')), 'no card front cites the slides');
 Object.keys(A.SEC_CHAPTER).forEach(id => {
   const mine = A.QB.filter(q => q.sec === id);

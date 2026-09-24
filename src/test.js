@@ -123,6 +123,9 @@ A.QB.forEach((q, i) => {
 });
 // no question about the page's own footnotes, and no true/false that states its own answer
 const META = /means the same thing|which pair of names|is another name for|are the same thing|two namings/i;
+// an exam asks about marketing, not about where things sit in a diagram
+const DIAGRAM = /sits at the center|sits inside|in figure \d/i;
+A.QB.forEach((q, i) => ok(!DIAGRAM.test(q.q), 'question #' + i + ' asks a concept, not the layout of a figure', q.q));
 A.QB.forEach((q, i) => ok(!META.test(q.q), 'question #' + i + ' asks about marketing, not about the page’s own wording', q.q));
 A.QB.filter(q => q.t === 'tf').forEach((q, i) => {
   const rest = String(q.e).replace(/^(True|False)\s*[—-]\s*/, '');

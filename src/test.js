@@ -247,6 +247,21 @@ A.QB.forEach((q, i) => {
   } else ok(q.t === 'tf' && typeof q.a === 'boolean', 'true/false has a boolean answer #' + i);
 });
 ok(new Set(A.QB.map(q => q.q)).size === A.QB.length, 'no duplicate questions');
+
+// ---------- option length must not give the answer away ----------
+// A student can score well on a quiz whose right answer is always the wordiest one,
+// and then lose marks on a real exam that has no such tell. These are ratchets:
+// they lock in the current state so it cannot get worse, and should be tightened.
+head('option length is not a tell');
+const mcq = A.QB.filter(q => q.t === 'mc');
+const olen = s => String(s).replace(/<[^>]+>/g, '').length;
+const longestShare = mcq.filter(q => olen(q.a) > Math.max(...q.w.map(olen))).length / mcq.length;
+const lenRatio = mcq.reduce((t, q) => t + olen(q.a) / (q.w.reduce((u, x) => u + olen(x), 0) / q.w.length), 0) / mcq.length;
+ok(longestShare <= 0.47, 'the right answer is not almost always the longest option', (longestShare * 100).toFixed(1) + '% (chance 25%, target <35%)');
+ok(lenRatio <= 1.30, 'the right answer is not far wordier than the wrong ones', lenRatio.toFixed(2) + ' (target 1.00)');
+console.log('  right answer longest: ' + (longestShare * 100).toFixed(1) + '%   length ratio: ' + lenRatio.toFixed(2));
+// and no question may have a one-word throwaway distractor beside a long answer
+mcq.forEach((q, i) => ok(!(olen(q.a) > 60 && q.w.some(x => olen(x) < 20)), 'question #' + i + ' has no throwaway distractor beside a long answer', q.q));
 console.log('  questions: ' + A.QB.length + ' (' + off.length + ' beyond the guide)');
 
 head('question generators (100 runs)');

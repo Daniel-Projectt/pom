@@ -429,6 +429,10 @@ kbd{font-family:var(--sans);font-size:10px;border:1px solid var(--line-strong);b
   .gitem{grid-template-columns:1fr;box-shadow:none;break-inside:avoid;padding:8px 10px}
   .gitem.ok{background:none}
 }
+
+/* when an option bar wraps on a phone, every row fills the width, so nothing hangs off to the left */
+.seg{justify-content:center}
+.seg button{flex:1 1 auto;border-bottom:1px solid var(--line);margin-bottom:-1px}
 </style>
 </head>
 <body>
